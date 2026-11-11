@@ -108,7 +108,8 @@ button svg, a svg { width: 19px; height: 19px; flex: none; }
 .stat-item { padding: 0 26px; border-right: 1px solid var(--line); flex: 1; color: var(--muted); font-size: .76rem; line-height: 1.5; }
 .stat-item:first-child { padding-left: 0; }
 .stat-item:last-child { border: none; padding-right: 0; }
-.stat-item strong { display: block; color: var(--forest); font-size: clamp(1.3rem, 1.7vw, 1.7rem); font-weight: 650; letter-spacing: -.04em; line-height: 1.3; margin-bottom: 7px; }
+.stat-item h2 { color: var(--forest); font-size: clamp(1.05rem, 1.35vw, 1.3rem); font-weight: 650; letter-spacing: -.025em; line-height: 1.3; margin: 0 0 7px; }
+.stat-item p { margin: 0; }
 .setup-grid, .ready-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 26px 0 34px; }
 .info-card { padding: 0 0 8px; }
 .info-card h2, .info-card h3 { margin-bottom: 10px; font-size: 1rem; }
@@ -298,7 +299,6 @@ dialog::backdrop { background: #18332ab8; backdrop-filter: blur(4px); }
 .hero-scene { padding-bottom: 35px; }
 .scene-caption { position: absolute; left: 20%; right: 0; bottom: 3px; display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #63806b; padding-top: 10px; font-size: .59rem; letter-spacing: .12em; text-transform: uppercase; color: #c5d7ba; }
 .setup-hero .hero-footnote { margin: 18px 0 0; font-size: .68rem; color: #b8cdb2; }
-.stat-item strong span { font-size: .66em; font-weight: 550; letter-spacing: -.01em; }
 .info-step { display: block; margin-bottom: 10px; color: #6a7d53; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
 .role-index { display: block; color: #819370; font-size: .66rem; letter-spacing: .08em; margin-bottom: 12px; }
 .role-notes { color: var(--muted); font-size: .8rem; }
@@ -396,9 +396,9 @@ dialog::backdrop { background: #18332ab8; backdrop-filter: blur(4px); }
   .hero-scene > svg { width: 240px; max-height: 190px; }
   .hero-scene { padding-bottom: 24px; height: 215px; }
   .scene-caption { left: 0; font-size: .54rem; }
-  .stat-row { margin: 25px 0; padding-bottom: 23px; }
-  .stat-item { padding: 0 13px; font-size: .65rem; line-height: 1.6; }
-  .stat-item strong { font-size: 1.05rem; letter-spacing: -.03em; }
+  .stat-row { flex-direction: column; gap: 15px; margin: 25px 0; padding-bottom: 23px; }
+  .stat-item { display: grid; grid-template-columns: 108px minmax(0, 1fr); gap: 14px; align-items: baseline; border: 0; padding: 0; font-size: .78rem; line-height: 1.5; }
+  .stat-item h2 { font-size: .95rem; letter-spacing: -.02em; margin: 0; }
   .setup-grid, .ready-summary { grid-template-columns: 1fr; gap: 16px; margin: 25px 0; }
   .info-card { padding-bottom: 17px; border-bottom: 1px solid var(--line); }
   .info-card:last-child { border: 0; padding-bottom: 0; }
@@ -471,8 +471,6 @@ dialog::backdrop { background: #18332ab8; backdrop-filter: blur(4px); }
   .workspace { padding-left: 14px; padding-right: 14px; }
   .setup-hero { padding: 26px 22px 0; }
   .setup-hero h1 { font-size: 2.6rem; }
-  .stat-item { padding-left: 10px; padding-right: 10px; }
-  .stat-item strong { font-size: .98rem; }
   .round-bar { padding: 15px; }
 }
 @media (max-width: 360px) {
