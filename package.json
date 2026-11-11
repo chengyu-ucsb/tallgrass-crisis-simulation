@@ -1,0 +1,10 @@
+{
+  "name": "tallgrass-crisis-simulation",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A classroom crisis communication simulation for COMM 5009.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node --check docs/app.js && node --check docs/content.js && node --check docs/progress.js && node --test scripts/test-progress.cjs"
+  }
+}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1d3933">
+  <meta name="description" content="A classroom crisis communication simulation for COMM 5009. Follow the developing Tallgrass case, discuss the evidence, and prepare your team's briefing memo.">
+  <title>Tallgrass Crisis Simulation | COMM 5009</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="content.js" defer></script>
+  <script src="progress.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to the case</a>
+  <header class="site-header">
+    <a class="brand" href="#setup" aria-label="Tallgrass simulation, start here">
+      <span class="brand-mark" aria-hidden="true"><svg width="32" height="38" viewBox="0 0 32 38" fill="none"><path d="M16 35V4M16 21L5 10M16 28L28 14M16 12L23 5M16 31L5 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+      <span><span class="brand-name">TALLGRASS</span><span class="brand-subtitle">Student Living</span></span>
+    </a>
+    <div class="header-actions">
+      <button class="text-button" data-reference="company">Company file</button>
+      <button class="text-button" data-reference="guide">Quick reference</button>
+      <button class="icon-button" id="fullscreen-button" aria-label="Enter full screen" title="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5"/></svg></button>
+    </div>
+  </header>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Simulation navigation">
+      <div class="course-label">COMM 5009<br><strong>Your simulation</strong></div>
+      <div class="journey-progress" id="journey-progress" aria-label="Simulation progress"></div>
+      <nav id="stage-navigation" class="stage-nav" aria-label="Class sequence"></nav>
+      <div class="sidebar-footer">
+        <p><strong>One round at a time</strong>Finish the current round, then wait for your instructor's cue to move on.</p>
+        <button class="text-button" data-reference="submission">Memo &amp; evaluation</button>
+        <p class="fiction-note">A fictional classroom case.</p>
+      </div>
+    </aside>
+    <main id="main-content" tabindex="-1"><div class="workspace" id="workspace"></div></main>
+  </div>
+  <dialog id="document-dialog" class="document-dialog" aria-labelledby="document-title">
+    <div class="dialog-topbar"><span id="document-label"></span><button class="icon-button" data-close-dialog aria-label="Close document">✕</button></div>
+    <article class="document-body" id="document-content"></article>
+  </dialog>
+  <dialog id="reference-dialog" class="document-dialog" aria-labelledby="reference-title">
+    <div class="dialog-topbar"><span>COMM 5009 · Reference</span><button class="icon-button" data-close-dialog aria-label="Close reference">✕</button></div>
+    <article class="document-body" id="reference-content"></article>
+  </dialog>
+  <section id="print-guide" aria-label="Printable quick reference"></section>
+  <div id="status-message" class="status-toast" role="status" aria-live="polite"></div>
+  <noscript><p class="notice">Enable JavaScript to move through the simulation. Your briefing memo and individual evaluation are submitted through Canvas.</p></noscript>
+</body>
+</html>
