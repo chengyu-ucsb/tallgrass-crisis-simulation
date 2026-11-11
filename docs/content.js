@@ -69,7 +69,7 @@ window.CRISIS_CONTENT = {
       ]
     },
     notes: [
-      "Work in the memo template from Canvas and submit it there when you finish. This website does not collect or submit your memo.",
+      "Download the Word template, save it in OneDrive or open it in Google Docs, and share the document with your teammates. One teammate submits that completed memo through Canvas at the end of class.",
       "Include your team name, members, and roles. Make sure everyone can access the shared memo when writing their individual evaluation.",
       "Your final memo should reflect what you know at the end. Use section 7 to keep a record of the decisions you made along the way and why they changed.",
       "Focus on completing the memo and responding to the information you receive. You are not graded on polish. The guiding questions are for discussion; you do not submit separate answers.",
@@ -103,7 +103,7 @@ window.CRISIS_CONTENT = {
         description: "Check these when your team is ready to work. Your instructor will tell you when to open the first update.",
         checks: [
           { id: "setup-roles", label: "We've chosen our roles." },
-          { id: "setup-memo", label: "Our shared memo is open, and our recorder is ready to type." }
+          { id: "setup-memo", label: "Our shared Word or Google document is open, and our recorder is ready to type." }
         ]
       },
       artifacts: [

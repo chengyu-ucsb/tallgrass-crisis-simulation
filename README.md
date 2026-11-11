@@ -4,7 +4,7 @@ A classroom crisis communication simulation for COMM 5009. Teams respond to an u
 
 ## In class
 
-Each team chooses one person to open the website's updates and complete its checkpoints while the recorder types in a shared document. The instructor projects the same website and sets the pace with verbal cues and the classroom timer. Other teammates may read on their own devices, but their progress is independent: the team's main screen does not unlock anyone else's page. Teams submit their completed memo through Canvas.
+Each team chooses one person to open the website's updates and complete its checkpoints. The recorder writes in one shared Word document in OneDrive or a Google Doc created from the downloadable Word template. The instructor projects the same website and sets the pace with verbal cues and the classroom timer. Other teammates may read on their own devices, but their progress is independent: the team's main screen does not unlock anyone else's page. Teams submit their completed memo through Canvas.
 
 1. Get ready: review the company background, choose roles, and open the memo template.
 2. Update 1, 8:05 a.m.: the building has been evacuated.
@@ -20,7 +20,7 @@ Each update includes individual document cards and a full reading view. Students
 - Print the one-page **Tallgrass Quick Reference** for the tables or individual students.
 - Keep the **Briefing Memo Print Version** as a backup for teams that cannot type.
 - Case updates, round instructions, and the debrief are on the website. The old phase worksheets are not required.
-- One team submits the seven-section briefing memo on Canvas by the end of class.
+- Each team submits one completed seven-section briefing memo on Canvas by the end of class. This is the same document the team writes during the simulation; Canvas is the hand-in location, not an additional team assignment.
 - Each student separately submits the approximately two-page evaluation on Canvas by November 20, 2026, at 11:59 p.m.
 
 The PDF reference and original Word templates are in `docs/downloads/` and linked from the website.
