@@ -533,19 +533,19 @@ body { background: var(--paper); }
 .sidebar { position: sticky; top: 76px; z-index: 20; height: auto; width: 100%; display: flex; flex-direction: row; align-items: center; gap: 24px; padding: 12px max(24px, calc((100vw - 1440px) / 2)); border: 0; border-bottom: 1px solid var(--line); background: #fffefaf5; overflow: visible; backdrop-filter: blur(12px); }
 .course-label, .sidebar-footer { display: none; }
 .journey-progress { flex: 0 0 140px; padding: 0; }
-.progress-caption { margin: 0 0 9px; font-size: .875rem; }
+.progress-caption { margin: 0 0 9px; font-size: .875rem; white-space: nowrap; }
 .journey-track { height: 5px; background: #e3e9db; }
 .stage-nav { display: flex; flex: 1 1 auto; gap: 8px; width: 100%; min-width: 0; overflow-x: auto; padding: 2px 0; scrollbar-width: thin; }
 .stage-nav::before { display: none; }
-.stage-link { flex: 1 0 146px; min-height: 65px; width: auto; padding: 10px 12px; border-radius: 12px; gap: 10px; background: #fffefa; }
+.stage-link { flex: 1 0 146px; min-width: max-content; min-height: 65px; width: auto; padding: 10px 12px; border-radius: 12px; gap: 10px; background: #fffefa; }
 .stage-link.locked, .stage-link:disabled { background: #fffefa; }
-.step-text { font-size: 1rem; white-space: normal; }
+.step-text { font-size: 1rem; white-space: nowrap; }
 .step-caption { display: block; font-size: .875rem; margin-top: 3px; }
 .step-state { display: none; }
 .step-number { width: 29px; height: 29px; flex-basis: 29px; font-size: .875rem; }
 .stage-link.active { box-shadow: 0 4px 10px #173e3312; }
 .workspace { max-width: 1440px; padding: 28px 32px 46px; }
-html { scroll-padding-top: 180px; }
+html { scroll-padding-top: 208px; }
 h1, h2, h3 { text-wrap: balance; }
 .section-heading h2 { font-size: 1.375rem; letter-spacing: -.025em; }
 .eyebrow { font-size: .8125rem; letter-spacing: .09em; }
@@ -657,7 +657,7 @@ h1, h2, h3 { text-wrap: balance; }
 .evidence-column .artifact-open { bottom: 18px; }
 .previous-evidence { padding-top: 18px; margin-top: 22px; }
 .previous-evidence summary { font-size: 1rem; }
-.task-panel { top: 180px; padding: 25px; background: #e7eddc; border: 1px solid #d4dfc6; border-radius: 20px; }
+.task-panel { top: 196px; padding: 25px; background: #e7eddc; border: 1px solid #d4dfc6; border-radius: 20px; }
 .task-panel-heading { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 23px; }
 .task-panel-icon { display: grid; place-items: center; flex: 0 0 39px; height: 39px; background: #d5e3b8; color: var(--forest); border-radius: 11px; }
 .task-panel-icon svg { width: 23px; height: 23px; }
@@ -694,7 +694,7 @@ dialog, .modal-backdrop .document-dialog { width: min(850px, calc(100vw - 40px))
 
 @media (max-width: 1200px) {
   .sidebar { gap: 16px; padding-inline: 24px; }
-  .journey-progress { flex-basis: 125px; }
+  .journey-progress { flex-basis: 140px; }
   .stage-link { flex-basis: 141px; }
   .workspace { padding-inline: 26px; }
   .setup-prep { grid-template-columns: minmax(0, 1.2fr) minmax(320px, 1fr); gap: 24px; }

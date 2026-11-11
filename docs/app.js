@@ -61,10 +61,22 @@
       const complete = progress.isComplete(index);
       const locked = !progress.canEnter(index);
       const state = complete ? 'Complete' : locked ? 'Locked' : index === current ? 'In progress' : 'Ready';
-      return `<button type="button" class="stage-link ${index === current ? 'active' : ''} ${complete ? 'complete' : locked ? 'locked' : 'available'}" data-stage="${stage.id}" ${locked ? 'disabled' : ''} ${index === current ? 'aria-current="step"' : ''} aria-label="${stageLabels[index]}: ${state}"><span class="step-number">${complete ? icon('check') : locked ? icon('lock', 'stage-lock-icon') : String(index + 1).padStart(2, '0')}</span><span class="step-text">${stageLabels[index]}<span class="step-caption">${stageCaptions[index]}</span><span class="step-state">${state}</span></span></button>`;
+      return `<button type="button" class="stage-link ${index === current ? 'active' : ''} ${complete ? 'complete' : locked ? 'locked' : 'available'}" data-stage="${stage.id}" ${locked ? 'disabled' : ''} ${index === current ? 'aria-current="step"' : ''} aria-label="${stageLabels[index]}: ${state}"><span class="step-number">${complete ? icon('check') : locked ? icon('lock', 'stage-lock-icon') : icon(index === 0 ? 'liaison' : index <= 3 ? 'record' : index === 4 ? 'spokesperson' : 'briefing')}</span><span class="step-text">${stageLabels[index]}<span class="step-caption">${stageCaptions[index]}</span><span class="step-state">${state}</span></span></button>`;
     }).join('');
     const count = progress.completedCount();
     $('#journey-progress').innerHTML = `<div class="progress-caption"><span>Your progress</span><strong>${count} / ${stages.length}</strong></div><div class="journey-track" role="progressbar" aria-label="Completed stages" aria-valuemin="0" aria-valuemax="${stages.length}" aria-valuenow="${count}"><span class="journey-fill" style="width:${count / stages.length * 100}%"></span></div>`;
+    revealActiveStage();
+  }
+
+  function revealActiveStage() {
+    const navigation = $('#stage-navigation');
+    const active = navigation.querySelector('[aria-current="step"]');
+    if (active && navigation.scrollWidth > navigation.clientWidth) {
+      const container = navigation.getBoundingClientRect();
+      const item = active.getBoundingClientRect();
+      if (item.left < container.left) navigation.scrollLeft += item.left - container.left - 8;
+      else if (item.right > container.right) navigation.scrollLeft += item.right - container.right + 8;
+    }
   }
 
   function timerMarkup() {
@@ -226,14 +238,6 @@ ${footer()}`;
     current = index;
     history.replaceState(null, '', `#${stages[current].id}`);
     render({focus: true});
-    const navigation = $('#stage-navigation');
-    const active = navigation.querySelector('[aria-current="step"]');
-    if (active && navigation.scrollWidth > navigation.clientWidth) {
-      const container = navigation.getBoundingClientRect();
-      const item = active.getBoundingClientRect();
-      if (item.left < container.left) navigation.scrollLeft += item.left - container.left - 8;
-      else if (item.right > container.right) navigation.scrollLeft += item.right - container.right + 8;
-    }
   }
 
   function readingAction(ids, label) {
