@@ -158,6 +158,14 @@
     current = index;
     history.replaceState(null, '', `#${stages[current].id}`);
     render({focus: true});
+    const navigation = $('#stage-navigation');
+    const active = navigation.querySelector('[aria-current="step"]');
+    if (active && navigation.scrollWidth > navigation.clientWidth) {
+      const container = navigation.getBoundingClientRect();
+      const item = active.getBoundingClientRect();
+      if (item.left < container.left) navigation.scrollLeft += item.left - container.left - 8;
+      else if (item.right > container.right) navigation.scrollLeft += item.right - container.right + 8;
+    }
   }
 
   function readingAction(ids, label) {

@@ -321,7 +321,7 @@ dialog::backdrop { background: #18332ab8; backdrop-filter: blur(4px); }
 .completion-actions .gate-hint { margin: 0; max-width: 480px; flex: 1 1 240px; }
 .document-reading-action { border-top: 1px solid var(--line); padding-top: 23px; margin-top: 28px; }
 .document-reading-action p { font-size: 1rem; color: var(--muted); }
-.status-toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 60; width: max-content; max-width: calc(100vw - 36px); border: 1px solid #afc18e; background: #eaf2d5; border-radius: 12px; padding: 13px 20px; color: var(--forest); box-shadow: 0 6px 24px #173e3324; font-size: 1rem; }
+.status-toast { pointer-events: none; position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 60; width: max-content; max-width: calc(100vw - 36px); border: 1px solid #afc18e; background: #eaf2d5; border-radius: 12px; padding: 13px 20px; color: var(--forest); box-shadow: 0 6px 24px #173e3324; font-size: 1rem; }
 .status-toast:empty { display: none; }
 
 @media (min-width: 1600px) {
@@ -493,6 +493,8 @@ dialog::backdrop { background: #18332ab8; backdrop-filter: blur(4px); }
 .task-panel .task-list li { line-height: 1.65; }
 .completion-checklist label:has(input:disabled) { opacity: 1; }
 @media (max-width: 950px) {
+  .sidebar { overflow: visible; }
+  .stage-nav { width: 100%; min-width: 0; overflow-x: auto; padding-bottom: 4px; }
   .content-layout { grid-template-columns: 1fr; }
   .task-panel { width: 100%; }
 }
