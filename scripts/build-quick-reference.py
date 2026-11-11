@@ -97,10 +97,10 @@ for index, concept in enumerate(data["guide"]["concepts"], 1):
 
 story.extend([
     paragraph("Keep a record", "heading"),
-    paragraph("Before the next update, write what you decided and what changed your thinking in section 7. "
-              "Preserve your original statement and record later revisions."),
+    paragraph("Write your answers on the memo handout. After each update, record what you decided and "
+              "what changed your thinking in section 7. Keep earlier wording readable when you revise."),
     paragraph("Turn in", "heading"),
-    paragraph("<b>Team:</b> One complete briefing memo on Canvas by the end of class. "
+    paragraph("<b>Team:</b> Give one completed paper memo to your instructor at the end of class. "
               "Read your public statement and explain one changed decision in a two-minute briefing."),
     paragraph("<b>Individual:</b> An approximately two-page Post-Crisis Evaluation on Canvas by "
               "<b>Friday, November 20, 2026, at 11:59 p.m.</b>"),

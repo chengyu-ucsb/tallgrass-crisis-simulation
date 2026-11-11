@@ -3,6 +3,8 @@
  * Source facts: COMM5009 CrisisInABox Student Packet.docx, pp. 1–2, 6, 8.
  * Tasks and assessment: newer Assignment Description, Facilitator Guide,
  * Briefing Memo Template, and Post-Crisis Evaluation Template.
+ * Current instructor directions: write on one paper memo handout per team
+ * and hand it directly to the instructor at the end of class.
  * The older packet's worksheets, restrictive role rules, fourteen-minute
  * rounds, and three-minute presentations are deliberately not carried over.
  */
@@ -36,7 +38,7 @@ window.CRISIS_CONTENT = {
     { name: "Spokesperson", description: "Drafts the public statements and reads the final statement to the class." },
     { name: "Stakeholder liaison", description: "Speaks for the people affected and drafts the message to them." },
     { name: "Media and digital lead", description: "Reads each update first and tracks the reporter and social media." },
-    { name: "Recorder", description: "Types the memo and records how the team's response changes." }
+    { name: "Recorder", description: "Writes on the memo handout and records how the team's response changes." }
   ],
   roleNotes: [
     "In a team of four, the stakeholder liaison also serves as recorder.",
@@ -45,7 +47,7 @@ window.CRISIS_CONTENT = {
   ],
   submission: {
     title: "Crisis Response Briefing Memo",
-    due: "Submit one memo per team on Canvas by the end of class.",
+    due: "Give one completed paper memo per team to the instructor at the end of class.",
     addressedTo: "Dana Whitlock, Chief Executive",
     sections: [
       { number: 1, title: "Situation summary", prompt: "In 3 to 4 sentences, explain what has happened and how much responsibility the public is likely to assign to the company right now." },
@@ -69,8 +71,8 @@ window.CRISIS_CONTENT = {
       ]
     },
     notes: [
-      "Download the Word template, save it in OneDrive or open it in Google Docs, and share the document with your teammates. One teammate submits that completed memo through Canvas at the end of class.",
-      "Include your team name, members, and roles. Make sure everyone can access the shared memo when writing their individual evaluation.",
+      "Write your answers on one printed memo handout per team. Give the completed handout directly to your instructor at the end of class.",
+      "Include your team name, members, and roles. Take a photo before handing it in if you want a copy for your individual evaluation.",
       "Your final memo should reflect what you know at the end. Use section 7 to keep a record of the decisions you made along the way and why they changed.",
       "Focus on completing the memo and responding to the information you receive. You are not graded on polish. The guiding questions are for discussion; you do not submit separate answers.",
       "The simulation is worth 50 points: participation, 30 points; individual Post-Crisis Evaluation, 20 points."
@@ -91,19 +93,19 @@ window.CRISIS_CONTENT = {
   stages: [
     {
       id: "setup", eyebrow: "Start here", title: "Get your team ready", scenarioTime: "Before the simulation", duration: 300,
-      description: "Choose your roles and get the shared memo ready. Your instructor will tell you when to begin.",
+      description: "Choose your roles and get your printed memo handout ready. Your instructor will tell you when to begin.",
       tasks: [
         "Sit with your client team and choose the five roles. Combine roles if your team has fewer than five members.",
-        "Open the Crisis Response Briefing Memo template from Canvas. Set up one shared document and choose who will type.",
+        "Get one printed Crisis Response Briefing Memo handout for your team and choose who will write.",
         "Read the company background and resources. You can return to them throughout the exercise.",
-        "Use only the background and the updates available to your team. Discuss the prompts together and build one team memo."
+        "Use only the background and the updates available to your team. Discuss the prompts together and write your answers on the memo handout."
       ],
       completion: {
         title: "Ready to begin?",
         description: "Check these when your team is ready to work. Your instructor will tell you when to open the first update.",
         checks: [
           { id: "setup-roles", label: "We've chosen our roles." },
-          { id: "setup-memo", label: "Our shared Word or Google document is open, and our recorder is ready to type." }
+          { id: "setup-memo", label: "We have our printed memo handout, and our recorder is ready to write." }
         ]
       },
       artifacts: [
@@ -121,14 +123,14 @@ window.CRISIS_CONTENT = {
       id: "update1", eyebrow: "Update 1", title: "Make your first response", scenarioTime: "Monday · 8:05 a.m.", duration: 900,
       description: "Work with the information you have now. Decide what the company should do and say first.",
       tasks: [
-        "Take two minutes to read the update. Then talk it through and start your memo.",
+        "Take two minutes to read the update. Then talk it through and start writing on your memo handout.",
         "Draft the situation summary and holding statement. Decide who will speak for the company.",
         "Choose the group that most needs to hear from you and draft a message for them. Decide what to do now and what you still need to find out.",
         "In section 7, record your first decision and what led you to it."
       ],
       completion: {
         title: "Before the next update",
-        description: "Check that you've done this work in your shared memo. Your answers can change as you learn more.",
+        description: "Check that you've written this work on your memo handout. Your answers can change as you learn more.",
         checks: [
           { id: "update1-statement", label: "Our first holding statement is in section 2." },
           { id: "update1-message", label: "We've drafted the situation summary and a message to our priority stakeholder." },
@@ -161,7 +163,7 @@ window.CRISIS_CONTENT = {
       ],
       completion: {
         title: "Before the next update",
-        description: "Check these once you've discussed the new information and updated your shared memo where needed.",
+        description: "Check these once you've discussed the new information and updated your memo handout where needed.",
         checks: [
           { id: "update2-response", label: "We've checked our statements, stakeholder message, and actions against the new information." },
           { id: "update2-decision", label: "The Update 2 row in section 7 records our decision and what shaped it." }
@@ -213,7 +215,7 @@ window.CRISIS_CONTENT = {
       ],
       completion: {
         title: "Ready to share your response?",
-        description: "Make sure your shared memo is complete before moving to the team briefings.",
+        description: "Make sure your memo handout is complete before moving to the team briefings.",
         checks: [
           { id: "update3-memo", label: "We've finished the public statement, advice to the chief executive, and remaining memo sections." },
           { id: "update3-decision", label: "The Update 3 row records our latest decision and what changed our thinking." }
@@ -258,23 +260,23 @@ window.CRISIS_CONTENT = {
       id: "briefings", eyebrow: "Team briefings", title: "Share your response", scenarioTime: "End of the simulation", duration: 120,
       description: "Each team has two minutes. The spokesperson reads the public statement; the crisis lead explains one decision the team changed.",
       tasks: [
-        "Submit one complete team memo on Canvas. Make sure everyone on your team can access a copy.",
+        "Review all seven sections of your memo handout. Keep it for the briefing and class discussion, then hand it to your instructor at the end of class.",
         "Spokesperson: read your final public statement.",
         "Crisis lead: explain one decision that changed and the information that changed it.",
         "Listen to how other teams set their priorities and explain their choices."
       ],
       completion: {
         title: "Before the debrief",
-        description: "Check these after your team has submitted its memo on Canvas and given its briefing.",
+        description: "Check these after your team has finished its paper memo and given its briefing.",
         checks: [
-          { id: "briefings-submitted", label: "One team member has submitted our completed memo on Canvas." },
+          { id: "briefings-memo-ready", label: "Our paper memo is complete, including all seven sections." },
           { id: "briefings-presented", label: "We've read our public statement and explained one decision we changed." }
         ]
       },
       artifacts: [
         {
-          id: "submission-check", type: "checklist", label: "Submission check", title: "One complete memo per team", source: "Assignment description and briefing memo template", time: "By the end of class", summary: "Check all seven sections and team details before submitting on Canvas.",
-          body: `<ol><li>Situation summary: 3 to 4 sentences.</li><li>Holding statement: 3 to 4 sentences.</li><li>Public statement: 5 to 7 sentences.</li><li>Message to a priority stakeholder: 3 to 5 sentences; name the audience.</li><li>Immediate actions: three actions for the next 24 hours.</li><li>Advice to the chief executive: 2 to 3 sentences.</li><li>How our response changed: one line per update, recording the decision and what changed your thinking.</li></ol><p>Include your team name and each member's role. The final memo should reflect the situation at the end and retain the record of your changing decisions.</p><p>Use the assignment on Canvas to submit. This website does not accept submissions.</p>`
+          id: "submission-check", type: "checklist", label: "Submission check", title: "One complete memo per team", source: "Assignment description and briefing memo template", time: "By the end of class", summary: "Check all seven sections and team details before handing your paper memo to the instructor.",
+          body: `<ol><li>Situation summary: 3 to 4 sentences.</li><li>Holding statement: 3 to 4 sentences.</li><li>Public statement: 5 to 7 sentences.</li><li>Message to a priority stakeholder: 3 to 5 sentences; name the audience.</li><li>Immediate actions: three actions for the next 24 hours.</li><li>Advice to the chief executive: 2 to 3 sentences.</li><li>How our response changed: one line per update, recording the decision and what changed your thinking.</li></ol><p>Include your team name and each member's role. The final memo should reflect the situation at the end and retain the record of your changing decisions.</p><p>Give one completed paper memo per team directly to the instructor at the end of class.</p>`
         }
       ], sources: ["assignment", "facilitator", "memo"]
     },
@@ -290,9 +292,9 @@ window.CRISIS_CONTENT = {
       ],
       completion: {
         title: "Before you finish",
-        description: "Keep what you need for your individual evaluation. Each person writes and submits their own evaluation on Canvas.",
+        description: "Give your completed paper memo to the instructor before you leave. Take a photo first if you want a copy for your individual evaluation.",
         checks: [
-          { id: "debrief-memo-access", label: "Everyone can access our team's memo and decision record." },
+          { id: "debrief-memo-handed-in", label: "One teammate has handed our completed paper memo to the instructor." },
           { id: "debrief-evaluation", label: "Each of us knows where to find the evaluation template and when to submit it." }
         ]
       },
