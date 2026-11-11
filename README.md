@@ -4,7 +4,7 @@ A classroom crisis communication simulation for COMM 5009. Teams respond to an u
 
 ## In class
 
-Everyone opens the same website. The instructor projects it and tells the class when to open each update. Students work in their usual shared document and submit their completed memo through Canvas.
+Each team chooses one person to open the website's updates and complete its checkpoints while the recorder types in a shared document. The instructor projects the same website and sets the pace with verbal cues and the classroom timer. Other teammates may read on their own devices, but their progress is independent: the team's main screen does not unlock anyone else's page. Teams submit their completed memo through Canvas.
 
 1. Get ready: review the company background, choose roles, and open the memo template.
 2. Update 1, 8:05 a.m.: the building has been evacuated.
