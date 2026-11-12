@@ -143,6 +143,35 @@
     const clock = root.querySelector('[data-film-time]');
     const status = root.querySelector('[data-film-status]');
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const expandButton = root.querySelector('[data-film-expand]');
+    const home = document.createComment('Illustrated overview position');
+    const expandedDialog = document.createElement('dialog');
+    expandedDialog.className = 'film-expanded-dialog';
+    expandedDialog.setAttribute('aria-label', 'Update 1 animated overview');
+    root.after(home);
+    document.body.append(expandedDialog);
+
+    function restoreView() {
+      if (root.parentElement === expandedDialog) home.before(root);
+      root.classList.remove('is-expanded');
+      expandButton.setAttribute('aria-label', 'Expand animation');
+      expandButton.querySelector('span').textContent = 'Expand';
+      if (!destroyed) {
+        expandButton.focus({preventScroll: true});
+        status.textContent = 'Animation returned to the page.';
+      }
+    }
+
+    function expandView() {
+      if (expandedDialog.open) { expandedDialog.close(); return; }
+      expandedDialog.append(root);
+      root.classList.add('is-expanded');
+      expandButton.setAttribute('aria-label', 'Close expanded animation');
+      expandButton.querySelector('span').textContent = 'Close';
+      expandedDialog.showModal();
+      expandButton.focus({preventScroll: true});
+      status.textContent = 'Animation expanded. Use Close or press Escape to return to the page.';
+    }
     let position = 0, sceneIndex = -1, playing = false, request = 0, lastFrame = 0, effects = [], destroyed = false;
 
     function collectEffects() {
@@ -221,7 +250,7 @@
       status.textContent = scenes[sceneIndex].label + '. Animation paused.';
     }
 
-    async function click(event) {
+    function click(event) {
       const button = event.target.closest('button');
       if (!button || !root.contains(button)) return;
       if (button.hasAttribute('data-film-play')) {
@@ -231,11 +260,7 @@
       } else if (button.hasAttribute('data-film-chapter')) {
         seek(scenes[Number(button.dataset.filmChapter)].start);
       } else if (button.hasAttribute('data-film-expand')) {
-        try {
-          if (document.fullscreenElement === root) await document.exitFullscreen();
-          else if (root.requestFullscreen) await root.requestFullscreen();
-          else status.textContent = 'Full screen is unavailable here. You can watch the overview in the page.';
-        } catch (_) { status.textContent = 'Full screen is unavailable here. You can watch the overview in the page.'; }
+        expandView();
       }
     }
 
@@ -245,16 +270,11 @@
       if (event.target.closest('[data-read-update], [data-artifact], [data-reference]')) pause(false);
     };
     const changedMotion = () => { pause(false); collectEffects(); paint(); };
-    const fullScreenChanged = () => {
-      const expanded = document.fullscreenElement === root, button = root.querySelector('[data-film-expand]');
-      button.setAttribute('aria-label', expanded ? 'Exit animation full screen' : 'Expand animation');
-      button.querySelector('span').textContent = expanded ? 'Exit' : 'Expand';
-    };
     root.addEventListener('click', click);
     seekInput.addEventListener('input', input);
     document.addEventListener('click', read);
     document.addEventListener('visibilitychange', hidden);
-    document.addEventListener('fullscreenchange', fullScreenChanged);
+    expandedDialog.addEventListener('close', restoreView);
     motion.addEventListener('change', changedMotion);
     paint();
     buttonState();
@@ -265,7 +285,11 @@
       seekInput.removeEventListener('input', input);
       document.removeEventListener('click', read);
       document.removeEventListener('visibilitychange', hidden);
-      document.removeEventListener('fullscreenchange', fullScreenChanged);
+      expandedDialog.removeEventListener('close', restoreView);
+      if (expandedDialog.open) expandedDialog.close();
+      restoreView();
+      expandedDialog.remove();
+      home.remove();
       motion.removeEventListener('change', changedMotion);
       effects.forEach(effect => effect.cancel());
     }};
