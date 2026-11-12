@@ -157,6 +157,8 @@
       expandButton.setAttribute('aria-label', 'Expand animation');
       expandButton.querySelector('span').textContent = 'Expand';
       if (!destroyed) {
+        collectEffects();
+        paint();
         expandButton.focus({preventScroll: true});
         status.textContent = 'Animation returned to the page.';
       }
@@ -169,6 +171,8 @@
       expandButton.setAttribute('aria-label', 'Close expanded animation');
       expandButton.querySelector('span').textContent = 'Close';
       expandedDialog.showModal();
+      collectEffects();
+      paint();
       expandButton.focus({preventScroll: true});
       status.textContent = 'Animation expanded. Use Close or press Escape to return to the page.';
     }
