@@ -13,7 +13,7 @@ Each team chooses one person to open the website's updates and complete its chec
 5. Team briefings: finish the paper memo and give a two-minute briefing.
 6. Debrief: discuss the decisions, hand in the paper memo, and prepare for the individual evaluation.
 
-Update 1 also includes a detailed illustrated overview with play, pause, replay, scene selection, a text transcript, and an expanded view for projection. It starts paused, with optional original music and scene cues off by default. There is no narration. The animation uses only information available in Update 1; all written evidence remains available below it. Watching does not mark documents as read or complete a checkpoint.
+Each of the three updates includes a detailed illustrated overview with play, pause, replay, scene selection, a text transcript, and an expanded view for projection. It starts paused, with optional original music and scene cues off by default. There is no narration. Each animation uses only information available in its round; all written evidence remains available below it. Watching does not mark documents as read or complete a checkpoint. Update 1 runs 2:14, Update 2 runs 2:24, and Update 3 runs 2:28.
 
 Each update includes individual document cards and a full reading view. Students mark the reading complete, confirm the required work on their memo handout, and complete the checkpoint to unlock the next stage. Search includes only evidence from the current and earlier updates. The countdown has start, pause, reset, and add-minute controls.
 
