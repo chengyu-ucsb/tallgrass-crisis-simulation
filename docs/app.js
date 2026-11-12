@@ -17,6 +17,7 @@
   let current = progress.canEnter(requestedStage) ? requestedStage : progress.firstIncomplete();
   let toastTimeout;
   let readingIds = [];
+  let animationController = null;
   const timers = stages.map(stage => ({remaining: stage.duration, end: null, announced: false}));
   const allArtifacts = stages.flatMap((stage, index) => stage.artifacts.map(artifact => ({...artifact, stageIndex: index})));
 
@@ -183,7 +184,7 @@ ${footer()}`;
 
   function evidenceMarkup(stage) {
     const earlier = allArtifacts.filter(artifact => artifact.stageIndex > 0 && artifact.stageIndex < current && artifact.stageIndex <= 3);
-    return `${heading(stage)}${timerMarkup()}<div class="content-layout"><section class="evidence-column" aria-label="Available case evidence"><div class="section-heading"><div><p class="eyebrow">Read the case</p><h2 id="evidence-heading">New evidence</h2></div><div class="section-actions"><span class="document-count">${stage.artifacts.length} documents</span><button class="secondary-button" data-read-update>Read all documents <span aria-hidden="true">→</span></button></div></div><label class="evidence-search-label" for="evidence-search"><span class="screen-reader-only">Search the evidence so far</span><input id="evidence-search" class="evidence-search" type="search" placeholder="Search the evidence so far…" autocomplete="off"></label><div class="artifact-grid" id="artifact-grid">${stage.artifacts.map(artifactCard).join('')}</div>${earlier.length ? `<details class="previous-evidence" id="previous-evidence"><summary>Earlier evidence (${earlier.length} documents)</summary><div class="artifact-grid">${earlier.map(artifactCard).join('')}</div></details>` : ''}</section>${taskPanel(stage)}</div>${completionMarkup()}${footer()}`;
+    return `${heading(stage)}${window.CrisisAnimation?.markup(stage.id) || ''}${timerMarkup()}<div class="content-layout"><section class="evidence-column" aria-label="Available case evidence"><div class="section-heading"><div><p class="eyebrow">Read the case</p><h2 id="evidence-heading">New evidence</h2></div><div class="section-actions"><span class="document-count">${stage.artifacts.length} documents</span><button class="secondary-button" data-read-update>Read all documents <span aria-hidden="true">→</span></button></div></div><label class="evidence-search-label" for="evidence-search"><span class="screen-reader-only">Search the evidence so far</span><input id="evidence-search" class="evidence-search" type="search" placeholder="Search the evidence so far…" autocomplete="off"></label><div class="artifact-grid" id="artifact-grid">${stage.artifacts.map(artifactCard).join('')}</div>${earlier.length ? `<details class="previous-evidence" id="previous-evidence"><summary>Earlier evidence (${earlier.length} documents)</summary><div class="artifact-grid">${earlier.map(artifactCard).join('')}</div></details>` : ''}</section>${taskPanel(stage)}</div>${completionMarkup()}${footer()}`;
   }
 
   function briefingMarkup(stage) {
@@ -196,8 +197,10 @@ ${footer()}`;
 
   function render({focus = false} = {}) {
     const stage = stages[current];
+    animationController?.destroy();
     renderNav();
     $('#workspace').innerHTML = current === 0 ? setupMarkup() : current <= 3 ? evidenceMarkup(stage) : current === 4 ? briefingMarkup(stage) : debriefMarkup(stage);
+    animationController = window.CrisisAnimation?.mount($('#workspace')) || null;
     document.title = `${stageLabels[current]} | Tallgrass Crisis Simulation`;
     updateClock();
     if (focus) {
