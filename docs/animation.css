@@ -11,7 +11,7 @@
 .film-expand { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; padding: 9px 13px; border: 1px solid #d4ddcc; border-radius: 10px; background: #f4f5eb; color: #305641; font-size: .9375rem; font-weight: 600; }
 .film-expand:hover { background: #e9eedc; }
 .film-expand svg { width: 20px; height: 20px; }
-.film-screen { position: relative; height: clamp(285px, 28vw, 360px); overflow: hidden; isolation: isolate; background: #dce7df; border-block: 1px solid #d3ddca; }
+.film-screen { position: relative; height: clamp(320px, 28vw, 360px); overflow: hidden; isolation: isolate; background: #dce7df; border-block: 1px solid #d3ddca; }
 .film-scene { position: absolute; inset: 0; overflow: hidden; }
 .film-scene:nth-child(1) { background: linear-gradient(#dce7df, #edf0df); }
 .film-scene:nth-child(2) { background: #e9e8d6; }
@@ -83,13 +83,13 @@
 @keyframes film-rain { from { transform: translate(0,-12px); } to { transform: translate(-7px,14px); } }
 @keyframes film-phone-check { 0%, 25% { transform: rotate(0); } 45%, 80% { transform: rotate(-2deg); } 100% { transform: rotate(0); } }
 @keyframes film-standing { 0%, 20% { transform: rotate(0); } 60%, 100% { transform: rotate(1.5deg); } }
-@keyframes film-email-arrive { from { transform: translate(-50%, 28px) scale(.95); } to { transform: translate(-50%, 0) scale(1); } }
+@keyframes film-email-arrive { from { transform: translate(-50%, 0) scale(.97); } to { transform: translate(-50%, 0) scale(1); } }
 @keyframes film-sheet-arrive { from { transform: translateY(18px) rotate(-1deg); } to { transform: translateY(0) rotate(0); } }
 @keyframes film-pen-write { 0%, 12% { transform: translate(0,0); } 35% { transform: translate(-210px,-73px); } 75% { transform: translate(-135px,-73px); } 100% { transform: translate(0,0); } }
 @keyframes film-write { 0%, 40% { stroke-dashoffset: 85; } 100% { stroke-dashoffset: 0; } }
 .case-film:fullscreen { display: flex; flex-direction: column; width: 100%; height: 100dvh; max-width: none; margin: 0; border: 0; border-radius: 0; overflow: auto; background: #fffefa; }
 .case-film:fullscreen .film-header { flex: 0 0 auto; padding-inline: 32px; }
-.case-film:fullscreen .film-screen { flex: 1 1 auto; min-height: 200px; height: auto; }
+.case-film:fullscreen .film-screen { flex: 1 1 auto; min-height: 320px; height: auto; }
 .case-film:fullscreen .film-caption { flex: 0 0 auto; padding: 18px 32px; }
 .case-film:fullscreen .film-caption h3 { font-size: clamp(1.4rem, 2.1vw, 2rem); }
 .case-film:fullscreen .film-caption p { font-size: clamp(1.0625rem, 1.45vw, 1.35rem); max-width: 1200px; }
@@ -112,8 +112,8 @@
   .film-header p > span { padding-inline: 1px; }
   .film-expand { padding: 9px; min-width: 42px; }
   .film-expand > span { display: none; }
-  .film-screen { height: 278px; }
-  .film-art { width: 695px; min-width: 100%; height: 278px; }
+  .film-screen { height: 340px; }
+  .film-art { width: 695px; min-width: 100%; height: 340px; }
   .film-place { top: 15px; left: 15px; max-width: calc(100% - 30px); font-size: .875rem; padding: 7px 10px; gap: 8px; }
   .film-place > span { padding-left: 8px; }
   .film-fact { display: none; }
@@ -143,7 +143,7 @@
   .film-chapters button { font-size: .9375rem; min-height: 44px; }
   .film-foot { padding: 13px 17px 15px; }
   .film-foot > p { font-size: .875rem; }
-  .case-film:fullscreen .film-screen { flex: 1 0 278px; min-height: 278px; }
+  .case-film:fullscreen .film-screen { flex: 1 0 340px; min-height: 340px; }
   .case-film:fullscreen .film-art { height: 100%; min-width: 695px; }
   .case-film:fullscreen .film-caption, .case-film:fullscreen .film-header { padding-inline: 17px; }
   .case-film:fullscreen .film-controls { padding-inline: 17px; }
@@ -152,8 +152,6 @@
   .film-email { width: calc(100% - 22px); padding: 12px; }
   .film-email-questions { font-size: 1rem; }
   .film-email-top { font-size: .875rem; }
-  .film-screen { height: 296px; }
-  .film-art { height: 296px; width: 740px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .case-film *, .case-film *::before, .case-film *::after { animation: none !important; transition: none !important; }
