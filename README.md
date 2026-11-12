@@ -13,7 +13,7 @@ Each team chooses one person to open the website's updates and complete its chec
 5. Team briefings: finish the paper memo and give a two-minute briefing.
 6. Debrief: discuss the decisions, hand in the paper memo, and prepare for the individual evaluation.
 
-Update 1 also includes a 32-second illustrated overview with play, pause, replay, scene selection, a text transcript, and an expanded view for projection. It starts paused and has no audio. The animation uses only information available in Update 1; all written evidence remains available below it. Watching does not mark documents as read or complete a checkpoint.
+Update 1 also includes a detailed illustrated overview with play, pause, replay, scene selection, a text transcript, and an expanded view for projection. It starts paused, with optional original music and scene cues off by default. There is no narration. The animation uses only information available in Update 1; all written evidence remains available below it. Watching does not mark documents as read or complete a checkpoint.
 
 Each update includes individual document cards and a full reading view. Students mark the reading complete, confirm the required work on their memo handout, and complete the checkpoint to unlock the next stage. Search includes only evidence from the current and earlier updates. The countdown has start, pause, reset, and add-minute controls.
 
@@ -43,7 +43,9 @@ These are completion checks reported by students, not automated grading or verif
 - `docs/content.js`: scenario facts, source artifacts, tasks, roles, and assessment instructions.
 - `docs/app.js`: navigation, reading controls, completion checkpoints, search, and timers.
 - `docs/progress.js`: shared prerequisite and progress-restoration rules.
-- `docs/animation.js` and `docs/animation.css`: Update 1 illustrations, captions, playback controls, and responsive layout. Motion follows the player position and respects reduced-motion preferences.
+- `docs/animation-scenes.js`: Scene text, visual facts, and timing, drawn from the case documents.
+- `docs/animation.js` and `docs/animation.css`: Illustrations, captions, playback controls, and responsive layout. Motion follows the player position and respects reduced-motion preferences.
+- `docs/animation-sound.js`: Optional original music and abstract scene cues, generated in the browser without recordings or external services. Sound stops when the player pauses, opens a document, changes stage, or leaves the page.
 - `scripts/test-progress.cjs`: focused checks for sequential access, partial completion, refresh, and invalid saved state.
 - `docs/styles.css`: desktop, phone, and print layouts.
 - `docs/downloads/`: printable reference and original assignment templates.
