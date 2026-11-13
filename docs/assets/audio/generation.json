@@ -1,0 +1,39 @@
+{
+  "update1": {
+    "seconds": 178,
+    "encodedSeconds": 178.056,
+    "sha256": "567bef626019eae9cec6c795e251cb2ce1b812d9fac9053e21052a5d6b8a4f11",
+    "bytes": 2137070,
+    "sceneCount": 8
+  },
+  "update2": {
+    "seconds": 187,
+    "encodedSeconds": 187.056,
+    "sha256": "5868d896d0af4a54d05a8dc6dc9255407e7e25e9b968ec9631bf949e546b1b68",
+    "bytes": 2245070,
+    "sceneCount": 8
+  },
+  "update3": {
+    "seconds": 183,
+    "encodedSeconds": 183.048,
+    "sha256": "fed90ce53bab52d0b17afd8a18b5c66311d3c2ff9076f6e8f658cf2f2bcad88c",
+    "bytes": 2196974,
+    "sceneCount": 8
+  },
+  "manifestSha256": "736f68c01c840ae2b3d640f9c39efec63ea430c17c7ae77760e7085040827c48",
+  "model": {
+    "repository": "hexgrad/Kokoro-82M",
+    "revision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+    "weights_sha256": "496dba118d1a58f5f3db2efc88dbdc216e0483fc89fe6e47ee1f2c53f18ad1e4",
+    "voice_sha256": "9a443b79a4b22489a5b0ab7c651a0bcd1a30bef675c28333f06971abbd47bd37"
+  },
+  "voice": "am_michael",
+  "packages": {
+    "kokoro": "0.9.4",
+    "misaki": "0.9.4",
+    "torch": "2.6.0+cpu",
+    "transformers": "4.48.3",
+    "spacy": "3.8.4",
+    "soundfile": "0.13.1"
+  }
+}
