@@ -86,7 +86,8 @@
   }
 
   function heading(stage) {
-    return `<header class="page-heading"><div class="heading-copy"><p class="eyebrow stage-overline">${icon(current <= 3 ? 'record' : current === 4 ? 'spokesperson' : 'lead')} ${stageLabels[current]}</p><h1 tabindex="-1">${esc(stage.title)}</h1><p class="page-description">${esc(stage.description)}</p></div><div class="scenario-time"><span>${icon('lead')} In the case</span>${esc(stage.scenarioTime)}</div></header>`;
+    const [day, hour] = String(stage.scenarioTime).split(' · ');
+    return `<header class="page-heading ${hour ? 'has-hour' : ''}">${hour ? `<p class="stage-hour"><span>${esc(day)}</span>${esc(hour)}</p>` : ''}<div class="heading-copy"><p class="eyebrow stage-overline">${stageLabels[current]}${hour ? '' : `<span class="stage-when">${esc(stage.scenarioTime)}</span>`}</p><h1 tabindex="-1">${esc(stage.title)}</h1><p class="page-description">${esc(stage.description)}</p></div></header>`;
   }
 
   function footer() {
@@ -104,40 +105,12 @@
   }
 
   function buildingScene() {
-    const windows = Array.from({length: 6}, (_, row) => Array.from({length: 4}, (_, col) => `<rect x="${275 + col * 28}" y="${108 + row * 21}" width="12" height="13" rx="1.5" fill="${(row + col) % 3 === 0 ? '#f5f1cf' : '#67896a'}"/>`).join('')).join('');
-    return `
-<div class="hero-scene" aria-hidden="true">
-<svg viewBox="0 0 560 360" fill="none">
-  <rect x="119" y="38" width="338" height="277" rx="18" transform="rotate(7 288 176)" fill="#436854" stroke="#6f8b72"/>
-  <path d="M80 99V64a17 17 0 0 1 17-17h117l30 27h218a18 18 0 0 1 18 18v208a18 18 0 0 1-18 18H98a18 18 0 0 1-18-18V99Z" fill="#e7edcf"/>
-  <rect x="94" y="87" width="372" height="217" rx="12" fill="#fbf8e9"/>
-  <circle cx="337" cy="175" r="93" fill="#dce7c0"/>
-  <circle cx="391" cy="113" r="27" fill="#d3e776"/>
-  <path d="M263 267V91h128v176" fill="#b5c8a7"/>
-  <path d="m391 91 23 17v159h-23" fill="#769275"/>
-  <path d="M258 91h139" stroke="#315744" stroke-width="8"/>
-  ${windows}
-  <rect x="308" y="242" width="38" height="25" fill="#325943"/>
-  <path d="M327 242v25" stroke="#d9e6bc"/>
-  <path d="M235 270h199" stroke="#82997d" stroke-width="2"/>
-  <path d="M240 268v-42m195 42v-35" stroke="#6a805e" stroke-width="3"/>
-  <ellipse cx="240" cy="213" rx="17" ry="27" fill="#93ac76"/>
-  <ellipse cx="435" cy="223" rx="16" ry="25" fill="#b8c98a"/>
-  <rect x="119" y="119" width="67" height="7" rx="3.5" fill="#58765a"/>
-  <rect x="119" y="139" width="91" height="5" rx="2.5" fill="#c1ceb1"/>
-  <rect x="119" y="151" width="75" height="5" rx="2.5" fill="#c1ceb1"/>
-  <rect x="119" y="163" width="83" height="5" rx="2.5" fill="#c1ceb1"/>
-  <rect x="119" y="191" width="73" height="7" rx="3.5" fill="#91a77d"/>
-  <rect x="119" y="211" width="91" height="5" rx="2.5" fill="#d3dcc6"/>
-  <rect x="119" y="223" width="80" height="5" rx="2.5" fill="#d3dcc6"/>
-  <rect x="119" y="235" width="88" height="5" rx="2.5" fill="#d3dcc6"/>
-  <circle cx="460" cy="63" r="34" fill="#d9ec77"/>
-  <path d="M460 81V45m0 20-12-11m12 20 13-14m-13-4 8-8" stroke="#315741" stroke-width="2.8" stroke-linecap="round"/>
-  <path d="M59 240h50a14 14 0 0 1 14 14v36a14 14 0 0 1-14 14H78l-20 13v-14a14 14 0 0 1-13-14v-35a14 14 0 0 1 14-14Z" fill="#edb99c"/>
-  <path d="M64 260h40m-40 13h30m-30 13h19" stroke="#8c674e" stroke-width="3" stroke-linecap="round"/>
-</svg>
-<div class="scene-caption"><span>The Halden</span><span>Cincinnati, Ohio</span></div>
-</div>`;
+    return `<div class="hero-scene" aria-hidden="true"><canvas class="hero-still" width="1280" height="720"></canvas><div class="scene-caption"><span>The Halden</span><span>Cincinnati, Ohio</span></div></div>`;
+  }
+
+  function drawHero() {
+    const canvas = $('.hero-still');
+    if (canvas) window.CrisisAnimation?.still(canvas, 'setup');
   }
 
   function setupMarkup() {
@@ -184,7 +157,7 @@ ${footer()}`;
 
   function evidenceMarkup(stage) {
     const earlier = allArtifacts.filter(artifact => artifact.stageIndex > 0 && artifact.stageIndex < current && artifact.stageIndex <= 3);
-    return `${heading(stage)}${window.CrisisAnimation?.markup(stage.id) || ''}${timerMarkup()}<div class="content-layout"><section class="evidence-column" aria-label="Available case evidence"><div class="section-heading"><div><p class="eyebrow">Read the case</p><h2 id="evidence-heading">New evidence</h2></div><div class="section-actions"><span class="document-count">${stage.artifacts.length} documents</span><button class="secondary-button" data-read-update>Read all documents <span aria-hidden="true">→</span></button></div></div><label class="evidence-search-label" for="evidence-search"><span class="screen-reader-only">Search the evidence so far</span><input id="evidence-search" class="evidence-search" type="search" placeholder="Search the evidence so far…" autocomplete="off"></label><div class="artifact-grid" id="artifact-grid">${stage.artifacts.map(artifactCard).join('')}</div>${earlier.length ? `<details class="previous-evidence" id="previous-evidence"><summary>Earlier evidence (${earlier.length} documents)</summary><div class="artifact-grid">${earlier.map(artifactCard).join('')}</div></details>` : ''}</section>${taskPanel(stage)}</div>${completionMarkup()}${footer()}`;
+    return `<div class="incident">${heading(stage)}${window.CrisisAnimation?.markup(stage.id) || ''}</div>${timerMarkup()}<div class="content-layout"><section class="evidence-column" aria-label="Available case evidence"><div class="section-heading"><div><p class="eyebrow">Read the case</p><h2 id="evidence-heading">New evidence</h2></div><div class="section-actions"><span class="document-count">${stage.artifacts.length} documents</span><button class="secondary-button" data-read-update>Read all documents <span aria-hidden="true">→</span></button></div></div><label class="evidence-search-label" for="evidence-search"><span class="screen-reader-only">Search the evidence so far</span><input id="evidence-search" class="evidence-search" type="search" placeholder="Search the evidence so far…" autocomplete="off"></label><div class="artifact-grid" id="artifact-grid">${stage.artifacts.map(artifactCard).join('')}</div>${earlier.length ? `<details class="previous-evidence" id="previous-evidence"><summary>Earlier evidence (${earlier.length} documents)</summary><div class="artifact-grid">${earlier.map(artifactCard).join('')}</div></details>` : ''}</section>${taskPanel(stage)}</div>${completionMarkup()}${footer()}`;
   }
 
   function briefingMarkup(stage) {
@@ -201,6 +174,7 @@ ${footer()}`;
     renderNav();
     $('#workspace').innerHTML = current === 0 ? setupMarkup() : current <= 3 ? evidenceMarkup(stage) : current === 4 ? briefingMarkup(stage) : debriefMarkup(stage);
     animationController = window.CrisisAnimation?.mount($('#workspace')) || null;
+    drawHero();
     document.title = `${stageLabels[current]} | Tallgrass Crisis Simulation`;
     updateClock();
     if (focus) {
@@ -254,6 +228,7 @@ ${footer()}`;
     if (!artifact) return;
     readingIds = [];
     $('#document-label').textContent = artifact.label || artifact.type;
+    $('#document-dialog').dataset.type = artifact.type;
     $('#document-content').innerHTML = `<p class="eyebrow">${esc(artifact.time)}</p><h2 id="document-title">${esc(artifact.title)}</h2><p class="document-source">${esc(artifact.source)}</p>${artifact.body}${artifact.stageIndex <= 3 ? readingAction([id], "I've read this") : ''}`;
     $('#document-dialog').showModal();
     $('#document-dialog').scrollTop = 0;
@@ -263,6 +238,7 @@ ${footer()}`;
     const stage = stages[current];
     if (current < 1 || current > 3 || !progress.canEnter(current)) return;
     $('#document-label').textContent = `${stage.eyebrow} · Full update`;
+    $('#document-dialog').dataset.type = 'full';
     $('#document-content').innerHTML = `<p class="eyebrow">${esc(stage.scenarioTime)}</p><h2 id="document-title">${esc(stage.title)}</h2><p class="document-intro">All ${stage.artifacts.length} documents for this round, together. Mark them as read at the end.</p>${stage.artifacts.map(artifact => `<section class="full-update-section"><p class="eyebrow">${esc(artifact.label)}</p><h3>${esc(artifact.title)}</h3><p class="document-source">${esc(artifact.source)} · ${esc(artifact.time)}</p>${artifact.body}</section>`).join('')}${readingAction(stage.artifacts.map(artifact => artifact.id), "I've read this update")}`;
     $('#document-dialog').showModal();
     $('#document-dialog').scrollTop = 0;
@@ -383,6 +359,7 @@ ${footer()}`;
   persist();
   buildPrintGuide();
   render();
+  document.fonts?.ready.then(drawHero);
   if (requestedStage > current) announce(`Start with ${stageLabels[current]}. Finish each checkpoint to unlock the next stage.`);
   setInterval(updateClock, 250);
 })();
