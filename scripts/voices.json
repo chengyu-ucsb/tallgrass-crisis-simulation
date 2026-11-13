@@ -1,0 +1,121 @@
+{
+  "description": "Stock AI voices for words quoted in the case documents. No voice cloning. Every line is verbatim from docs/content.js; 'say' keeps the document's punctuation and only spells out numerals and times so the model reads them without a break (\"nine AM\", not \"nine a.m.\").",
+  "model": {
+    "name": "Kokoro-82M v1.0 (ONNX)",
+    "weights": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx",
+    "voices": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin"
+  },
+  "target_rms_dbfs": -18,
+  "peak_dbfs": -2,
+  "lines": [
+    {
+      "id": "u1-priya",
+      "speaker": "Priya Natarajan, Channel 7 News",
+      "source": "reporter-email-0752",
+      "voice": "af_heart",
+      "speed": 1.0,
+      "text": "Can you confirm what caused the evacuation, whether anyone was hurt, when residents will be allowed back in, and what the company is doing for the students who are outside right now? We would like a statement by 9:00 a.m. and would welcome someone on camera at 11:00.",
+      "say": "Can you confirm what caused the evacuation, whether anyone was hurt, when residents will be allowed back in, and what the company is doing for the students who are outside right now? We would like a statement by nine AM and would welcome someone on camera at eleven."
+    },
+    {
+      "id": "u2-post",
+      "speaker": "Circulating social post",
+      "source": "social-post-0841",
+      "voice": "am_puck",
+      "speed": 1.05,
+      "text": "The Halden on campus has been CONDEMNED and is collapsing. Two students hospitalized. Tallgrass Student Living knew. Share this.",
+      "say": "The Halden on campus has been condemned and is collapsing. Two students hospitalized. Tallgrass Student Living knew. Share this."
+    },
+    {
+      "id": "u2-request-4471",
+      "speaker": "Resident, Unit 312",
+      "source": "request-4471",
+      "voice": "af_kore",
+      "speed": 1.0,
+      "text": "Cracks in the hallway wall on 3 by the east stairs, new since last week.",
+      "say": "Cracks in the hallway wall on three by the east stairs, new since last week."
+    },
+    {
+      "id": "u2-request-4502",
+      "speaker": "Resident, Unit 318",
+      "source": "request-4502",
+      "voice": "af_aoede",
+      "speed": 1.0,
+      "text": "The crack is longer now and my door won't close unless I slam it.",
+      "say": "The crack is longer now and my door won't close unless I slam it."
+    },
+    {
+      "id": "u2-request-4539",
+      "speaker": "Resident, Unit 312",
+      "source": "request-4539",
+      "voice": "af_kore",
+      "speed": 1.0,
+      "text": "Third time. The crack goes into the ceiling now. Can someone please look at it.",
+      "say": "Third time. The crack goes into the ceiling now. Can someone please look at it."
+    },
+    {
+      "id": "u2-closed",
+      "speaker": "Closing note, M. Reyes",
+      "source": "request-4471, request-4502, request-4539",
+      "voice": "am_fenrir",
+      "speed": 0.96,
+      "text": "Cosmetic. No action required.",
+      "say": "Cosmetic. No action required."
+    },
+    {
+      "id": "u2-mother",
+      "speaker": "A mother in Dayton, on Facebook",
+      "source": "parent-calls",
+      "voice": "af_alloy",
+      "speed": 0.96,
+      "text": "nobody from the company will answer.",
+      "say": "Nobody from the company will answer."
+    },
+    {
+      "id": "u2-priya",
+      "speaker": "Priya Natarajan, Channel 7 News",
+      "source": "reporter-followup",
+      "voice": "af_heart",
+      "speed": 1.0,
+      "text": "We have the maintenance ticket screenshots. Did Tallgrass Student Living ignore warnings about this wall for three weeks? Will someone go on camera at 11:00?",
+      "say": "We have the maintenance ticket screenshots. Did Tallgrass Student Living ignore warnings about this wall for three weeks? Will someone go on camera at eleven?"
+    },
+    {
+      "id": "u3-contractor",
+      "speaker": "Kessler-Brandt Construction",
+      "source": "contractor-statement",
+      "voice": "am_michael",
+      "speed": 1.0,
+      "text": "Kessler-Brandt Construction built The Halden to the engineer's drawings and passed every city inspection. We are confident in our work.",
+      "say": "Kessler-Brandt Construction built The Halden to the engineer's drawings and passed every city inspection. We are confident in our work."
+    },
+    {
+      "id": "u3-engineer",
+      "speaker": "Larkin & Pell Structural Engineers",
+      "source": "engineer-statement",
+      "voice": "af_sarah",
+      "speed": 1.0,
+      "text": "Our design was sound. We are reviewing whether construction matched the design.",
+      "say": "Our design was sound. We are reviewing whether construction matched the design."
+    },
+    {
+      "id": "u3-university",
+      "speaker": "University of Cincinnati (statement within the fictional scenario)",
+      "source": "university-statement",
+      "voice": "af_nova",
+      "speed": 1.0,
+      "text": "The Halden is a privately owned and operated property and is not affiliated with the University. Student Affairs is assisting affected students with information about temporary housing.",
+      "say": "The Halden is a privately owned and operated property and is not affiliated with the University. Student Affairs is assisting affected students with information about temporary housing."
+    },
+    {
+      "id": "u3-dana",
+      "speaker": "Dana Whitlock, chief executive (proposed wording, not issued)",
+      "source": "ceo-request",
+      "voice": "af_bella",
+      "speed": 0.98,
+      "text": "we were as surprised as anyone.",
+      "say": "We were as surprised as anyone."
+    }
+  ],
+  "max_pause_seconds": 0.5
+}

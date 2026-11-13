@@ -3,139 +3,195 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#1d3933">
-  <title>Sound credits | Tallgrass Crisis Simulation</title>
+  <meta name="theme-color" content="#18222f">
+  <meta name="author" content="Chengyu Fang">
+  <title>Sound and voice credits | Tallgrass Crisis Simulation</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=design-6">
+  <link rel="stylesheet" href="styles.css?v=system-1">
   <style>
-    body { background:#f4f2ea; color:#1d3933; }
-    .audio-page { width:min(1120px,calc(100% - 40px)); margin:48px auto 64px; }
-    .audio-back { display:inline-flex; min-height:44px; align-items:center; color:#244d40; font-weight:650; text-underline-offset:4px; }
-    .audio-page h1 { margin:22px 0 16px; font-size:clamp(2rem,5vw,3.2rem); line-height:1.15; letter-spacing:-.025em; }
-    .audio-intro { max-width:760px; font-size:18px; line-height:1.65; }
-    .audio-intro p { margin:0 0 16px; }
-    .audio-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin:32px 0; }
-    .audio-card { background:#fffdf7; border:1px solid #cdd4c7; border-radius:16px; padding:22px; min-width:0; }
-    .audio-card h2 { font-size:20px; line-height:1.3; margin:0 0 8px; }
-    .audio-card p { font-size:16px; line-height:1.55; margin:0 0 14px; }
-    .audio-card .audio-use { min-height:48px; }
-    .audio-card a { color:#255c49; text-underline-offset:3px; overflow-wrap:anywhere; }
-    .audio-card .audio-duration { font-size:15px; color:#4e6157; margin:0; }
-    .audio-card audio { width:100%; margin-top:6px; }
-    .audio-note { padding-top:24px; border-top:1px solid #cdd4c7; font-size:16px; line-height:1.6; }
-    .audio-note a { color:#255c49; text-underline-offset:3px; }
-    a:focus-visible { outline:3px solid #a65b32; outline-offset:4px; }
-    @media(max-width:850px) { .audio-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-    @media(max-width:560px) { .audio-page { margin-top:24px; width:calc(100% - 32px); } .audio-grid { grid-template-columns:1fr; } .audio-card .audio-use { min-height:0; } }
+    .audio-page { width: min(1120px, calc(100% - 40px)); margin: 40px auto 64px; }
+    .audio-back { display: inline-flex; min-height: 44px; align-items: center; font-weight: 650; }
+    .audio-page h1 { margin: 18px 0 14px; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: .98; font-stretch: 70%; font-weight: 800; }
+    .audio-page > h2 { margin: 40px 0 6px; font-size: 1.5rem; }
+    .audio-intro { max-width: 72ch; font-size: 1.0625rem; line-height: 1.6; }
+    .audio-intro p { margin: 0 0 14px; }
+    .audio-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 20px 0 8px; }
+    .audio-card { display: grid; align-content: start; gap: 8px; min-width: 0; padding: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+    .audio-card h2 { margin: 0; font-size: 1.125rem; line-height: 1.25; font-stretch: 100%; }
+    .audio-card p { margin: 0; font-size: 1rem; line-height: 1.5; }
+    .audio-card a { overflow-wrap: anywhere; }
+    .audio-card .audio-duration { font-size: .875rem; color: var(--muted); }
+    .audio-card audio { width: 100%; margin-top: 4px; }
+    .audio-note { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); max-width: 72ch; line-height: 1.6; }
+    @media (max-width: 850px) { .audio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px) { .audio-page { margin-top: 20px; width: calc(100% - 28px); } .audio-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <main class="audio-page">
     <a class="audio-back" href="./">← Back to the simulation</a>
-    <h1>Sound credits</h1>
+    <h1>Sound and voice credits</h1>
     <div class="audio-intro">
-      <p>The overviews use edited recordings and device sounds to introduce scenes and connect them. The sounds are dramatizations of the fictional case. The narration and written evidence contain the case information.</p>
-      <p>All twelve source sounds are released under <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0 1.0</a>. They are trimmed, balanced and hosted with this website. There is no background music.</p>
-      <p>You can preview each edited sound below. Its timing, fades and volume in the overview depend on the scene; effects become quieter while the narrator speaks.</p>
+      <p>The three overviews use recorded sound effects and AI voices. Both are dramatizations of a fictional case. The written documents hold the case information.</p>
+    </div>
+
+    <h2>Voices</h2>
+    <div class="audio-intro">
+      <p>Each voice reads words that a case document quotes, and nothing else. The voices are stock voices from the open Kokoro text-to-speech model. None is a recording or a clone of a real person. There is no narrator.</p>
+    </div>
+    <div class="audio-grid">
+      <article class="audio-card">
+        <h2>Priya Natarajan, Channel 7 News</h2>
+        <p class="audio-use">Update 1. “Can you confirm what caused the evacuation, whether anyone was hurt, when residents will be allowed back in, and what the company is doing for the students who are outside right now? We would like a statement by 9:00 a.m. and would welcome someone on camera at 11:00.”</p>
+        <p class="audio-duration">Voice <code>af_heart</code>, 15.7 seconds</p>
+        <audio controls preload="none" aria-label="Preview the voice for Priya Natarajan, Channel 7 News" src="assets/voices/u1-priya.mp3?v=391ecd1e"></audio>
+      </article>
+      <article class="audio-card">
+        <h2>Circulating social post</h2>
+        <p class="audio-use">Update 2. “The Halden on campus has been CONDEMNED and is collapsing. Two students hospitalized. Tallgrass Student Living knew. Share this.”</p>
+        <p class="audio-duration">Voice <code>am_puck</code>, 7.2 seconds</p>
+        <audio controls preload="none" aria-label="Preview the voice for Circulating social post" src="assets/voices/u2-post.mp3?v=391ecd1e"></audio>
+      </article>
+      <article class="audio-card">
+        <h2>Resident, Unit 312</h2>
+        <p class="audio-use">Update 2. “Cracks in the hallway wall on 3 by the east stairs, new since last week.”</p>
+        <p class="audio-duration">Voice <code>af_kore</code>, 4.3 seconds</p>
+        <audio controls preload="none" aria-label="Preview the voice for Resident, Unit 312" src="assets/voices/u2-request-4471.mp3?v=391ecd1e"></audio>
+      </article>
+      <article class="audio-card">
+        <h2>Resident, Unit 318</h2>
+        <p class="audio-use">Update 2. “The crack is longer now and my door won&#x27;t close unless I slam it.”</p>
+        <p class="audio-duration">Voice <code>af_aoede</code>, 3.5 seconds</p>
+        <audio controls preload="none" aria-label="Preview the voice for Resident, Unit 318" src="assets/voices/u2-request-4502.mp3?v=391ecd1e"></audio>
+      </article>
+      <article class="audio-card">
+        <h2>Resident, Unit 312</h2>
+        <p class="audio-use">Update 2. “Third time. The crack goes into the ceiling now. Can someone please look at it.”</p>
+        <p class="audio-duration">Voice <code>af_kore</code>, 4.3 seconds</p>
+        <audio controls preload="none" aria-label="Preview the voice for Resident, Unit 312" src="assets/voices/u2-request-4539.mp3?v=391ecd1e"></audio>
+      </article>
+      <article class="audio-card">
+        <h2>Closing note, M. Reyes</h2>
+        <p class="audio-use">Update 2. “Cosmetic. No action required.”</p>
+        <p class="audio-duration">Voice <code>am_fenrir</code>, 1.8 seconds</p>
+        <audio controls preload="none" aria-label="Preview the voice for Closing note, M. Reyes" src="assets/voices/u2-closed.mp3?v=391ecd1e"></audio>
+      </article>
+      <article class="audio-card">
+        <h2>A mother in Dayton, on Facebook</h2>
+        <p class="audio-use">Update 2. “nobody from the company will answer.”</p>
+        <p class="audio-duration">Voice <code>af_alloy</code>, 2.3 seconds</p>
+        <audio controls preload="none" aria-label="Preview the voice for A mother in Dayton, on Facebook" src="assets/voices/u2-mother.mp3?v=391ecd1e"></audio>
+      </article>
+      <article class="audio-card">
+        <h2>Priya Natarajan, Channel 7 News</h2>
+        <p class="audio-use">Update 2. “We have the maintenance ticket screenshots. Did Tallgrass Student Living ignore warnings about this wall for three weeks? Will someone go on camera at 11:00?”</p>
+        <p class="audio-duration">Voice <code>af_heart</code>, 9.2 seconds</p>
+        <audio controls preload="none" aria-label="Preview the voice for Priya Natarajan, Channel 7 News" src="assets/voices/u2-priya.mp3?v=391ecd1e"></audio>
+      </article>
+      <article class="audio-card">
+        <h2>Kessler-Brandt Construction</h2>
+        <p class="audio-use">Update 3. “Kessler-Brandt Construction built The Halden to the engineer&#x27;s drawings and passed every city inspection. We are confident in our work.”</p>
+        <p class="audio-duration">Voice <code>am_michael</code>, 8.2 seconds</p>
+        <audio controls preload="none" aria-label="Preview the voice for Kessler-Brandt Construction" src="assets/voices/u3-contractor.mp3?v=391ecd1e"></audio>
+      </article>
+      <article class="audio-card">
+        <h2>Larkin &amp; Pell Structural Engineers</h2>
+        <p class="audio-use">Update 3. “Our design was sound. We are reviewing whether construction matched the design.”</p>
+        <p class="audio-duration">Voice <code>af_sarah</code>, 4.3 seconds</p>
+        <audio controls preload="none" aria-label="Preview the voice for Larkin &amp; Pell Structural Engineers" src="assets/voices/u3-engineer.mp3?v=391ecd1e"></audio>
+      </article>
+      <article class="audio-card">
+        <h2>University of Cincinnati (statement within the fictional scenario)</h2>
+        <p class="audio-use">Update 3. “The Halden is a privately owned and operated property and is not affiliated with the University. Student Affairs is assisting affected students with information about temporary housing.”</p>
+        <p class="audio-duration">Voice <code>af_nova</code>, 10.2 seconds</p>
+        <audio controls preload="none" aria-label="Preview the voice for University of Cincinnati (statement within the fictional scenario)" src="assets/voices/u3-university.mp3?v=391ecd1e"></audio>
+      </article>
+      <article class="audio-card">
+        <h2>Dana Whitlock, chief executive (proposed wording, not issued)</h2>
+        <p class="audio-use">Update 3. “we were as surprised as anyone.”</p>
+        <p class="audio-duration">Voice <code>af_bella</code>, 1.6 seconds</p>
+        <audio controls preload="none" aria-label="Preview the voice for Dana Whitlock, chief executive (proposed wording, not issued)" src="assets/voices/u3-dana.mp3?v=391ecd1e"></audio>
+      </article>
+    </div>
+
+    <h2>Sound effects</h2>
+    <div class="audio-intro">
+      <p>All source sounds are released under <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0 1.0</a>. They are trimmed, balanced and hosted with this website. The stamp on the maintenance requests and the quiet hallway air in Update 1 are synthesized in the browser. There is no music.</p>
     </div>
     <div class="audio-grid">
       <article class="audio-card">
         <h2>Dry crack</h2>
-        <p class="audio-use">The first report.</p>
-        <p><a href="https://freesound.org/people/TheHiraHira/sounds/460247/" target="_blank" rel="noopener">wood break small 1.mp3</a><br>By TheHiraHira · CC0 1.0</p>
+        <p class="audio-use">Update 1, the first report at 6:10 a.m.</p>
+        <p><a href="https://freesound.org/people/TheHiraHira/sounds/460247/" target="_blank" rel="noopener">wood break small 1.mp3</a><br>By TheHiraHira, CC0 1.0</p>
         <p class="audio-duration">0.9 seconds</p>
-        <audio controls preload="metadata" aria-label="Preview crack sound" src="assets/effects/crack.mp3"></audio>
+        <audio controls preload="none" aria-label="Preview dry crack" src="assets/effects/crack.mp3"></audio>
       </article>
       <article class="audio-card">
         <h2>Building alarm</h2>
-        <p class="audio-use">The evacuation transition.</p>
-        <p><a href="https://freesound.org/people/pushkin/sounds/319413/" target="_blank" rel="noopener">Fire alarm</a><br>By pushkin · CC0 1.0</p>
-        <p class="audio-duration">3.1 seconds</p>
-        <audio controls preload="metadata" aria-label="Preview alarm sound" src="assets/effects/alarm.mp3"></audio>
+        <p class="audio-use">Update 1, the evacuation at 6:40 a.m.</p>
+        <p><a href="https://freesound.org/people/pushkin/sounds/319413/" target="_blank" rel="noopener">Fire alarm</a><br>By pushkin, CC0 1.0</p>
+        <p class="audio-duration">3.2 seconds</p>
+        <audio controls preload="none" aria-label="Preview building alarm" src="assets/effects/alarm.mp3"></audio>
       </article>
       <article class="audio-card">
         <h2>Footsteps</h2>
-        <p class="audio-use">Residents leaving the building.</p>
-        <p><a href="https://freesound.org/people/Rickmk2/sounds/164315/" target="_blank" rel="noopener">Footsteps on wooden flooring.wav</a><br>By Rickmk2 · CC0 1.0</p>
+        <p class="audio-use">Update 1, residents leaving the building.</p>
+        <p><a href="https://freesound.org/people/Rickmk2/sounds/164315/" target="_blank" rel="noopener">Footsteps on wooden flooring.wav</a><br>By Rickmk2, CC0 1.0</p>
         <p class="audio-duration">4.6 seconds</p>
-        <audio controls preload="metadata" aria-label="Preview steps sound" src="assets/effects/steps.mp3"></audio>
+        <audio controls preload="none" aria-label="Preview footsteps" src="assets/effects/steps.mp3"></audio>
       </article>
       <article class="audio-card">
         <h2>Rain</h2>
-        <p class="audio-use">Residents sheltering from the rain.</p>
-        <p><a href="https://freesound.org/people/seth-m/sounds/323427/" target="_blank" rel="noopener">rainfall</a><br>By seth-m · CC0 1.0</p>
+        <p class="audio-use">All three updates, quieter while a voice reads.</p>
+        <p><a href="https://freesound.org/people/seth-m/sounds/323427/" target="_blank" rel="noopener">rainfall</a><br>By seth-m, CC0 1.0</p>
         <p class="audio-duration">11.5 seconds</p>
-        <audio controls preload="metadata" aria-label="Preview rain sound" src="assets/effects/rain.mp3"></audio>
-      </article>
-      <article class="audio-card">
-        <h2>Desk phone</h2>
-        <p class="audio-use">Incoming calls and the contractor callback.</p>
-        <p><a href="https://freesound.org/people/knufds/sounds/345807/" target="_blank" rel="noopener">AT&amp;T model #210 desk phone</a><br>By knufds · CC0 1.0</p>
-        <p class="audio-duration">1.9 seconds</p>
-        <audio controls preload="metadata" aria-label="Preview phone sound" src="assets/effects/phone.mp3"></audio>
+        <audio controls preload="none" aria-label="Preview rain" src="assets/effects/rain.mp3"></audio>
       </article>
       <article class="audio-card">
         <h2>Phone vibration</h2>
-        <p class="audio-use">Group chat transitions.</p>
-        <p><a href="https://freesound.org/people/lartti/sounds/529979/" target="_blank" rel="noopener">phone vibrate.wav</a><br>By lartti · CC0 1.0</p>
-        <p class="audio-duration">1.0 seconds</p>
-        <audio controls preload="metadata" aria-label="Preview vibrate sound" src="assets/effects/vibrate.mp3"></audio>
+        <p class="audio-use">Each notification on the team&#x27;s phone.</p>
+        <p><a href="https://freesound.org/people/lartti/sounds/529979/" target="_blank" rel="noopener">phone vibrate.wav</a><br>By lartti, CC0 1.0</p>
+        <p class="audio-duration">1.1 seconds</p>
+        <audio controls preload="none" aria-label="Preview phone vibration" src="assets/effects/vibrate.mp3"></audio>
       </article>
       <article class="audio-card">
-        <h2>Keyboard / mouse</h2>
-        <p class="audio-use">Opening records and switching sources.</p>
-        <p><a href="https://freesound.org/people/derrick.d/sounds/529317/" target="_blank" rel="noopener">In the Zone</a><br>By derrick.d · CC0 1.0</p>
-        <p class="audio-duration">0.3 seconds</p>
-        <audio controls preload="metadata" aria-label="Preview click sound" src="assets/effects/click.mp3"></audio>
-      </article>
-      <article class="audio-card">
-        <h2>Page turn</h2>
-        <p class="audio-use">Reports, statements and the team memo.</p>
-        <p><a href="https://freesound.org/people/HenKonen/sounds/757221/" target="_blank" rel="noopener">Paper page turn 1</a><br>By HenKonen · CC0 1.0</p>
-        <p class="audio-duration">1.0 seconds</p>
-        <audio controls preload="metadata" aria-label="Preview page sound" src="assets/effects/page.mp3"></audio>
-      </article>
-      <article class="audio-card">
-        <h2>Pen on paper</h2>
-        <p class="audio-use">Writing on the memo handout.</p>
-        <p><a href="https://freesound.org/people/Anthousai/sounds/337086/" target="_blank" rel="noopener">writing - pen 01.wav</a><br>By Anthousai · CC0 1.0</p>
-        <p class="audio-duration">2.7 seconds</p>
-        <audio controls preload="metadata" aria-label="Preview pen sound" src="assets/effects/pen.mp3"></audio>
-      </article>
-      <article class="audio-card">
-        <h2>Phone pickup</h2>
-        <p class="audio-use">Answering the contractor’s callback.</p>
-        <p><a href="https://freesound.org/people/MootMcnoodles/sounds/444399/" target="_blank" rel="noopener">Phone Pick Up.wav</a><br>By MootMcnoodles · CC0 1.0</p>
-        <p class="audio-duration">0.7 seconds</p>
-        <audio controls preload="metadata" aria-label="Preview pickup sound" src="assets/effects/pickup.mp3"></audio>
-      </article>
-      <article class="audio-card">
-        <h2>Outgoing ringback</h2>
-        <p class="audio-use">Unanswered outgoing calls.</p>
-        <p><a href="https://freesound.org/people/tt_runscript/sounds/337655/" target="_blank" rel="noopener">Current US/Can. Ringback tone</a><br>By tt_runscript · CC0 1.0</p>
-        <p class="audio-duration">1.4 seconds</p>
-        <audio controls preload="metadata" aria-label="Preview ringback sound" src="assets/effects/ringback.mp3"></audio>
-      </article>
-      <article class="audio-card">
-        <h2>Message notification</h2>
-        <p class="audio-use">Messages and reporter emails.</p>
-        <p><a href="https://freesound.org/people/stwime/sounds/545363/" target="_blank" rel="noopener">friendly.mp3</a><br>By stwime · CC0 1.0</p>
+        <h2>Notification tone</h2>
+        <p class="audio-use">Each notification on the team&#x27;s phone.</p>
+        <p><a href="https://freesound.org/people/stwime/sounds/545363/" target="_blank" rel="noopener">friendly.mp3</a><br>By stwime, CC0 1.0</p>
         <p class="audio-duration">0.4 seconds</p>
-        <audio controls preload="metadata" aria-label="Preview notify sound" src="assets/effects/notify.mp3"></audio>
+        <audio controls preload="none" aria-label="Preview notification tone" src="assets/effects/notify.mp3"></audio>
+      </article>
+      <article class="audio-card">
+        <h2>Paper</h2>
+        <p class="audio-use">Maintenance requests, statements and the draft statement.</p>
+        <p><a href="https://freesound.org/people/HenKonen/sounds/757221/" target="_blank" rel="noopener">Paper page turn 1</a><br>By HenKonen, CC0 1.0</p>
+        <p class="audio-duration">1.0 seconds</p>
+        <audio controls preload="none" aria-label="Preview paper" src="assets/effects/page.mp3"></audio>
+      </article>
+      <article class="audio-card">
+        <h2>Desk phone</h2>
+        <p class="audio-use">Update 2, calls to the leasing office.</p>
+        <p><a href="https://freesound.org/people/knufds/sounds/345807/" target="_blank" rel="noopener">AT&amp;T model #210 desk phone</a><br>By knufds, CC0 1.0</p>
+        <p class="audio-duration">1.9 seconds</p>
+        <audio controls preload="none" aria-label="Preview desk phone" src="assets/effects/phone.mp3"></audio>
+      </article>
+      <article class="audio-card">
+        <h2>Receiver</h2>
+        <p class="audio-use">Update 2, the contractor&#x27;s callback.</p>
+        <p><a href="https://freesound.org/people/MootMcnoodles/sounds/444399/" target="_blank" rel="noopener">Phone Pick Up.wav</a><br>By MootMcnoodles, CC0 1.0</p>
+        <p class="audio-duration">0.8 seconds</p>
+        <audio controls preload="none" aria-label="Preview receiver" src="assets/effects/pickup.mp3"></audio>
+      </article>
+      <article class="audio-card">
+        <h2>Click</h2>
+        <p class="audio-use">Update 3, the on-camera account.</p>
+        <p><a href="https://freesound.org/people/derrick.d/sounds/529317/" target="_blank" rel="noopener">In the Zone</a><br>By derrick.d, CC0 1.0</p>
+        <p class="audio-duration">0.3 seconds</p>
+        <audio controls preload="none" aria-label="Preview click" src="assets/effects/click.mp3"></audio>
       </article>
     </div>
-    <div class="audio-note">
-      <p>The narrator uses the stock synthetic male voice Kokoro <strong>am_michael</strong>. It is not a recording or clone of the instructor or a person named in the case. <a href="https://huggingface.co/hexgrad/Kokoro-82M" target="_blank" rel="noopener">Model and license</a>.</p>
-      <p><a href="https://github.com/chengyu-ucsb/tallgrass-crisis-simulation/blob/main/docs/assets/effects/README.md" target="_blank" rel="noopener">Editing notes and source details</a> · <a href="./">Return to the simulation</a></p>
-    </div>
+
+    <p class="audio-note">The voice lines, the voice chosen for each, and the script that generates them are in <code>scripts/voices.json</code> and <code>scripts/build-voices.py</code>. This is a fictional classroom scenario. Statements attributed to the University of Cincinnati and other organizations are part of the exercise.</p>
   </main>
-  <script>
-    document.addEventListener('play', function(event) {
-      if (event.target.tagName !== 'AUDIO') return;
-      document.querySelectorAll('audio').forEach(function(audio) {
-        if (audio !== event.target) audio.pause();
-      });
-    }, true);
-  </script>
 </body>
 </html>
