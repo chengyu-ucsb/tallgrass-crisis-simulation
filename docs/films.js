@@ -7,6 +7,8 @@
  */
 (() => {
   const n = value => (Math.round(value * 100) / 100).toString();
+  // Clip lengths come from voice-tracks.js, written by scripts/build-voices.py.
+  const seconds = (id, fallback) => (window.CrisisVoices && window.CrisisVoices[id] ? window.CrisisVoices[id].seconds : fallback);
   const glyphs = {
     play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>',
     chat: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 5h16v11H10l-5 4v-4H4z"/></svg>',
@@ -27,7 +29,7 @@
 
   /* ------------------------------------------------------------ Update 1 */
   const one = (() => {
-    const lock = 27, mail = 37.0, voice = mail + 1.5, end = voice + 16.19 + 1.0, length = end + 7.6;
+    const lock = 27, mail = 37.0, voice = mail + 1.5, end = voice + seconds('u1-priya', 16) + 1.0, length = end + 7.6;
     return {
       label: 'Update 1', length, poster: 13.2,
       shots: { video: 1.6, night: 8, lapse: 20, lock, end },

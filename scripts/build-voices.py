@@ -37,15 +37,56 @@ def trim(samples, rate, floor_db=-45.0, pad=0.06):
     return samples[start:end]
 
 
-def level(samples, target_rms_db, peak_db):
-    """Scale to a target RMS, then hold peaks under the ceiling."""
-    rms = float(np.sqrt(np.mean(samples ** 2)))
-    samples = samples * (10 ** (target_rms_db / 20) / max(rms, 1e-9))
+def pauses(samples, rate, floor_db=-42.0, least=0.2):
+    """Silences inside a clip as (start, length) in seconds, from 10 ms frames."""
+    frame = int(rate * 0.01)
+    count = samples.size // frame
+    quiet = np.array([np.sqrt(np.mean(samples[i * frame:(i + 1) * frame] ** 2)) for i in range(count)]) < 10 ** (floor_db / 20)
+    found, i = [], 0
+    while i < count:
+        if quiet[i]:
+            j = i
+            while j < count and quiet[j]:
+                j += 1
+            if i > 0 and j < count and (j - i) * 0.01 >= least:
+                found.append((i * frame, (j - i) * frame))
+            i = j
+        else:
+            i += 1
+    return found
+
+
+def tighten(samples, rate, longest):
+    """Shorten any silence longer than `longest` seconds; the model sometimes over-holds a sentence break."""
+    keep, cursor, limit = [], 0, int(longest * rate)
+    for start, length in pauses(samples, rate):
+        if length > limit:
+            cut = length - limit
+            keep.append(samples[cursor:start + limit // 2])
+            cursor = start + limit // 2 + cut
+    keep.append(samples[cursor:])
+    return np.concatenate(keep)
+
+
+def speech_rms(samples, rate, floor_db=-42.0):
+    """RMS over the frames that carry speech, so clips with more pauses are not levelled louder."""
+    frame = int(rate * 0.01)
+    count = samples.size // frame
+    power = np.array([np.mean(samples[i * frame:(i + 1) * frame] ** 2) for i in range(count)])
+    active = power[power > (10 ** (floor_db / 20)) ** 2]
+    return float(np.sqrt(np.mean(active if active.size else power)))
+
+
+def level(samples, rate, target_rms_db, peak_db):
+    """Bring speech to the target RMS, then round off only the peaks above the ceiling."""
+    samples = samples * (10 ** (target_rms_db / 20) / max(speech_rms(samples, rate), 1e-9))
     ceiling = 10 ** (peak_db / 20)
-    peak = float(np.max(np.abs(samples)))
-    if peak > ceiling:
-        samples = np.tanh(samples / ceiling * 1.2) / np.tanh(1.2) * ceiling
-    fade = int(0.012 * 24000)
+    knee = 0.6 * ceiling
+    size = np.abs(samples)
+    over = size > knee
+    # Below the knee nothing changes, so every clip keeps the same loudness.
+    samples[over] = np.sign(samples[over]) * (knee + (ceiling - knee) * np.tanh((size[over] - knee) / (ceiling - knee)))
+    fade = int(0.012 * rate)
     ramp = np.linspace(0.0, 1.0, fade, dtype=np.float32)
     samples[:fade] *= ramp
     samples[-fade:] *= ramp[::-1]
@@ -67,7 +108,9 @@ def main():
         if args.only and line["id"] not in args.only:
             continue
         samples, rate = kokoro.create(line["say"], voice=line["voice"], speed=line["speed"], lang="en-us")
-        samples = level(trim(np.asarray(samples, dtype=np.float32), rate), SPEC["target_rms_dbfs"], SPEC["peak_dbfs"])
+        samples = tighten(trim(np.asarray(samples, dtype=np.float32), rate), rate, SPEC.get("max_pause_seconds", 0.5))
+        held = [[round(a / rate, 2), round(b / rate, 2)] for a, b in pauses(samples, rate)]
+        samples = level(samples, rate, SPEC["target_rms_dbfs"], SPEC["peak_dbfs"])
         target = OUT / (line["id"] + ".mp3")
         with tempfile.NamedTemporaryFile(suffix=".wav") as wav:
             sf.write(wav.name, samples, rate, subtype="PCM_16")
@@ -76,11 +119,12 @@ def main():
         manifest[line["id"]] = {
             "speaker": line["speaker"], "source": line["source"], "voice": line["voice"], "speed": line["speed"],
             "text": line["text"], "seconds": round(samples.size / rate, 2),
-            "rms_dbfs": round(20 * float(np.log10(np.sqrt(np.mean(samples ** 2)))), 1),
+            "speech_rms_dbfs": round(20 * float(np.log10(speech_rms(samples, rate))), 1),
             "peak_dbfs": round(20 * float(np.log10(np.max(np.abs(samples)))), 1),
+            "pauses": held,
             "sha256": hashlib.sha256(target.read_bytes()).hexdigest(),
         }
-        print(line["id"], line["voice"], manifest[line["id"]]["seconds"], "s")
+        print(line["id"], line["voice"], manifest[line["id"]]["seconds"], "s", "pauses [start, length]:", held)
 
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
     lines = ["window.CrisisVoices = " + json.dumps({k: {"seconds": v["seconds"], "speaker": v["speaker"], "text": v["text"]} for k, v in manifest.items()}, indent=2) + ";", ""]
