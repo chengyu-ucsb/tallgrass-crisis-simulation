@@ -50,6 +50,8 @@ for stage_id, stage in spec["stages"].items():
                     raise RuntimeError("Empty narration: " + stage_id + "/" + str(index + 1))
                 samples = wave.detach().cpu().numpy().astype(np.float32)
                 if samples.size:
+                    if pieces:
+                        pieces.append(np.zeros(int(0.15 * SR), dtype=np.float32))
                     pieces.append(samples)
                     spoken_chunks.append(graphemes)
         if not pieces:

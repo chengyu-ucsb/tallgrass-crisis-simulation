@@ -18,7 +18,7 @@
         {
           "label": "Evacuation",
           "minimum_seconds": 12,
-          "cue": "alarm",
+          "cue": "evacuation",
           "text": "Half an hour later, at six forty, the Cincinnati Fire Department ordered a precautionary evacuation. All two hundred and thirty-six residents are out of the building. Nobody is hurt. The cause of the crack is still unknown."
         },
         {

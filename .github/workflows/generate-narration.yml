@@ -32,7 +32,7 @@ jobs:
           sudo apt-get install -y --no-install-recommends espeak-ng ffmpeg libsndfile1
           python -m pip install pip==25.0.1
           python -m pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
-          python -m pip install kokoro==0.9.4 'misaki[en]==0.9.4' transformers==4.48.3 tokenizers==0.21.0 huggingface-hub==0.28.1 numpy==1.26.4 spacy==3.8.4 thinc==8.3.4 spacy-curated-transformers==0.3.0 soundfile==0.13.1
+          python -m pip install kokoro==0.9.4 'misaki[en]==0.9.4' transformers==4.48.3 tokenizers==0.21.0 huggingface-hub==0.28.1 numpy==1.26.4 spacy==3.8.4 thinc==8.3.4 spacy-curated-transformers==0.3.0 soundfile==0.13.1 click==8.1.8 typer==0.15.1 weasel==0.4.1
           python -m pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
           python -m pip check
       - name: Generate and verify the three narration tracks
