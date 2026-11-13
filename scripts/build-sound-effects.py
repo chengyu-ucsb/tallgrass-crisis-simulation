@@ -29,8 +29,9 @@ decoded_clips = {}
 def run(args, data=None):
     return subprocess.run(args, input=data, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True).stdout
 
-def decode(data):
-    raw = run(["ffmpeg", "-v", "error", "-i", "pipe:0", "-af", "aresample=32000,highpass=f=65,lowpass=f=11500",
+def decode(data, cleanup=False):
+    filters = ["-af", "aresample=32000,highpass=f=65,lowpass=f=11500"] if cleanup else []
+    raw = run(["ffmpeg", "-v", "error", "-i", "pipe:0", *filters,
                "-ar", str(SR), "-ac", "1", "-f", "f32le", "pipe:1"], data)
     return np.frombuffer(raw, dtype="<f4").copy()
 
@@ -70,7 +71,7 @@ for cfg in SPEC["sources"]:
     source_hash = hashlib.sha256(data).hexdigest()
     if source_hash != cfg["sha256"]:
         raise RuntimeError("Source checksum changed: " + ident)
-    samples, start, end = excerpt(decode(data), cfg)
+    samples, start, end = excerpt(decode(data, cleanup=True), cfg)
     # A small single reflection gives the dry crack a hallway tail; no collapse layer.
     if ident == "crack":
         delay = round(.065 * SR)
