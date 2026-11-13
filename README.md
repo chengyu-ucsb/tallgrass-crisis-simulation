@@ -13,7 +13,9 @@ Each team chooses one person to open the website's updates and complete its chec
 5. Team briefings: finish the paper memo and give a two-minute briefing.
 6. Debrief: discuss the decisions, hand in the paper memo, and prepare for the individual evaluation.
 
-Each of the three updates includes a detailed illustrated overview with play, pause, replay, scene selection, a text transcript, and an expanded view for projection. It starts paused, with optional original music and scene cues off by default. There is no narration. Each animation uses only information available in its round; all written evidence remains available below it. Watching does not mark documents as read or complete a checkpoint. Update 1 runs 2:14, Update 2 runs 2:24, and Update 3 runs 2:28.
+Each of the three updates includes an eight-scene illustrated overview with a recorded stock male narrator, scene sound effects, play, pause, replay, scene selection, a transcript, and an expanded view for projection. Nothing plays until the user presses Play. Narration and effects start enabled and can be turned off separately. There is no music. The first update includes a dry crack, a brief evacuation alarm and footsteps, rain, and communication cues. Later updates use calls, messages, paper, and pen sounds. These are dramatized effects, not recordings of an actual incident.
+
+Narration uses static MP3 files hosted with the website, so every device receives the same voice without a speech API or subscription. Scene timing allows the narration to finish, and the animation follows the recording's playback position. Pausing, seeking, opening the evidence, changing stages, or leaving the page stops both audio and motion. Each animation uses only information available in its round; all written evidence remains available below it. Watching does not mark documents as read or complete a checkpoint.
 
 Each update includes individual document cards and a full reading view. Students mark the reading complete, confirm the required work on their memo handout, and complete the checkpoint to unlock the next stage. Search includes only evidence from the current and earlier updates. The countdown has start, pause, reset, and add-minute controls.
 
@@ -45,7 +47,10 @@ These are completion checks reported by students, not automated grading or verif
 - `docs/progress.js`: shared prerequisite and progress-restoration rules.
 - `docs/animation-scenes.js`: Scene text, visual facts, and timing, drawn from the case documents.
 - `docs/animation.js` and `docs/animation.css`: Illustrations, captions, playback controls, and responsive layout. Motion follows the player position and respects reduced-motion preferences.
-- `docs/animation-sound.js`: Optional original music and abstract scene cues, generated in the browser without recordings or external services. Sound stops when the player pauses, opens a document, changes stage, or leaves the page.
+- `docs/animation-sound.js`: Original scene sound effects synthesized in the browser, with no music or external service.
+- `docs/narration-tracks.js` and `docs/assets/audio/`: Recorded narration, complete spoken transcripts, scene durations, and generation details.
+- `scripts/narration.json` and `scripts/build-narration.py`: Narration scripts and reproducible audio generation with the stock Kokoro `am_michael` voice.
+- `.github/workflows/generate-narration.yml`: Generates and commits the recordings when their scripts change, using a standard public-repository runner. The generation does not use a paid speech API. Publish the generated files through the normal Pages workflow after generation completes.
 - `scripts/test-progress.cjs`: focused checks for sequential access, partial completion, refresh, and invalid saved state.
 - `docs/styles.css`: desktop, phone, and print layouts.
 - `docs/downloads/`: printable reference and original assignment templates.

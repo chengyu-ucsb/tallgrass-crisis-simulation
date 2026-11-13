@@ -11,7 +11,7 @@ window.CrisisFilms = {
         "place": "The Halden",
         "time": "6:10 a.m.",
         "badge": "Security calls 911",
-        "cue": "arrival",
+        "cue": "crack",
         "title": "A crack in the third-floor hallway",
         "caption": "A resident hears a loud crack and finds a new diagonal crack across the hallway wall and into the ceiling near the east stairwell. The overnight security contractor calls 911."
       },
@@ -26,7 +26,7 @@ window.CrisisFilms = {
           "value": "236",
           "label": "residents evacuated"
         },
-        "cue": "arrival",
+        "cue": "evacuation",
         "title": "Everyone is out. Nobody is hurt.",
         "caption": "The Cincinnati Fire Department orders a precautionary evacuation. All 236 residents are out, and nobody is hurt. The cause is still unknown."
       },
@@ -59,7 +59,7 @@ window.CrisisFilms = {
         "art": "shelter",
         "place": "The building next door",
         "badge": "38°F and raining",
-        "cue": "arrival",
+        "cue": "rain",
         "title": "Residents need practical help",
         "caption": "Most residents are sheltering in the neighboring lobby and parking garage, which Tallgrass does not own. Others have gone to friends. Many left coats, laptops, medications, and car keys behind. Final exams begin in three weeks."
       },
@@ -86,7 +86,7 @@ window.CrisisFilms = {
             ]
           ]
         },
-        "cue": "message",
+        "cue": "dial",
         "title": "The team is still waiting for answers",
         "caption": "Property manager Marcus Reyes is on site. The contractor and structural engineer have not returned calls. Chief executive Dana Whitlock is returning from Columbus and is reachable by phone."
       },
@@ -109,7 +109,7 @@ window.CrisisFilms = {
             "parents have called"
           ]
         ],
-        "cue": "message",
+        "cue": "messages",
         "title": "The story is already spreading",
         "caption": "A resident posted a video of the crack at 6:50 a.m. It now has 40,000 views. The residents’ 190-member group chat is moving quickly. Two parents have called the leasing office, which opens at 9:00. Tallgrass has said nothing publicly."
       },
@@ -132,7 +132,7 @@ window.CrisisFilms = {
             ]
           ]
         },
-        "cue": "message",
+        "cue": "email",
         "title": "A statement by 9:00. An interview at 11:00.",
         "caption": "Priya Natarajan asks what caused the evacuation, whether anyone was hurt, when residents can return, and how Tallgrass is helping. She wants a statement by 9:00 a.m. for online and noon coverage, and invites someone on camera at 11:00."
       },
@@ -142,7 +142,7 @@ window.CrisisFilms = {
         "art": "memo",
         "place": "Your team’s memo handout",
         "badge": "Read, discuss, and write",
-        "cue": "finish",
+        "cue": "pen",
         "title": "What will your team do and say first?",
         "caption": "Read the full update below. Start your situation summary, holding statement, and message to a priority stakeholder on the memo handout. Decide who will speak for the company, and record your first decision and reasoning in section 7."
       }
@@ -193,7 +193,7 @@ window.CrisisFilms = {
             ]
           ]
         },
-        "cue": "message",
+        "cue": "messages",
         "title": "A post makes alarming claims",
         "caption": "The post has 12,000 shares. The account has 300 followers, and your team can find no connection to the building. Its claims about condemnation and hospitalization conflict with the information available to your team."
       },
@@ -215,7 +215,7 @@ window.CrisisFilms = {
             ]
           ]
         },
-        "cue": "paper",
+        "cue": "papers",
         "title": "Earlier complaints surface",
         "caption": "Screenshots from the residents’ chat show reports of new hallway cracks on October 28, then a longer crack and a sticking door on November 3. Both requests were closed as “Cosmetic. No action required. (M. Reyes)”."
       },
@@ -253,7 +253,7 @@ window.CrisisFilms = {
           "label": "calls from parents"
         },
         "badge": "Lease terms: company resources",
-        "cue": "message",
+        "cue": "phone",
         "title": "The phone keeps ringing",
         "caption": "Since 9:00 a.m., 44 parents have called. A mother in Dayton posted on Facebook that she is driving down to get her daughter and cannot reach the company. Other parents ask about rent refunds and ending leases."
       },
@@ -275,7 +275,7 @@ window.CrisisFilms = {
             ]
           ]
         },
-        "cue": "message",
+        "cue": "email",
         "title": "The reporter asks about the warnings",
         "caption": "Priya Natarajan now has the maintenance screenshots. She asks whether Tallgrass ignored warnings about the wall for three weeks and again requests someone on camera at 11:00 a.m."
       },
@@ -297,7 +297,7 @@ window.CrisisFilms = {
             ]
           ]
         },
-        "cue": "message",
+        "cue": "phone",
         "title": "The contractor responds",
         "caption": "Kessler-Brandt Construction has called back and says only that it will review the matter with counsel. Larkin & Pell Structural Engineers has still not returned the company’s calls."
       },
@@ -307,7 +307,7 @@ window.CrisisFilms = {
         "art": "memo",
         "place": "Your team’s memo handout",
         "badge": "Section 7 · Update 2",
-        "cue": "finish",
+        "cue": "pen",
         "title": "Revisit your response",
         "caption": "Read the full update. Review your situation summary, statements, stakeholder message, and immediate actions. Discuss the interview request, then record your Update 2 decision and what shaped it in section 7 of your paper memo handout."
       }
@@ -356,7 +356,7 @@ window.CrisisFilms = {
             ]
           ]
         },
-        "cue": "paper",
+        "cue": "papers",
         "title": "The contractor and engineer give their accounts",
         "caption": "Kessler-Brandt says it built to the engineer’s drawings and passed every city inspection. Larkin & Pell says its design was sound and is reviewing whether construction matched that design. These are their statements."
       },
@@ -378,7 +378,7 @@ window.CrisisFilms = {
             ]
           ]
         },
-        "cue": "paper",
+        "cue": "email",
         "title": "The university responds",
         "caption": "UC says The Halden is privately owned and operated and is not affiliated with the university. Student Affairs is helping affected students find information about temporary housing."
       },
@@ -401,7 +401,7 @@ window.CrisisFilms = {
             ]
           ]
         },
-        "cue": "message",
+        "cue": "record",
         "title": "A former technician describes an earlier warning",
         "caption": "Former maintenance technician Tom Delgado tells Priya on camera that he reported out-of-square third-floor door frames in August and was told it was “normal settling.” He left Tallgrass in September."
       },
@@ -446,7 +446,7 @@ window.CrisisFilms = {
             ]
           ]
         },
-        "cue": "arrival",
+        "cue": "paper",
         "title": "A housing offer and a daytime warming space",
         "caption": "A hotel group has offered 120 rooms at a reduced rate for two weeks; the nightly rate is not given. UC’s Campus Recreation Center is open as a daytime warming space. Check the company resources for spending authority and lease terms."
       },
@@ -460,7 +460,7 @@ window.CrisisFilms = {
           "value": "5:00",
           "label": "p.m. · planned protest"
         },
-        "cue": "message",
+        "cue": "messages",
         "title": "Residents plan a protest",
         "caption": "Residents are organizing a protest outside the leasing office at 5:00 p.m."
       },
@@ -470,7 +470,7 @@ window.CrisisFilms = {
         "art": "memo",
         "place": "Your team’s memo handout",
         "badge": "Hand in after the briefing and debrief",
-        "cue": "finish",
+        "cue": "pen",
         "title": "Prepare your final response",
         "caption": "Read the full update. Finish all seven memo sections, including your public statement, advice to the chief executive, stakeholder message, three immediate actions, and Update 3 decision record. Prepare your two-minute briefing. Keep the memo for the debrief, then hand it in at the end of class."
       }
