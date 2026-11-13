@@ -1,0 +1,40 @@
+name: Build recorded scene effects
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/sound-effects.json
+      - scripts/build-sound-effects.py
+      - .github/workflows/build-sound-effects.yml
+permissions:
+  contents: write
+concurrency:
+  group: crisis-recorded-effects
+  cancel-in-progress: false
+jobs:
+  effects:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: "3.11"
+      - name: Install audio editing tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ffmpeg
+          python -m pip install numpy==1.26.4
+      - name: Build effects and verify the unchanged narration
+        run: python scripts/build-sound-effects.py
+      - name: Save recorded effects to the repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/assets/effects docs/effects-tracks.js
+          if git diff --staged --quiet; then
+            exit 0
+          fi
+          git commit -m "Build licensed recordings for all three scene soundtracks"
+          git push

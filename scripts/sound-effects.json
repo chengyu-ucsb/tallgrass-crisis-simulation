@@ -1,0 +1,628 @@
+{
+  "version": 1,
+  "description": "Recorded Foley, ambience and device sounds; no music; approved narration unchanged.",
+  "sources": [
+    {
+      "id": "crack",
+      "creator": "TheHiraHira",
+      "title": "wood break small 1.mp3",
+      "page": "https://freesound.org/people/TheHiraHira/sounds/460247/",
+      "download": "https://cdn.freesound.org/previews/460/460247_9117851-hq.mp3",
+      "sha256": "00c30b565b632dc9fe9562a6fa2cf10ca2cbcca2b21868ff1eaeaf876ff1ba8b",
+      "license": "CC0 1.0",
+      "selection": "transient",
+      "seconds": 0.8,
+      "preRoll": 0.07,
+      "peak": 0.78,
+      "rms": 0.24,
+      "fadeIn": 0.003,
+      "fadeOut": 0.11
+    },
+    {
+      "id": "alarm",
+      "creator": "pushkin",
+      "title": "Fire alarm",
+      "page": "https://freesound.org/people/pushkin/sounds/319413/",
+      "download": "https://cdn.freesound.org/previews/319/319413_336074-hq.mp3",
+      "sha256": "0a89258cb93066e9d12d58e44d85aac0c28a073b95a734a2daac4040ef66438e",
+      "license": "CC0 1.0",
+      "selection": "first-active",
+      "seconds": 3.1,
+      "rms": 0.2,
+      "fadeIn": 0.035,
+      "fadeOut": 0.12
+    },
+    {
+      "id": "steps",
+      "creator": "Rickmk2",
+      "title": "Footsteps on wooden flooring.wav",
+      "page": "https://freesound.org/people/Rickmk2/sounds/164315/",
+      "download": "https://cdn.freesound.org/previews/164/164315_2407533-hq.mp3",
+      "sha256": "ec51cee76b5790fccb318927bf6bbf6b122c3502f49a408d8dcec3d2d80b9a1d",
+      "license": "CC0 1.0",
+      "selection": "first-active",
+      "seconds": 4.6,
+      "preRoll": 0.06,
+      "rms": 0.19,
+      "fadeOut": 0.12
+    },
+    {
+      "id": "rain",
+      "creator": "seth-m",
+      "title": "rainfall",
+      "page": "https://freesound.org/people/seth-m/sounds/323427/",
+      "download": "https://cdn.freesound.org/previews/323/323427_3366749-hq.mp3",
+      "sha256": "3eefc08069f9c5be7a4d4e0d081c53f930fff27be0c028695d85525614e04764",
+      "license": "CC0 1.0",
+      "selection": "full",
+      "seconds": 11.478,
+      "rms": 0.18,
+      "fadeIn": 0.03,
+      "fadeOut": 0.04
+    },
+    {
+      "id": "phone",
+      "creator": "knufds",
+      "title": "AT&T model #210 desk phone",
+      "page": "https://freesound.org/people/knufds/sounds/345807/",
+      "download": "https://cdn.freesound.org/previews/345/345807_191884-hq.mp3",
+      "sha256": "8eff75ec91088fcee418aa1cce1846ad803433a12b79bd1a8a7ad1dc9da2cbfb",
+      "license": "CC0 1.0",
+      "selection": "first-active",
+      "seconds": 1.9,
+      "rms": 0.19,
+      "fadeIn": 0.015,
+      "fadeOut": 0.1
+    },
+    {
+      "id": "vibrate",
+      "creator": "lartti",
+      "title": "phone vibrate.wav",
+      "page": "https://freesound.org/people/lartti/sounds/529979/",
+      "download": "https://cdn.freesound.org/previews/529/529979_1654547-hq.mp3",
+      "sha256": "b1c8161ddc162b15aab19844abc39ffb1e81f13f48b722533395648c062c9d9c",
+      "license": "CC0 1.0",
+      "selection": "full",
+      "seconds": 1.027,
+      "rms": 0.19,
+      "fadeIn": 0.012,
+      "fadeOut": 0.06
+    },
+    {
+      "id": "click",
+      "creator": "derrick.d",
+      "title": "In the Zone",
+      "page": "https://freesound.org/people/derrick.d/sounds/529317/",
+      "download": "https://cdn.freesound.org/previews/529/529317_7870834-hq.mp3",
+      "sha256": "06f84bcc96c68308a1fe52bd934cd0af57981aa97dc80d127f291c42b4a818f0",
+      "license": "CC0 1.0",
+      "selection": "transient",
+      "seconds": 0.28,
+      "preRoll": 0.025,
+      "peak": 0.68,
+      "rms": 0.2,
+      "fadeIn": 0.003,
+      "fadeOut": 0.025
+    },
+    {
+      "id": "page",
+      "creator": "HenKonen",
+      "title": "Paper page turn 1",
+      "page": "https://freesound.org/people/HenKonen/sounds/757221/",
+      "download": "https://cdn.freesound.org/previews/757/757221_10938187-hq.mp3",
+      "sha256": "0bd44c4d21141587dafce18ddb285ff58ce14403952329f0e1401e0a6b80bec5",
+      "license": "CC0 1.0",
+      "selection": "full",
+      "seconds": 0.939,
+      "rms": 0.22,
+      "fadeIn": 0.004,
+      "fadeOut": 0.04
+    },
+    {
+      "id": "pen",
+      "creator": "Anthousai",
+      "title": "writing - pen 01.wav",
+      "page": "https://freesound.org/people/Anthousai/sounds/337086/",
+      "download": "https://cdn.freesound.org/previews/337/337086_5923045-hq.mp3",
+      "sha256": "eb583dfa9a6293f5d034f751d6b07081daf273c7b002d7a746800d5aafca66d8",
+      "license": "CC0 1.0",
+      "selection": "first-active",
+      "seconds": 2.7,
+      "preRoll": 0.02,
+      "rms": 0.2,
+      "fadeIn": 0.015,
+      "fadeOut": 0.08
+    },
+    {
+      "id": "pickup",
+      "creator": "MootMcnoodles",
+      "title": "Phone Pick Up.wav",
+      "page": "https://freesound.org/people/MootMcnoodles/sounds/444399/",
+      "download": "https://cdn.freesound.org/previews/444/444399_7231443-hq.mp3",
+      "sha256": "cc9e8cf5b774126ae46ed92689103f64c9fc70fdda04690c948415e4fd23ffe8",
+      "license": "CC0 1.0",
+      "selection": "full",
+      "seconds": 0.7,
+      "rms": 0.18,
+      "fadeIn": 0.004,
+      "fadeOut": 0.03
+    },
+    {
+      "id": "ringback",
+      "creator": "tt_runscript",
+      "title": "Current US/Can. Ringback tone",
+      "page": "https://freesound.org/people/tt_runscript/sounds/337655/",
+      "download": "https://cdn.freesound.org/previews/337/337655_5365416-hq.mp3",
+      "sha256": "ac3b7b2a9a67827b57f6a42f44de02f6484048708992890bc4b6f68dfd7a84c3",
+      "license": "CC0 1.0",
+      "selection": "first-active",
+      "seconds": 1.4,
+      "rms": 0.17,
+      "fadeIn": 0.025,
+      "fadeOut": 0.12
+    },
+    {
+      "id": "notify",
+      "creator": "stwime",
+      "title": "friendly.mp3",
+      "page": "https://freesound.org/people/stwime/sounds/545363/",
+      "download": "https://cdn.freesound.org/previews/545/545363_12183728-hq.mp3",
+      "sha256": "5d3d335dd994fce994cb3bbb45bd64a80a6f0f23e307c82179c0055a452082ca",
+      "license": "CC0 1.0",
+      "selection": "full",
+      "seconds": 0.388,
+      "rms": 0.17,
+      "fadeIn": 0.004,
+      "fadeOut": 0.045
+    }
+  ],
+  "tracks": {
+    "update1": [
+      {
+        "scene": 0,
+        "at": 0.28,
+        "clip": "crack",
+        "gain": 0.9,
+        "fadeIn": 0.004,
+        "fadeOut": 0.16
+      },
+      {
+        "scene": 1,
+        "at": -0.35,
+        "clip": "alarm",
+        "gain": 0.7,
+        "duration": 3,
+        "fadeIn": 0.18,
+        "fadeOut": 0.7
+      },
+      {
+        "scene": 1,
+        "at": 0.3,
+        "clip": "steps",
+        "gain": 0.68,
+        "duration": 4.2,
+        "fadeIn": 0.08,
+        "fadeOut": 1.2
+      },
+      {
+        "scene": 2,
+        "at": 0.1,
+        "clip": "click",
+        "gain": 0.48,
+        "duration": 0.28,
+        "fadeOut": 0.02
+      },
+      {
+        "scene": 2,
+        "at": 0.5,
+        "clip": "page",
+        "gain": 0.52,
+        "rate": 1.05
+      },
+      {
+        "scene": 3,
+        "at": -0.4,
+        "clip": "rain",
+        "gain": 0.65,
+        "duration": 10.5,
+        "fadeIn": 0.7,
+        "fadeOut": 2.7
+      },
+      {
+        "scene": 4,
+        "at": 0.15,
+        "clip": "ringback",
+        "gain": 0.63,
+        "duration": 1.3,
+        "fadeIn": 0.04,
+        "fadeOut": 0.15
+      },
+      {
+        "scene": 5,
+        "at": -0.35,
+        "clip": "vibrate",
+        "gain": 0.63,
+        "duration": 1,
+        "fadeOut": 0.15
+      },
+      {
+        "scene": 5,
+        "at": 0.5,
+        "clip": "notify",
+        "gain": 0.55
+      },
+      {
+        "scene": 5,
+        "at": 1.16,
+        "clip": "notify",
+        "gain": 0.4,
+        "rate": 1.07
+      },
+      {
+        "scene": 6,
+        "at": -0.26,
+        "clip": "notify",
+        "gain": 0.58,
+        "rate": 0.92
+      },
+      {
+        "scene": 6,
+        "at": 0.08000000000000002,
+        "clip": "notify",
+        "gain": 0.38,
+        "rate": 1.1
+      },
+      {
+        "scene": 6,
+        "at": 0.59,
+        "clip": "click",
+        "gain": 0.4,
+        "duration": 0.28,
+        "fadeOut": 0.03
+      },
+      {
+        "scene": 7,
+        "at": -0.24,
+        "clip": "page",
+        "gain": 0.55,
+        "rate": 0.9
+      },
+      {
+        "scene": 7,
+        "at": 0.65,
+        "clip": "pen",
+        "gain": 0.58,
+        "duration": 1.8,
+        "fadeIn": 0.04,
+        "fadeOut": 0.22
+      },
+      {
+        "scene": 7,
+        "at": 22.465,
+        "clip": "pen",
+        "gain": 0.48,
+        "duration": 0.3750000000000007,
+        "fadeIn": 0.03,
+        "fadeOut": 0.14
+      }
+    ],
+    "update2": [
+      {
+        "scene": 0,
+        "at": 0.12,
+        "clip": "page",
+        "gain": 0.58,
+        "rate": 0.88
+      },
+      {
+        "scene": 0,
+        "at": 0.95,
+        "clip": "click",
+        "gain": 0.42,
+        "duration": 0.28,
+        "fadeOut": 0.03
+      },
+      {
+        "scene": 1,
+        "at": -0.35,
+        "clip": "vibrate",
+        "gain": 0.68,
+        "duration": 1,
+        "fadeOut": 0.15
+      },
+      {
+        "scene": 1,
+        "at": 0.25,
+        "clip": "notify",
+        "gain": 0.58
+      },
+      {
+        "scene": 1,
+        "at": 0.78,
+        "clip": "notify",
+        "gain": 0.47,
+        "rate": 1.08
+      },
+      {
+        "scene": 1,
+        "at": 1.3,
+        "clip": "notify",
+        "gain": 0.38,
+        "rate": 0.94
+      },
+      {
+        "scene": 2,
+        "at": -0.2,
+        "clip": "click",
+        "gain": 0.55,
+        "duration": 0.28,
+        "fadeOut": 0.025
+      },
+      {
+        "scene": 2,
+        "at": 0.1,
+        "clip": "page",
+        "gain": 0.58,
+        "rate": 1.08
+      },
+      {
+        "scene": 2,
+        "at": 0.98,
+        "clip": "page",
+        "gain": 0.48,
+        "rate": 0.96
+      },
+      {
+        "scene": 3,
+        "at": -0.48,
+        "clip": "page",
+        "gain": 0.65,
+        "rate": 0.88
+      },
+      {
+        "scene": 3,
+        "at": 0.68,
+        "clip": "click",
+        "gain": 0.43,
+        "duration": 0.28,
+        "fadeOut": 0.025
+      },
+      {
+        "scene": 4,
+        "at": -0.5,
+        "clip": "phone",
+        "gain": 0.72,
+        "duration": 1.8,
+        "fadeIn": 0.08,
+        "fadeOut": 0.24
+      },
+      {
+        "scene": 4,
+        "at": 2.8,
+        "clip": "phone",
+        "gain": 0.43,
+        "duration": 1.6,
+        "fadeIn": 0.08,
+        "fadeOut": 0.55
+      },
+      {
+        "scene": 5,
+        "at": -0.35,
+        "clip": "notify",
+        "gain": 0.58,
+        "rate": 0.92
+      },
+      {
+        "scene": 5,
+        "at": -0.009999999999999953,
+        "clip": "notify",
+        "gain": 0.38,
+        "rate": 1.1
+      },
+      {
+        "scene": 5,
+        "at": 0.5,
+        "clip": "click",
+        "gain": 0.4,
+        "duration": 0.28,
+        "fadeOut": 0.03
+      },
+      {
+        "scene": 6,
+        "at": -0.26,
+        "clip": "phone",
+        "gain": 0.63,
+        "duration": 0.95,
+        "fadeIn": 0.05,
+        "fadeOut": 0.16
+      },
+      {
+        "scene": 6,
+        "at": 0.73,
+        "clip": "pickup",
+        "gain": 0.7,
+        "fadeOut": 0.08
+      },
+      {
+        "scene": 6,
+        "at": 15.37,
+        "clip": "click",
+        "gain": 0.42,
+        "duration": 0.28,
+        "fadeOut": 0.03
+      },
+      {
+        "scene": 7,
+        "at": -0.24,
+        "clip": "page",
+        "gain": 0.55,
+        "rate": 0.9
+      },
+      {
+        "scene": 7,
+        "at": 0.65,
+        "clip": "pen",
+        "gain": 0.58,
+        "duration": 1.8,
+        "fadeIn": 0.04,
+        "fadeOut": 0.22
+      },
+      {
+        "scene": 7,
+        "at": 22.815,
+        "clip": "pen",
+        "gain": 0.48,
+        "duration": 0.8,
+        "fadeIn": 0.03,
+        "fadeOut": 0.14
+      }
+    ],
+    "update3": [
+      {
+        "scene": 0,
+        "at": 0.1,
+        "clip": "page",
+        "gain": 0.68,
+        "rate": 0.83
+      },
+      {
+        "scene": 0,
+        "at": 1.07,
+        "clip": "click",
+        "gain": 0.46,
+        "duration": 0.28,
+        "fadeOut": 0.02
+      },
+      {
+        "scene": 1,
+        "at": -0.3,
+        "clip": "page",
+        "gain": 0.58,
+        "rate": 0.91
+      },
+      {
+        "scene": 1,
+        "at": 0.8,
+        "clip": "page",
+        "gain": 0.58,
+        "rate": 1.07
+      },
+      {
+        "scene": 2,
+        "at": -0.2,
+        "clip": "notify",
+        "gain": 0.58,
+        "rate": 0.92
+      },
+      {
+        "scene": 2,
+        "at": 0.14,
+        "clip": "notify",
+        "gain": 0.38,
+        "rate": 1.1
+      },
+      {
+        "scene": 2,
+        "at": 0.6499999999999999,
+        "clip": "click",
+        "gain": 0.4,
+        "duration": 0.28,
+        "fadeOut": 0.03
+      },
+      {
+        "scene": 3,
+        "at": -0.12,
+        "clip": "click",
+        "gain": 0.62,
+        "duration": 0.28,
+        "fadeOut": 0.02
+      },
+      {
+        "scene": 3,
+        "at": 0.48,
+        "clip": "click",
+        "gain": 0.35,
+        "duration": 0.28,
+        "rate": 0.85,
+        "fadeOut": 0.03
+      },
+      {
+        "scene": 3,
+        "at": 21.37,
+        "clip": "click",
+        "gain": 0.42,
+        "duration": 0.28,
+        "fadeOut": 0.02
+      },
+      {
+        "scene": 4,
+        "at": 0.12,
+        "clip": "page",
+        "gain": 0.68,
+        "rate": 0.86
+      },
+      {
+        "scene": 5,
+        "at": -0.22,
+        "clip": "click",
+        "gain": 0.44,
+        "duration": 0.28,
+        "fadeOut": 0.02
+      },
+      {
+        "scene": 5,
+        "at": 0.2,
+        "clip": "page",
+        "gain": 0.53,
+        "rate": 1.11
+      },
+      {
+        "scene": 6,
+        "at": -0.32,
+        "clip": "vibrate",
+        "gain": 0.63,
+        "duration": 1,
+        "fadeOut": 0.15
+      },
+      {
+        "scene": 6,
+        "at": 0.6,
+        "clip": "notify",
+        "gain": 0.56
+      },
+      {
+        "scene": 6,
+        "at": 1.1,
+        "clip": "click",
+        "gain": 0.36,
+        "duration": 0.28,
+        "fadeOut": 0.02
+      },
+      {
+        "scene": 7,
+        "at": -0.24,
+        "clip": "page",
+        "gain": 0.55,
+        "rate": 0.9
+      },
+      {
+        "scene": 7,
+        "at": 0.65,
+        "clip": "pen",
+        "gain": 0.58,
+        "duration": 1.8,
+        "fadeIn": 0.04,
+        "fadeOut": 0.22
+      },
+      {
+        "scene": 7,
+        "at": 27.09,
+        "clip": "pen",
+        "gain": 0.48,
+        "duration": 0.7500000000000007,
+        "fadeIn": 0.03,
+        "fadeOut": 0.14
+      }
+    ]
+  }
+}
