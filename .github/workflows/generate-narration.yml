@@ -1,0 +1,49 @@
+name: Generate crisis narration
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/narration.json
+      - scripts/build-narration.py
+      - .github/workflows/generate-narration.yml
+permissions:
+  contents: write
+concurrency:
+  group: crisis-narration
+  cancel-in-progress: false
+jobs:
+  narrate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      TOKENIZERS_PARALLELISM: "false"
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: "3.11"
+      - name: Install CPU speech tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends espeak-ng ffmpeg libsndfile1
+          python -m pip install pip==25.0.1
+          python -m pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install kokoro==0.9.4 'misaki[en]==0.9.4' transformers==4.48.3 tokenizers==0.21.0 huggingface-hub==0.28.1 numpy==1.26.4 spacy==3.8.4 thinc==8.3.4 spacy-curated-transformers==0.3.0 soundfile==0.13.1
+          python -m pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+          python -m pip check
+      - name: Generate and verify the three narration tracks
+        run: python scripts/build-narration.py
+      - name: Save generated audio to the repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/assets/audio/update1.mp3 docs/assets/audio/update2.mp3 docs/assets/audio/update3.mp3 docs/assets/audio/generation.json docs/assets/audio/README.md docs/narration-tracks.js
+          if git diff --staged --quiet; then
+            exit 0
+          fi
+          git commit -m "Generate the three crisis narration tracks"
+          git push
