@@ -61,3 +61,4 @@ window.CrisisVoices = {
     "text": "we were as surprised as anyone."
   }
 };
+window.CrisisVoicesVersion = "391ecd1e";

@@ -379,7 +379,8 @@
   /* ================================================================= sound */
   const EFFECTS = ['crack', 'rain', 'alarm', 'steps', 'vibrate', 'notify', 'page', 'phone', 'pickup', 'click'];
   const bytes = new Map();   // clip id -> Promise<ArrayBuffer | null>
-  const load = id => { if (!bytes.has(id)) bytes.set(id, fetch((EFFECTS.includes(id) ? 'assets/effects/' : 'assets/voices/') + id + '.mp3').then(r => r.ok ? r.arrayBuffer() : null).catch(() => null)); return bytes.get(id); };
+  const voiceVersion = window.CrisisVoicesVersion ? '?v=' + window.CrisisVoicesVersion : ''; // new clips replace cached ones
+  const load = id => { if (!bytes.has(id)) bytes.set(id, fetch(EFFECTS.includes(id) ? 'assets/effects/' + id + '.mp3' : 'assets/voices/' + id + '.mp3' + voiceVersion).then(r => r.ok ? r.arrayBuffer() : null).catch(() => null)); return bytes.get(id); };
   const clipIds = film => [...new Set([...film.cues.map(c => c.id), ...film.voices.map(v => v.id)])].filter(id => id !== 'tone' && id !== 'thud');
   function synth(context, id) {
     const rate = context.sampleRate;
