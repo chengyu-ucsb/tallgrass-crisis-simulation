@@ -1,0 +1,277 @@
+{
+  "sampleRate": 32000,
+  "narrationPreserved": {
+    "docs/narration-tracks.js": "83d9061359d713086e104a31b56569cf51d002261f5b07cef2f934f70c2b33b7",
+    "scripts/narration.json": "736f68c01c840ae2b3d640f9c39efec63ea430c17c7ae77760e7085040827c48",
+    "docs/assets/audio/update1.mp3": "567bef626019eae9cec6c795e251cb2ce1b812d9fac9053e21052a5d6b8a4f11",
+    "docs/assets/audio/update2.mp3": "5868d896d0af4a54d05a8dc6dc9255407e7e25e9b968ec9631bf949e546b1b68",
+    "docs/assets/audio/update3.mp3": "fed90ce53bab52d0b17afd8a18b5c66311d3c2ff9076f6e8f658cf2f2bcad88c"
+  },
+  "clips": {
+    "crack": {
+      "title": "wood break small 1.mp3",
+      "creator": "TheHiraHira",
+      "sourcePage": "https://freesound.org/people/TheHiraHira/sounds/460247/",
+      "download": "https://cdn.freesound.org/previews/460/460247_9117851-hq.mp3",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceSha256": "00c30b565b632dc9fe9562a6fa2cf10ca2cbcca2b21868ff1eaeaf876ff1ba8b",
+      "sourceSeconds": [
+        2.89,
+        3.69
+      ],
+      "selection": "transient",
+      "processing": "Mono 32 kHz; high/low-pass cleanup, level balance, short edge fades; MP3 96 kbps; one quiet 65 ms reflection",
+      "duration": 0.90147,
+      "sha256": "634ecd30325f036860eb7f913016a538240eb63c88749a7ea15ad7579e7a22f5",
+      "bytes": 11827,
+      "peakDbFS": -1.84,
+      "rmsDbFS": -29.22
+    },
+    "alarm": {
+      "title": "Fire alarm",
+      "creator": "pushkin",
+      "sourcePage": "https://freesound.org/people/pushkin/sounds/319413/",
+      "download": "https://cdn.freesound.org/previews/319/319413_336074-hq.mp3",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceSha256": "0a89258cb93066e9d12d58e44d85aac0c28a073b95a734a2daac4040ef66438e",
+      "sourceSeconds": [
+        0.0,
+        3.1
+      ],
+      "selection": "first-active",
+      "processing": "Mono 32 kHz; high/low-pass cleanup, level balance, short edge fades; MP3 96 kbps",
+      "duration": 3.13347,
+      "sha256": "e0d114fd868c50c4c6eac385131b8b098b520a7718a820956f0edbe554e6e4f2",
+      "bytes": 38595,
+      "peakDbFS": -2.61,
+      "rmsDbFS": -19.98
+    },
+    "steps": {
+      "title": "Footsteps on wooden flooring.wav",
+      "creator": "Rickmk2",
+      "sourcePage": "https://freesound.org/people/Rickmk2/sounds/164315/",
+      "download": "https://cdn.freesound.org/previews/164/164315_2407533-hq.mp3",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceSha256": "ec51cee76b5790fccb318927bf6bbf6b122c3502f49a408d8dcec3d2d80b9a1d",
+      "sourceSeconds": [
+        1.03,
+        5.63
+      ],
+      "selection": "first-active",
+      "processing": "Mono 32 kHz; high/low-pass cleanup, level balance, short edge fades; MP3 96 kbps",
+      "duration": 4.60947,
+      "sha256": "3a35bfa0659593ebcac77c9c36b2f43bfaba6e6c1ab2780e19adfd7b1ca10df6",
+      "bytes": 56329,
+      "peakDbFS": -2.88,
+      "rmsDbFS": -35.7
+    },
+    "rain": {
+      "title": "rainfall",
+      "creator": "seth-m",
+      "sourcePage": "https://freesound.org/people/seth-m/sounds/323427/",
+      "download": "https://cdn.freesound.org/previews/323/323427_3366749-hq.mp3",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceSha256": "3eefc08069f9c5be7a4d4e0d081c53f930fff27be0c028695d85525614e04764",
+      "sourceSeconds": [
+        0.0,
+        11.478
+      ],
+      "selection": "full",
+      "processing": "Mono 32 kHz; high/low-pass cleanup, level balance, short edge fades; MP3 96 kbps",
+      "duration": 11.48547,
+      "sha256": "8af3eb4886b0e67929bf08bb2084f0d503ce81b79313d6f53bd048c42ded0fb6",
+      "bytes": 138816,
+      "peakDbFS": -2.83,
+      "rmsDbFS": -23.0
+    },
+    "phone": {
+      "title": "AT&T model #210 desk phone",
+      "creator": "knufds",
+      "sourcePage": "https://freesound.org/people/knufds/sounds/345807/",
+      "download": "https://cdn.freesound.org/previews/345/345807_191884-hq.mp3",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceSha256": "8eff75ec91088fcee418aa1cce1846ad803433a12b79bd1a8a7ad1dc9da2cbfb",
+      "sourceSeconds": [
+        0.15,
+        2.05
+      ],
+      "selection": "first-active",
+      "processing": "Mono 32 kHz; high/low-pass cleanup, level balance, short edge fades; MP3 96 kbps",
+      "duration": 1.90947,
+      "sha256": "cc4895e6337e43d64ec15328caff5938355a5cb6879f08579d17b4caf0b4df77",
+      "bytes": 23922,
+      "peakDbFS": -5.23,
+      "rmsDbFS": -15.03
+    },
+    "vibrate": {
+      "title": "phone vibrate.wav",
+      "creator": "lartti",
+      "sourcePage": "https://freesound.org/people/lartti/sounds/529979/",
+      "download": "https://cdn.freesound.org/previews/529/529979_1654547-hq.mp3",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceSha256": "b1c8161ddc162b15aab19844abc39ffb1e81f13f48b722533395648c062c9d9c",
+      "sourceSeconds": [
+        0.0,
+        1.027
+      ],
+      "selection": "full",
+      "processing": "Mono 32 kHz; high/low-pass cleanup, level balance, short edge fades; MP3 96 kbps",
+      "duration": 1.04547,
+      "sha256": "57b02c23c774135f257a6d6fd087e3119d3f1d668bc727946d32e3175eb20f9f",
+      "bytes": 13545,
+      "peakDbFS": -3.12,
+      "rmsDbFS": -15.98
+    },
+    "click": {
+      "title": "In the Zone",
+      "creator": "derrick.d",
+      "sourcePage": "https://freesound.org/people/derrick.d/sounds/529317/",
+      "download": "https://cdn.freesound.org/previews/529/529317_7870834-hq.mp3",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceSha256": "06f84bcc96c68308a1fe52bd934cd0af57981aa97dc80d127f291c42b4a818f0",
+      "sourceSeconds": [
+        8.905,
+        9.185
+      ],
+      "selection": "transient",
+      "processing": "Mono 32 kHz; high/low-pass cleanup, level balance, short edge fades; MP3 96 kbps",
+      "duration": 0.28947,
+      "sha256": "8c0afb0f91fda852bb89a6bc1c6abb13aa63115aaca94a88df9268ef3cf38b38",
+      "bytes": 4470,
+      "peakDbFS": -3.9,
+      "rmsDbFS": -27.72
+    },
+    "page": {
+      "title": "Paper page turn 1",
+      "creator": "HenKonen",
+      "sourcePage": "https://freesound.org/people/HenKonen/sounds/757221/",
+      "download": "https://cdn.freesound.org/previews/757/757221_10938187-hq.mp3",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceSha256": "0bd44c4d21141587dafce18ddb285ff58ce14403952329f0e1401e0a6b80bec5",
+      "sourceSeconds": [
+        0.0,
+        0.939
+      ],
+      "selection": "full",
+      "processing": "Mono 32 kHz; high/low-pass cleanup, level balance, short edge fades; MP3 96 kbps",
+      "duration": 0.97347,
+      "sha256": "25459953077be2091635203bba6dabb8cb5f0b9069729450e21abfeaa97801f1",
+      "bytes": 12683,
+      "peakDbFS": -2.6,
+      "rmsDbFS": -29.75
+    },
+    "pen": {
+      "title": "writing - pen 01.wav",
+      "creator": "Anthousai",
+      "sourcePage": "https://freesound.org/people/Anthousai/sounds/337086/",
+      "download": "https://cdn.freesound.org/previews/337/337086_5923045-hq.mp3",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceSha256": "eb583dfa9a6293f5d034f751d6b07081daf273c7b002d7a746800d5aafca66d8",
+      "sourceSeconds": [
+        0.1,
+        2.8
+      ],
+      "selection": "first-active",
+      "processing": "Mono 32 kHz; high/low-pass cleanup, level balance, short edge fades; MP3 96 kbps",
+      "duration": 2.70147,
+      "sha256": "b1e6ab086fee8040b1172e46ab267b34b1f060417a2bff09edbd7413024a3aa0",
+      "bytes": 33423,
+      "peakDbFS": -4.8,
+      "rmsDbFS": -25.91
+    },
+    "pickup": {
+      "title": "Phone Pick Up.wav",
+      "creator": "MootMcnoodles",
+      "sourcePage": "https://freesound.org/people/MootMcnoodles/sounds/444399/",
+      "download": "https://cdn.freesound.org/previews/444/444399_7231443-hq.mp3",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceSha256": "cc9e8cf5b774126ae46ed92689103f64c9fc70fdda04690c948415e4fd23ffe8",
+      "sourceSeconds": [
+        0.0,
+        0.7
+      ],
+      "selection": "full",
+      "processing": "Mono 32 kHz; high/low-pass cleanup, level balance, short edge fades; MP3 96 kbps",
+      "duration": 0.72147,
+      "sha256": "ef16f02f440a50a41a28c4f8ac1d7f98b83eeb74f81b5fd83956153faf566b1d",
+      "bytes": 9664,
+      "peakDbFS": -2.63,
+      "rmsDbFS": -27.81
+    },
+    "ringback": {
+      "title": "Current US/Can. Ringback tone",
+      "creator": "tt_runscript",
+      "sourcePage": "https://freesound.org/people/tt_runscript/sounds/337655/",
+      "download": "https://cdn.freesound.org/previews/337/337655_5365416-hq.mp3",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceSha256": "ac3b7b2a9a67827b57f6a42f44de02f6484048708992890bc4b6f68dfd7a84c3",
+      "sourceSeconds": [
+        0.0,
+        1.4
+      ],
+      "selection": "first-active",
+      "processing": "Mono 32 kHz; high/low-pass cleanup, level balance, short edge fades; MP3 96 kbps",
+      "duration": 1.40547,
+      "sha256": "567eebaa17921f1573b0a5e7fb4af8da95a08ada1fe6f5f1dd6952b33074ee41",
+      "bytes": 17883,
+      "peakDbFS": -10.34,
+      "rmsDbFS": -16.16
+    },
+    "notify": {
+      "title": "friendly.mp3",
+      "creator": "stwime",
+      "sourcePage": "https://freesound.org/people/stwime/sounds/545363/",
+      "download": "https://cdn.freesound.org/previews/545/545363_12183728-hq.mp3",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceSha256": "5d3d335dd994fce994cb3bbb45bd64a80a6f0f23e307c82179c0055a452082ca",
+      "sourceSeconds": [
+        0.0,
+        0.388
+      ],
+      "selection": "full",
+      "processing": "Mono 32 kHz; high/low-pass cleanup, level balance, short edge fades; MP3 96 kbps",
+      "duration": 0.39747,
+      "sha256": "45910d3d23e61d6b97e818fae29aa243637efef2d2512b51dbf174c61842d88d",
+      "bytes": 5764,
+      "peakDbFS": -5.75,
+      "rmsDbFS": -15.94
+    }
+  },
+  "stages": {
+    "update1": {
+      "seconds": 178,
+      "events": 16,
+      "scenesCovered": 8,
+      "effectsPeakDbFS": -2.75,
+      "estimatedCombinedPeakDbFS": -2.35
+    },
+    "update2": {
+      "seconds": 187,
+      "events": 22,
+      "scenesCovered": 8,
+      "effectsPeakDbFS": -4.59,
+      "estimatedCombinedPeakDbFS": -2.09
+    },
+    "update3": {
+      "seconds": 183,
+      "events": 19,
+      "scenesCovered": 8,
+      "effectsPeakDbFS": -6.05,
+      "estimatedCombinedPeakDbFS": -1.62
+    }
+  },
+  "specSha256": "216df779247aee2c5732b9b60582dcffa3f46ad4dd716269a7d56c18626478d5",
+  "totalBytes": 366921
+}
