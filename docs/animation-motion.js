@@ -218,7 +218,7 @@
         if (a.enter !== null && !reduced) {
           const at = number(a.at, record.enterAt);
           const p = out((time - at) / Math.max(0.1, number(a.duration, 0.85)));
-          opacity *= at === 0 ? 0.4 + 0.6 * p : p;
+          opacity *= at === 0 ? 0.9 + 0.1 * p : p;
           y += (1 - p) * 14;
         }
         if (a.reveal !== null && !reduced) {

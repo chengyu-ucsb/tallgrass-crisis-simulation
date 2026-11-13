@@ -397,7 +397,7 @@
     if(callback) art+=focus('contractor counsel',at(381,227,
       gesture('receiver',group('transform="rotate(-7)"',receiver+
         path('M57-32q30-27 48-15l35 18-7 24-40-8q-23 18-34-19','none',0,'#c99c7b')+
-        path('M130-33h122v43H130Z','none',0,C.blue)),'0 0',.73,.7,85)))+
+        path('M130-33h500v43H130Z','none',0,C.blue)),'0 0',.73,.7,85)))+
       focus('counsel',enter(1,folder(76,94,181,124)))+
       focus('engineer',enter(2,card(539,90,139,151,6,'#bac8ac')));
     else art+=focus('parent',enter(1,at(87,99,
@@ -478,14 +478,14 @@
       at(62,143,group('data-film-write="pen" data-film-path="'+inkId+'" data-film-start="62 143"',
         group('transform="rotate(28)"',
           path('M130 32 59 5Q37-4 27-22L14-48Q8-57 1-51L-5-38Q-12-29-5-20L12-1Q24 16 46 24L112 65Z','none',0,'#8d6048')+
-          path('M112 17l59 26-21 62-57-33Z','none',0,C.blue)+
+          path('M112 17 730 270 697 385 93 72Z','none',0,C.blue)+
           path('M19-34q-15-9-20 1l3 15','#b18165',2)+
           path('M0 0-5-15v-112h10v112Z','none',0,C.forest)+
           path('M-5-15 0 0 5-15Z','none',0,'#c4a477')+
           path('M0-4v4',C.deep,2)+
           path('M-5-102h10','#c4d79c',4)+
           path('M6-110v34','#9cb77c',2))));
-    return desk(uid)+
+    return desk(uid)+mug(639,369,.96)+
       at(586,48,group('transform="rotate(9)"',
         rect(0,0,130,105,'#89a590',8)+rect(8,8,114,85,'#dce6d4',4)+
         path('M0 105h130l19 19h-166Z','none',0,'#bdcdb2')+lines(24,28,83,3,15,'#a0b696',4)))+
@@ -495,7 +495,6 @@
         circle(54,58,24,'#b3c9a5')+circle(54,51,9,'#8ca77f')+
         path('M37 79q1-19 17-19 16 0 17 19','none',0,'#8ca77f')+
         lines(23,110,61,2,15,'#9fb595',4))))+
-      mug(639,369,.96)+
       focus('handin decision',folder(40,354,151,95,'#c5cba6'))+
       path('M0 420h137q28-28 58-22l36 13q14 10-1 22l-49-1q-23 32-47 41H0Z','none',0,'#d0a27f')+
       path('M0 407h101l-11 93H0Z','none',0,'#839c6c');
