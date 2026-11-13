@@ -151,13 +151,19 @@ ${footer()}`;
     return `<button class="artifact-card ${read ? 'is-read' : ''}" data-artifact="${esc(artifact.id)}" data-type="${esc(artifact.type)}" aria-label="Read ${esc(artifact.title)}${read ? ', marked as read' : ''}"><span class="artifact-icon">${icon(artifact.type)}</span>${trackReading ? `<span class="artifact-status ${read ? 'done' : ''}">${read ? `${icon('check')} Read` : 'To read'}</span>` : ''}<span class="artifact-type">${esc(artifact.label || artifact.type)}</span><span class="artifact-title">${esc(artifact.title)}</span><span class="artifact-summary">${esc(artifact.summary)}</span><span class="artifact-meta">${esc(artifact.time)} · ${esc(artifact.source)}</span><span class="artifact-open" aria-hidden="true">→</span></button>`;
   }
 
+  function readCount() {
+    const counts = progress.counts(current);
+    const done = counts.read === counts.documents;
+    return `<span class="document-count ${done ? 'done' : ''}" id="document-count">${done ? `All ${counts.documents} read` : `${counts.read} of ${counts.documents} read`}</span>`;
+  }
+
   function taskPanel(stage) {
     return `<aside class="task-panel"><div class="task-panel-heading"><span class="task-panel-icon">${icon('recorder')}</span><div><p class="eyebrow">Discuss and write</p><h2>Write on your memo handout</h2></div></div>${list(stage.tasks)}<div class="submission-note"><p><strong>After this update:</strong> Add a line in section 7 of your handout explaining what your team decided and what changed your thinking.</p><button class="text-button" data-reference="submission">See the memo sections <span aria-hidden="true">→</span></button></div></aside>`;
   }
 
   function evidenceMarkup(stage) {
     const earlier = allArtifacts.filter(artifact => artifact.stageIndex > 0 && artifact.stageIndex < current && artifact.stageIndex <= 3);
-    return `<div class="incident">${heading(stage)}${window.CrisisAnimation?.markup(stage.id) || ''}</div>${timerMarkup()}<div class="content-layout"><section class="evidence-column" aria-label="Available case evidence"><div class="section-heading"><div><p class="eyebrow">Read the case</p><h2 id="evidence-heading">New evidence</h2></div><div class="section-actions"><span class="document-count">${stage.artifacts.length} documents</span><button class="secondary-button" data-read-update>Read all documents <span aria-hidden="true">→</span></button></div></div><label class="evidence-search-label" for="evidence-search"><span class="screen-reader-only">Search the evidence so far</span><input id="evidence-search" class="evidence-search" type="search" placeholder="Search the evidence so far…" autocomplete="off"></label><div class="artifact-grid" id="artifact-grid">${stage.artifacts.map(artifactCard).join('')}</div>${earlier.length ? `<details class="previous-evidence" id="previous-evidence"><summary>Earlier evidence (${earlier.length} documents)</summary><div class="artifact-grid">${earlier.map(artifactCard).join('')}</div></details>` : ''}</section>${taskPanel(stage)}</div>${completionMarkup()}${footer()}`;
+    return `<div class="incident">${heading(stage)}${window.CrisisAnimation?.markup(stage.id) || ''}</div>${timerMarkup()}<div class="content-layout"><section class="evidence-column" aria-label="Available case evidence"><div class="section-heading"><div><p class="eyebrow">Read the case</p><h2 id="evidence-heading">New evidence</h2></div><div class="section-actions">${readCount()}<button class="secondary-button" data-read-update>Read all documents <span aria-hidden="true">→</span></button></div></div><label class="evidence-search-label" for="evidence-search"><span class="screen-reader-only">Search the evidence so far</span><input id="evidence-search" class="evidence-search" type="search" placeholder="Search the evidence so far…" autocomplete="off"></label><div class="artifact-grid" id="artifact-grid">${stage.artifacts.map(artifactCard).join('')}</div>${earlier.length ? `<details class="previous-evidence" id="previous-evidence"><summary>Earlier evidence (${earlier.length} documents)</summary><div class="artifact-grid">${earlier.map(artifactCard).join('')}</div></details>` : ''}</section>${taskPanel(stage)}</div>${completionMarkup()}${footer()}`;
   }
 
   function briefingMarkup(stage) {
@@ -187,6 +193,7 @@ ${footer()}`;
     renderNav();
     $('#completion-panel').outerHTML = completionMarkup();
     $('.page-footer').outerHTML = footer();
+    if ($('#document-count')) $('#document-count').outerHTML = readCount();
     document.querySelectorAll('[data-artifact]').forEach(card => {
       const read = progress.isRead(card.dataset.artifact);
       card.classList.toggle('is-read', read);

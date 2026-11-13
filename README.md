@@ -17,7 +17,7 @@ Each of the three updates opens with a short overview of about a minute (1:03, 1
 
 Voices and effects are static MP3 files hosted with the website, so every device hears the same thing without a speech service or subscription. The picture follows the playback clock, so pausing or scrubbing always lands on the same frame. Opening a document, changing stages, or leaving the page stops sound and motion. Each overview uses only information available in its round; all written evidence remains available below it. Watching does not mark documents as read or complete a checkpoint.
 
-Each update includes individual document cards and a full reading view. Students mark the reading complete, confirm the required work on their memo handout, and complete the checkpoint to unlock the next stage. Search includes only evidence from the current and earlier updates. The countdown has start, pause, reset, and add-minute controls.
+Each update includes individual document cards and a full reading view. A document that has been marked as read folds into a compact green row, so the ones still to read stand out; it still opens when clicked. Students mark the reading complete, confirm the required work on their memo handout, and complete the checkpoint to unlock the next stage. Search includes only evidence from the current and earlier updates. The countdown has start, pause, reset, and add-minute controls.
 
 ## Paper and submissions
 
