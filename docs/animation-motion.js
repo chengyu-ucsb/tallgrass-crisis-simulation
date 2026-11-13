@@ -169,11 +169,7 @@
       let currentBeat = 0;
       state.beatTimes.forEach((at, index) => { if (time >= at) currentBeat = index; });
       const active = state.beats[currentBeat] || state.beats[0];
-      const previous = state.beats[Math.max(0, currentBeat - 1)];
       const focus = String(active.focus || '');
-      const previousFocus = String(previous.focus || '');
-      const focusBlend = reduced ? 1 : ease((time - state.beatTimes[currentBeat]) / 0.6);
-      const hasFocus = state.records.some(record => record.focusKeys.includes(focus));
       const pen = writing(time, state, reduced);
 
       if (state.lastBeat !== currentBeat) {
@@ -294,9 +290,7 @@
         }
         if (record.focusKeys.length) {
           const selected = record.focusKeys.includes(focus);
-          const wasSelected = record.focusKeys.includes(previousFocus);
-          const strength = (wasSelected ? 1 : 0) * (1 - focusBlend) + (selected ? 1 : 0) * focusBlend;
-          if (hasFocus && !reduced) opacity *= 0.72 + 0.28 * strength;
+          // Keep objects opaque so people, paper and devices do not ghost through their backgrounds.
           if (record.lastFocus !== selected) {
             record.node.classList.toggle('is-film-focused', selected);
             record.lastFocus = selected;
