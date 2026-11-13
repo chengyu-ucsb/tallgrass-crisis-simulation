@@ -46,7 +46,10 @@ These are completion checks reported by students, not automated grading or verif
 - `docs/app.js`: navigation, reading controls, completion checkpoints, search, and timers.
 - `docs/progress.js`: shared prerequisite and progress-restoration rules.
 - `docs/animation-scenes.js`: Scene text, visual facts, and timing, drawn from the case documents.
-- `docs/animation.js` and `docs/animation.css`: Illustrations, captions, playback controls, and responsive layout. Motion follows the player position and respects reduced-motion preferences.
+- `docs/animation.js` and `docs/animation.css`: Captions, playback controls, audio lifecycle, chapter navigation and expanded viewing.
+- `docs/animation-art.js`: Layered SVG illustrations with scene-specific compositions and independently movable objects.
+- `docs/animation-story.js`: Three or four visual beats per scene, with persistent source and uncertainty labels.
+- `docs/animation-motion.js` and `docs/animation-cinema.css`: Deterministic visual choreography and the responsive illustration/evidence layout. Every pose follows the player position and respects reduced-motion preferences.
 - `docs/animation-sound.js`: Recorded scene effects scheduled with Web Audio against the narration clock, including transitions across scene cuts and automatic volume reduction under speech.
 - `docs/effects-tracks.js` and `docs/assets/effects/`: Twelve edited CC0 clips, all 57 scene cues, source credits, hashes and measured levels. `docs/audio-credits.html` provides credits and individual sound previews.
 - `scripts/sound-effects.json`, `scripts/build-sound-effects.py` and `.github/workflows/build-sound-effects.yml`: Reproducible effect processing and cue validation; the build checks that the approved narration is unchanged.
@@ -57,6 +60,16 @@ These are completion checks reported by students, not automated grading or verif
 - `docs/styles.css`: desktop, phone, and print layouts.
 - `docs/downloads/`: printable reference and original assignment templates.
 - `scripts/build-quick-reference.py`: regenerates the reference PDF from the scenario data.
+
+### Animation direction
+
+All three narrated overviews use a consistent illustrated documentary style. Full-contrast artwork and concise evidence occupy separate areas; the complete scene caption, spoken transcript and written case remain available. Each of the 24 scenes has three or four visual beats, rather than displaying every foreground fact at once.
+
+The visual director samples the existing narration clock. It owns no audio, timers or animation loop. Walking, crack reveal, document handling, phone gestures, rain and memo writing therefore freeze when playback pauses and return to the matching pose after a seek. Natural scene changes use a short artwork-only crossfade; source labels always belong to the current scene. Chapter selection displays that chapter directly.
+
+The story keeps unofficial reports, unverified posts, preliminary findings, attributed accounts, offers and proposed actions visibly qualified. It never depicts an actual collapse, hotel booking, published CEO statement or protest already taking place. Counts appear as complete case values, not animated intermediate figures.
+
+The responsive layout stacks the illustration above the evidence on smaller screens. Reduced-motion mode removes camera movement, walking, rain travel and drawn reveals, while keeping the full composition and the current evidence readable. Motion is an optional aid; the written evidence and paper memo determine the classroom workflow.
 
 ### Scene sound design
 

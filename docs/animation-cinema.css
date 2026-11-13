@@ -1,0 +1,377 @@
+/* Illustrated scenes and evidence share the frame without covering each other.
+   All motion is sampled by animation-motion.js from the existing player clock. */
+
+.film-screen.cinema-screen {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  height: auto;
+  min-height: 420px;
+  overflow: hidden;
+  background: #dce4da;
+}
+
+.film-scene.cinema-scene {
+  position: relative;
+  inset: auto;
+  grid-area: 1 / 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
+  min-width: 0;
+  min-height: 420px;
+  overflow: hidden;
+  background: #e0e7dc;
+}
+
+.film-scene.cinema-scene.is-outgoing {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: transparent;
+}
+
+.cinema-scene.is-outgoing .cinema-evidence {
+  visibility: hidden;
+}
+
+.cinema-art-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: #dce4da;
+}
+
+.cinema-art-stage > .cinema-art {
+  position: relative;
+  display: block;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  object-fit: contain;
+}
+
+.cinema-evidence {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 28px 30px 25px;
+  box-sizing: border-box;
+  border-left: 1px solid #c9d3c2;
+  color: #223f35;
+  background: linear-gradient(145deg, #fffdf6 0%, #f4f2e7 100%);
+}
+
+.cinema-context {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 0 15px;
+  border-bottom: 1px solid #d7ddcd;
+  color: #43594a;
+  font-family: "Aptos", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0;
+  overflow-wrap: break-word;
+}
+
+.cinema-scene-kind {
+  margin: 0 0 7px;
+  color: #56634a;
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: .01em;
+}
+
+.cinema-beats {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding-block: 20px 17px;
+}
+
+.cinema-beats > [data-film-beat] {
+  width: 100%;
+  min-width: 0;
+}
+
+.cinema-beats > [data-film-beat][hidden] {
+  display: none !important;
+}
+
+.cinema-beat-heading {
+  margin: 0 0 12px;
+  color: #24483a;
+  font-family: "Aptos Display", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.625rem, 2.4vw, 2.125rem);
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  font-variant-numeric: tabular-nums;
+}
+
+.cinema-beat-detail {
+  margin: 0;
+  color: #445b4c;
+  font-family: "Aptos", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0;
+  overflow-wrap: break-word;
+}
+
+.cinema-beat-detail:empty {
+  display: none;
+}
+
+.cinema-beat-detail strong {
+  color: #294f3c;
+  font-weight: 650;
+}
+
+.cinema-beat-progress {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  padding: 3px 0 0;
+}
+
+.cinema-beat-progress > [data-film-beat-progress] {
+  position: relative;
+  display: block;
+  flex: 1 1 0;
+  height: 4px;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #dce1d1;
+}
+
+.cinema-beat-progress > [data-film-beat-progress]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #52704b;
+  transform: scaleX(var(--beat-progress, 0));
+  transform-origin: left center;
+}
+
+.cinema-beat-progress > [data-progress-state="current"]::after {
+  background: #345f45;
+}
+
+.cinema-art .cinema-focus-ring {
+  opacity: 0;
+}
+
+.cinema-art .is-film-focused > .cinema-focus-ring {
+  opacity: 1;
+}
+
+/* Expanded playback uses the available room; the grid can grow for larger text. */
+.case-film.is-expanded .film-screen.cinema-screen {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 440px;
+}
+
+.case-film.is-expanded .film-scene.cinema-scene {
+  min-height: 440px;
+}
+
+.case-film.is-expanded .cinema-evidence {
+  padding: clamp(24px, 3vw, 46px);
+}
+
+.case-film.is-expanded .cinema-context {
+  font-size: clamp(1rem, 1.3vw, 1.1875rem);
+}
+
+.case-film.is-expanded .cinema-beat-heading {
+  font-size: clamp(1.875rem, 3vw, 3rem);
+}
+
+.case-film.is-expanded .cinema-beat-detail {
+  font-size: clamp(1.0625rem, 1.5vw, 1.375rem);
+}
+
+/* Small laptop and classroom projector screens keep the image and controls close. */
+@media (min-width: 761px) and (max-height: 800px) {
+  .case-film.is-expanded .film-screen.cinema-screen,
+  .case-film.is-expanded .film-scene.cinema-scene {
+    min-height: 310px;
+  }
+
+  .case-film.is-expanded .cinema-evidence {
+    padding: 18px 24px;
+  }
+
+  .case-film.is-expanded .cinema-context {
+    padding-bottom: 11px;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .case-film.is-expanded .cinema-beats {
+    padding-block: 14px;
+  }
+
+  .case-film.is-expanded .cinema-beat-heading {
+    margin-bottom: 10px;
+    font-size: 1.75rem;
+    line-height: 1.15;
+  }
+
+  .case-film.is-expanded .cinema-beat-detail {
+    font-size: 1.0625rem;
+    line-height: 1.45;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1000px) {
+  .cinema-evidence {
+    padding: 24px;
+  }
+
+  .cinema-beat-heading {
+    font-size: 1.75rem;
+  }
+}
+
+/* Full illustrations stay contained on phones. Evidence receives its own row. */
+@media (max-width: 760px) {
+  .film-screen.cinema-screen,
+  .case-film.is-expanded .film-screen.cinema-screen {
+    height: auto;
+    min-height: 500px;
+  }
+
+  .film-scene.cinema-scene,
+  .case-film.is-expanded .film-scene.cinema-scene {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 250px minmax(230px, auto);
+    min-height: 500px;
+  }
+
+  .cinema-art-stage {
+    width: 100%;
+    height: 250px;
+  }
+
+  .cinema-art-stage > .cinema-art {
+    flex: 0 1 auto;
+    width: 100%;
+    height: 100%;
+    max-height: 250px;
+  }
+
+  .cinema-evidence,
+  .case-film.is-expanded .cinema-evidence {
+    padding: 19px 23px 20px;
+    border-top: 1px solid #c9d3c2;
+    border-left: 0;
+  }
+
+  .cinema-context,
+  .case-film.is-expanded .cinema-context {
+    padding-bottom: 11px;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .cinema-beats,
+  .case-film.is-expanded .cinema-beats {
+    padding-block: 15px 13px;
+  }
+
+  .cinema-beat-heading,
+  .case-film.is-expanded .cinema-beat-heading {
+    margin-bottom: 9px;
+    font-size: 1.625rem;
+    line-height: 1.18;
+    letter-spacing: -.025em;
+  }
+
+  .cinema-beat-detail,
+  .case-film.is-expanded .cinema-beat-detail {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .cinema-beat-progress {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 420px) {
+  .film-screen.cinema-screen,
+  .case-film.is-expanded .film-screen.cinema-screen {
+    min-height: 510px;
+  }
+
+  .film-scene.cinema-scene,
+  .case-film.is-expanded .film-scene.cinema-scene {
+    grid-template-rows: 220px minmax(260px, auto);
+    min-height: 510px;
+  }
+
+  .cinema-art-stage {
+    height: 220px;
+  }
+
+  .cinema-art-stage > .cinema-art {
+    max-height: 220px;
+  }
+
+  .cinema-evidence,
+  .case-film.is-expanded .cinema-evidence {
+    padding-inline: 19px;
+  }
+}
+
+@media (max-width: 360px) {
+  .film-screen.cinema-screen,
+  .case-film.is-expanded .film-screen.cinema-screen,
+  .film-scene.cinema-scene,
+  .case-film.is-expanded .film-scene.cinema-scene {
+    min-height: 530px;
+  }
+
+  .cinema-beat-heading,
+  .case-film.is-expanded .cinema-beat-heading {
+    font-size: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinema-scene,
+  .cinema-scene *,
+  .cinema-scene *::before,
+  .cinema-scene *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .cinema-beat-heading {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
