@@ -47,7 +47,9 @@ These are completion checks reported by students, not automated grading or verif
 - `docs/progress.js`: shared prerequisite and progress-restoration rules.
 - `docs/animation-scenes.js`: Scene text, visual facts, and timing, drawn from the case documents.
 - `docs/animation.js` and `docs/animation.css`: Illustrations, captions, playback controls, and responsive layout. Motion follows the player position and respects reduced-motion preferences.
-- `docs/animation-sound.js`: Original scene sound effects synthesized in the browser, with no music or external service.
+- `docs/animation-sound.js`: Recorded scene effects scheduled with Web Audio against the narration clock, including transitions across scene cuts and automatic volume reduction under speech.
+- `docs/effects-tracks.js` and `docs/assets/effects/`: Twelve edited CC0 clips, all 57 scene cues, source credits, hashes and measured levels. `docs/audio-credits.html` provides credits and individual sound previews.
+- `scripts/sound-effects.json`, `scripts/build-sound-effects.py` and `.github/workflows/build-sound-effects.yml`: Reproducible effect processing and cue validation; the build checks that the approved narration is unchanged.
 - `docs/narration-tracks.js` and `docs/assets/audio/`: Recorded narration, complete spoken transcripts, scene durations, and generation details.
 - `scripts/narration.json` and `scripts/build-narration.py`: Narration scripts and reproducible audio generation with the stock Kokoro `am_michael` voice.
 - `.github/workflows/generate-narration.yml`: Generates and commits the recordings when their scripts change, using a standard public-repository runner. The generation does not use a paid speech API. Publish the generated files through the normal Pages workflow after generation completes.
@@ -55,6 +57,16 @@ These are completion checks reported by students, not automated grading or verif
 - `docs/styles.css`: desktop, phone, and print layouts.
 - `docs/downloads/`: printable reference and original assignment templates.
 - `scripts/build-quick-reference.py`: regenerates the reference PDF from the scenario data.
+
+### Scene sound design
+
+The three overviews use recorded Foley and ambience: a dry crack, a brief building alarm, walking footsteps, rain, desk-phone ringing, vibration, keyboard/mouse clicks, paper, pen and receiver handling. Short device tones identify outgoing calls and messages. There is no music.
+
+A few sounds begin just before the next scene, so rain introduces the shelter, a ring leads into incoming calls, and paper leads into the memo. All scenes retain their original narration and duration. Effects reduce to 28% around speech and recover afterward; disabling Narration restores the intended effect level. Pause, buffering, reading, seeking and changing stages stop sound immediately. Resuming uses the matching clip offset and never replays a completed cue.
+
+The player preloads only the clips needed by the current update. Play briefly reads “Loading effects…” until they are ready; turning Effects off allows narration or visuals to play without waiting. Failed effect loading leaves narration available and provides an explicit retry through the Effects button.
+
+Source files were verified as CC0 and are served from this repository. The build records source and output SHA-256 hashes, exact excerpt ranges, encoded peaks and an estimated combined mix peak. The approval of the existing narration is preserved by before/after hash checks. Those measurements verify technical bounds, not an audible review on classroom speakers.
 
 The site has no external runtime dependencies, tracking, or application database.
 

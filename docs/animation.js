@@ -163,7 +163,7 @@
     const scenes = film.scenes.map((scene, n) => {
       const spoken = recorded ? track.scenes[n] : null;
       const seconds = spoken?.seconds || scene.seconds;
-      const next = {...scene, seconds, start:length, cue:spoken?.cue || scene.cue, narration:spoken?.text || ''};
+      const next = {...scene, seconds, start:length, cue:spoken?.cue || scene.cue, narration:spoken?.text || '', speechStart:spoken?.speechStart ?? 1.7, speechSeconds:spoken?.speechSeconds || 0};
       length += seconds;
       return next;
     });
@@ -206,7 +206,7 @@
       '<p class="film-audio-notice" role="status" data-film-notice hidden></p></div>'+
       '<nav class="film-chapters" aria-label="Animation scenes">'+scenes.map((scene,n)=>'<button type="button" data-film-chapter="'+n+'" aria-label="Show scene '+(n+1)+': '+escape(scene.label)+'"'+(n===0?' aria-current="step"':'')+'><span class="film-chapter-dot" aria-hidden="true"></span>'+escape(scene.label)+'</button>').join('')+'</nav>'+
       '<div class="film-mobile-scenes"><label for="film-scene-select">Scene</label><select id="film-scene-select" aria-label="Choose animation scene" data-film-select>'+scenes.map((scene,n)=>'<option value="'+n+'">'+escape(scene.label)+'</option>').join('')+'</select></div>'+
-      '<div class="film-foot"><p>AI narration and dramatized sound effects. You can turn either off. Read the documents below for the full update.</p><details class="film-transcript"><summary>Read the animation text</summary><ol>'+scenes.map(scene=>'<li><strong>'+escape(scene.title)+'</strong><p>'+escape(scene.narration || scene.caption)+'</p>'+(scene.narration?'':'<ul class="film-transcript-details">'+visualDetails(scene).map(detail=>'<li>'+escape(detail)+'</li>').join('')+'</ul>')+'</li>').join('')+'</ol></details></div>'+
+      '<div class="film-foot"><p>AI narration and dramatized sound effects. You can turn either off. Read the documents below for the full update. <a href="audio-credits.html" target="_blank" rel="noopener">Sound credits</a>.</p><details class="film-transcript"><summary>Read the animation text</summary><ol>'+scenes.map(scene=>'<li><strong>'+escape(scene.title)+'</strong><p>'+escape(scene.narration || scene.caption)+'</p>'+(scene.narration?'':'<ul class="film-transcript-details">'+visualDetails(scene).map(detail=>'<li>'+escape(detail)+'</li>').join('')+'</ul>')+'</li>').join('')+'</ol></details></div>'+
       (film.narrationSrc?'<audio data-film-audio preload="metadata" src="'+escape(film.narrationSrc)+'" aria-label="Recorded narration" hidden></audio>':'')+
       '<p class="screen-reader-only" role="status" data-film-status>Animation ready. Press Play to start. Narration and sound effects can be turned off separately.</p></section>';
   }
@@ -224,7 +224,9 @@
     const soundButton = root.querySelector('[data-film-sound]');
     const narratorButton = root.querySelector('[data-film-narration]');
     const audio = root.querySelector('[data-film-audio]');
-    const sound = window.CrisisSound?.create();
+    const effectsData = window.CrisisEffects;
+    const sound = effectsData && window.CrisisSound?.create({clips:effectsData.clips, events:effectsData.tracks[root.dataset.filmStage] || [], scenes});
+    const replayButton = root.querySelector('[data-film-replay]');
     const clock = root.querySelector('[data-film-time]');
     const status = root.querySelector('[data-film-status]');
     const notice = root.querySelector('[data-film-notice]');
@@ -240,6 +242,7 @@
     let position=0, sceneIndex=-1, playing=false, starting=false, request=0, lastFrame=0;
     let effects=[], destroyed=false, playTicket=0, soundTicket=0, loadTimer=0, buffering=false;
     let effectsOn=Boolean(sound?.supported), narratorOn=Boolean(audio), pendingAudioSeek=null;
+    let effectsLoading=Boolean(sound?.supported&&!sound?.ready), preparationTicket=0;
 
     function showNotice(message='') {
       notice.hidden=!message;
@@ -303,10 +306,13 @@
       clock.textContent=timecode(seconds);
       seekInput.setAttribute('aria-valuetext',seconds+' seconds of '+length+', '+scenes[sceneIndex].label);
       root.classList.toggle('is-ended',position>=length);
-      sound?.update(position,sceneIndex,scenes[sceneIndex].cue,sceneTime);
+      sound?.update(position,sceneIndex,scenes[sceneIndex].cue,sceneTime,narratorOn);
     }
     function buttonState() {
-      const label=starting?'Cancel loading':playing?'Pause':position>=length?'Play again':position>0?'Resume':'Play overview';
+      const loadingEffects=effectsOn&&effectsLoading&&!playing&&!starting;
+      const label=loadingEffects?'Loading effects…':starting?'Cancel loading':playing?'Pause':position>=length?'Play again':position>0?'Resume':'Play overview';
+      playButton.disabled=loadingEffects;
+      replayButton.disabled=effectsOn&&effectsLoading;
       playButton.innerHTML=symbol(playing||starting?'pause':'play')+'<span>'+label+'</span>';
       root.classList.toggle('is-playing',playing);
       root.classList.toggle('is-loading-audio',starting);
@@ -321,6 +327,21 @@
       narratorButton.setAttribute('aria-pressed',String(narratorOn));
       narratorButton.innerHTML=symbol('narrator')+'<span>'+(!audio?'Narration unavailable':narratorOn?'Narration on':'Narration off')+'</span>';
       narratorButton.title=narratorOn?'Turn off the narrator':'Turn on the narrator';
+    }
+    async function prepareEffects(retry=false) {
+      if(!sound?.supported) return false;
+      const ticket=++preparationTicket;
+      effectsLoading=true; buttonState();
+      const ready=await sound.prepare({retry});
+      if(destroyed||ticket!==preparationTicket) return false;
+      effectsLoading=false;
+      if(ready&&notice.textContent.startsWith('Sound effects')) showNotice();
+      if(!ready&&effectsOn) {
+        effectsOn=false; sound.mute();
+        showNotice('Sound effects could not load. Narration is ready to use. Turn Effects on to retry.');
+      }
+      buttonState(); audioButtonState();
+      return ready;
     }
     function pause(announce=true) {
       const wasActive=playing||starting;
@@ -356,7 +377,7 @@
       if(!sound?.supported||!effectsCanPlay()) return;
       const ready=await sound.enable();
       if(ticket!==soundTicket||!effectsCanPlay()) return;
-      const started=ready && await sound.start(sceneIndex);
+      const started=ready && await sound.start(sceneIndex,position);
       if(ticket!==soundTicket||!effectsCanPlay()) {
         if(ticket===soundTicket) sound.stop();
         return;
@@ -364,10 +385,13 @@
       if(!started) {
         effectsOn=false; sound.mute(); audioButtonState();
         showNotice('Sound effects could not start. You can turn Effects on to try again.');
-      } else paint();
+      } else {
+        if(notice.textContent.startsWith('Sound effects')) showNotice();
+        paint();
+      }
     }
     function play() {
-      if(destroyed||playing||starting) return;
+      if(destroyed||playing||starting||(effectsOn&&effectsLoading)) return;
       if(position>=length) position=0;
       const ticket=++playTicket;
       showNotice();
@@ -416,8 +440,14 @@
       if(!sound?.supported) return;
       effectsOn=!effectsOn; ++soundTicket;
       if(!effectsOn) sound.mute();
-      else if(playing) void startEffects();
-      audioButtonState();
+      else if(!sound.ready) {
+        // Unlock from this click; preparation itself never starts playback.
+        void sound.enable();
+        void prepareEffects(true).then(ready=>{
+          if(ready&&!destroyed&&effectsOn&&playing) void startEffects();
+        });
+      } else if(playing) void startEffects();
+      audioButtonState(); buttonState();
       status.textContent=effectsOn?'Scene sound effects on.':'Scene sound effects off.';
     }
     function toggleNarrator() {
@@ -497,8 +527,9 @@
       audio.addEventListener('error',audioError);
     }
     paint(); buttonState(); audioButtonState();
+    if(effectsLoading) void prepareEffects();
     return {pause,destroy() {
-      pause(false); destroyed=true; sound?.destroy();
+      pause(false); destroyed=true; ++preparationTicket; sound?.destroy();
       root.removeEventListener('click',click);
       seekInput.removeEventListener('input',input);
       selectInput.removeEventListener('change',select);

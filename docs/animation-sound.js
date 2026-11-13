@@ -1,179 +1,416 @@
 'use strict';
-/* Short original sound effects. No music, recordings, network calls, or looping tracks. */
+/* Recorded effects only. The player owns time; narration files are never modified. */
 (() => {
-  function create() {
-    const AC=window.AudioContext||window.webkitAudioContext;
-    let context=null,master=null,noiseBuffer=null;
-    let enabled=false,active=false,destroyed=false;
-    let runTicket=0,settingTicket=0,lastScene=-1,lastPosition=-1;
-    const voices=new Set();
-    function clean(v) {
-      if(!voices.delete(v)) return;
-      v.source.onended=null;
-      v.nodes.forEach(node=>{try{node.disconnect();}catch(_){}});
-    }
-    function silence() {
-      if(!context) return;
-      const now=context.currentTime;
-      for(const v of [...voices]) {
-        try{
-          v.gate.gain.cancelScheduledValues(now);
-          v.gate.gain.setValueAtTime(v.gate.gain.value,now);
-          v.gate.gain.linearRampToValueAtTime(0,now+.018);
-          v.source.stop(now+.022);
-        }catch(_){clean(v);}
+  const finite = value => typeof value === 'number' && Number.isFinite(value);
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+  function create({clips = {}, events = [], scenes = []} = {}) {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    let context = null, master = null, duck = null, initialSuspendPending = false;
+    let destroyed = false, enabled = false, active = false;
+    let runTicket = 0, settingTicket = 0, position = 0, narratorOn = true;
+    let anchorTime = 0, anchorPosition = 0, needsSchedule = true;
+    let configurationError = '', runtimeError = '';
+    const voices = new Set(), records = new Map();
+    const sceneList = [], timeline = [], speech = [];
+    let length = 0;
+
+    try {
+      if (!Array.isArray(scenes) || !scenes.length || !Array.isArray(events) || !events.length) {
+        throw new Error('No recorded effects are available for this update.');
       }
-    }
-    function stop(){++runTicket;active=false;silence();}
-    async function wake(){
-      if(!context||destroyed||context.state==='closed') return false;
-      if(context.state==='running') return true;
-      let timer;
-      try{
-        return await Promise.race([
-          context.resume().then(()=>context?.state==='running'),
-          new Promise(resolve=>{timer=setTimeout(()=>resolve(false),2500);})
-        ]);
-      }catch(_){return false;}finally{clearTimeout(timer);}
-    }
-    async function enable(){
-      if(!AC||destroyed) return false;
-      const ticket=++settingTicket;enabled=true;
-      try{
-        if(!context){
-          context=new AC();master=context.createGain();master.gain.value=.4;master.connect(context.destination);
-          noiseBuffer=context.createBuffer(1,Math.ceil(context.sampleRate*4),context.sampleRate);
-          const data=noiseBuffer.getChannelData(0);
-          for(let n=0;n<data.length;n++) data[n]=Math.random()*2-1;
+      for (const scene of scenes) {
+        const seconds = scene.seconds ?? scene.length;
+        const start = finite(scene.start) ? scene.start : length;
+        if (!finite(seconds) || seconds <= 0 || start < 0) throw new Error('Invalid effects timing.');
+        const end = start + seconds;
+        sceneList.push({start, end});
+        length = Math.max(length, end);
+        if (finite(scene.speechStart) && finite(scene.speechSeconds) && scene.speechSeconds > 0) {
+          const from = Math.max(start, start + scene.speechStart);
+          const to = Math.min(end, from + scene.speechSeconds);
+          if (to > from) speech.push({from, to});
         }
-        const ready=await wake();
-        if(destroyed||ticket!==settingTicket||!enabled) return false;
-        if(!ready) enabled=false;
-        return ready;
-      }catch(_){if(ticket===settingTicket)enabled=false;return false;}
-    }
-    async function start(_sceneIndex){
-      stop();
-      if(!enabled||destroyed||!context)return false;
-      const ticket=++runTicket,ready=await wake();
-      if(destroyed||ticket!==runTicket||!enabled)return false;
-      active=ready;return ready;
-    }
-    function attach(source,filter,delay,duration,level,attack=.008,hold=false){
-      if(!active||!enabled||destroyed||context?.state!=='running')return null;
-      const at=context.currentTime+delay,envelope=context.createGain(),gate=context.createGain();
-      gate.gain.value=1;
-      const peak=Math.min(attack,duration*.3);
-      envelope.gain.setValueAtTime(0,at);
-      envelope.gain.linearRampToValueAtTime(level,at+peak);
-      if(hold){
-        envelope.gain.setValueAtTime(level,at+Math.max(peak,duration-Math.min(.18,duration*.25)));
-        envelope.gain.linearRampToValueAtTime(0,at+duration);
-      }else envelope.gain.exponentialRampToValueAtTime(.00001,at+duration);
-      source.connect(filter||envelope);if(filter)filter.connect(envelope);
-      envelope.connect(gate);gate.connect(master);
-      const v={source,gate,nodes:[source,...(filter?[filter]:[]),envelope,gate]};
-      voices.add(v);source.onended=()=>clean(v);return at;
-    }
-    function noise(delay,duration,level,frequency,type='bandpass',q=.7,attack=.006,hold=false){
-      if(!active||!noiseBuffer)return;
-      const source=context.createBufferSource(),filter=context.createBiquadFilter();
-      source.buffer=noiseBuffer;
-      filter.type=type;filter.frequency.value=frequency;filter.Q.value=q;
-      const at=attach(source,filter,delay,duration,level,attack,hold);
-      if(at===null){source.disconnect();filter.disconnect();return;}
-      const offset=Math.random()*Math.max(0,noiseBuffer.duration-duration-.05);
-      source.start(at,offset,duration+.025);source.stop(at+duration+.03);
-    }
-    function tone(frequency,delay,duration,level,type='sine',hold=false,end=frequency){
-      if(!active||!context)return;
-      const source=context.createOscillator();source.type=type;source.frequency.value=frequency;
-      const at=attach(source,null,delay,duration,level,.008,hold);
-      if(at===null){source.disconnect();return;}
-      if(end!==frequency){source.frequency.setValueAtTime(frequency,at);source.frequency.exponentialRampToValueAtTime(end,at+duration);}
-      source.start(at);source.stop(at+duration+.03);
-    }
-    function alarm(delay=0){
-      [0,.52,1.04].forEach(t=>tone(830,delay+t,.32,.13,'triangle',true));
-    }
-    function footsteps(delay=0){
-      [0,.43,.87,1.32,1.78].forEach((t,n)=>{
-        const level=.24-n*.018;
-        noise(delay+t,.12,level,520,'lowpass');
-        tone(145,delay+t,.075,.045,'sine',false,95);
-        noise(delay+t+.055,.065,level*.24,1700,'bandpass',.6);
+      }
+      events.forEach((event, id) => {
+        const scene = sceneList[event.scene];
+        const clip = clips[event.clip];
+        if (!Number.isInteger(event.scene) || !scene || !clip || typeof clip.src !== 'string' || !clip.src) {
+          throw new Error('A recorded effect is missing from this update.');
+        }
+        const at = event.at ?? 0, rate = event.rate ?? 1, gain = event.gain ?? 1;
+        const duration = event.duration ?? null;
+        const fadeIn = event.fadeIn ?? .012, fadeOut = event.fadeOut ?? .08;
+        if (!finite(at) || !finite(rate) || rate <= 0 || rate > 4 ||
+            !finite(gain) || gain < 0 || gain > 2 ||
+            (duration !== null && (!finite(duration) || duration <= 0)) ||
+            !finite(fadeIn) || fadeIn < 0 || !finite(fadeOut) || fadeOut < 0) {
+          throw new Error('Invalid recorded-effect settings.');
+        }
+        timeline.push({
+          id, clip: event.clip, from: scene.start + at, sceneEnd: scene.end,
+          rate, gain, duration, fadeIn, fadeOut, bed: event.bed === true
+        });
+        if (!records.has(event.clip)) {
+          records.set(event.clip, {
+            src: clip.src, buffer: null, attempts: 0, ticket: 0,
+            promise: null, cancel: null, failed: false
+          });
+        }
       });
+      timeline.sort((a, b) => a.from - b.from || a.id - b.id);
+      speech.sort((a, b) => a.from - b.from);
+      // Merge nearby speech windows so automation never creates conflicting ramps.
+      for (let n = 1; n < speech.length;) {
+        if (speech[n].from - .18 <= speech[n - 1].to + .28) {
+          speech[n - 1].to = Math.max(speech[n - 1].to, speech[n].to);
+          speech.splice(n, 1);
+        } else n++;
+      }
+    } catch (error) {
+      configurationError = error.message || 'Recorded effects are unavailable.';
     }
-    function message(delay=0){
-      tone(980,delay,.095,.09);
-      noise(delay,.04,.055,1900,'bandpass',.7);
-    }
-    function paper(delay=0){
-      noise(delay,.28,.16,2300,'bandpass',.55,.025);
-      noise(delay+.17,.22,.10,3900,'highpass',.7,.02);
-    }
-    function cue(kind){
-      switch(kind){
-        case 'crack':
-          noise(0,.09,.42,1050,'bandpass',.55,.002);
-          noise(.035,.055,.22,2300,'highpass',.7,.002);
-          noise(.095,.11,.12,750,'bandpass',.8,.003);
-          break;
-        case 'alarm':alarm();break;
-        case 'evacuation':alarm();footsteps(1.65);break;
-        case 'footsteps':footsteps();break;
-        case 'rain':
-          noise(0,2.6,.11,1900,'bandpass',.35,.3,true);
-          [.45,.92,1.57].forEach(t=>noise(t,.055,.035,3200,'bandpass',1.2,.003));
-          break;
-        case 'dial':
-          noise(0,.07,.12,850,'lowpass');
-          [0.2,.4].forEach(t=>{tone(697,t,.09,.045,'sine',true);tone(1209,t,.09,.045,'sine',true);});
-          break;
-        case 'phone':
-        case 'telephone':
-          [0,.9].forEach(burst=>{
-            for(let n=0;n<7;n++){
-              tone(1100,burst+n*.065,.05,.075,'sine',true);
-              tone(1450,burst+n*.065,.05,.05,'sine',true);
-            }
-          });break;
-        case 'message':
-        case 'messages':
-        case 'group':
-        case 'group-message':[0,.34,.78].forEach(message);break;
-        case 'email':
-          noise(0,.16,.09,1800,'bandpass',.5,.025);
-          tone(1180,.11,.18,.09);break;
-        case 'record':
-          noise(0,.045,.08,1200,'bandpass',.8,.002);
-          noise(.11,.05,.055,1800,'bandpass',.7,.002);break;
-        case 'paper':paper();break;
-        case 'papers':paper();paper(.6);break;
-        case 'finish':
-        case 'pen':
-          [0,.14,.32,.55,.77].forEach((t,n)=>noise(t,n%2?.075:.12,.10,2600,'bandpass',.65,.012));break;
+
+    const ready = () => !destroyed && !configurationError && records.size > 0 &&
+      [...records.values()].every(record => Boolean(record.buffer));
+
+    function clean(voice) {
+      if (!voices.delete(voice)) return;
+      voice.source.onended = null;
+      for (const node of [voice.source, voice.envelope, voice.gate]) {
+        try { node.disconnect(); } catch (_) {}
       }
     }
-    function update(position,sceneIndex,cueKind,sceneTime=Infinity){
-      if(destroyed)return;
-      const p=Number(position);if(!Number.isFinite(p))return;
-      if(lastPosition>=0&&p<lastPosition-.04)lastScene=-1;
-      lastPosition=p;
-      if(!active||!enabled||context?.state!=='running')return;
-      if(sceneIndex===lastScene)return;
-      lastScene=sceneIndex;
-      const nearStart=Number.isFinite(sceneTime)?sceneTime>=0&&sceneTime<=.8:p<=.8;
-      if(nearStart&&cueKind)cue(cueKind);
+    function silence(immediate = false) {
+      const now = context?.currentTime || 0;
+      for (const voice of [...voices]) {
+        if (voice.stopping && !immediate) continue;
+        voice.stopping = true;
+        try {
+          if (immediate || voice.when > now) {
+            voice.source.stop(now);
+            clean(voice);
+          } else {
+            voice.gate.gain.cancelScheduledValues(now);
+            voice.gate.gain.setValueAtTime(1, now);
+            voice.gate.gain.linearRampToValueAtTime(0, now + .012);
+            voice.source.stop(now + .016);
+          }
+        } catch (_) { clean(voice); }
+      }
     }
-    function mute(){enabled=false;++settingTicket;stop();}
-    function destroy(){
-      destroyed=true;mute();
-      for(const v of [...voices])clean(v);
-      const closing=context;context=null;master=null;noiseBuffer=null;
-      if(closing)void closing.close().catch(()=>{});
+    function stop() {
+      ++runTicket;
+      active = false;
+      needsSchedule = true;
+      silence();
     }
-    return{supported:Boolean(AC),get enabled(){return enabled;},get active(){return active;},enable,start,update,stop,mute,destroy};
+    function stateChanged() {
+      if (context?.state !== 'running' && active) {
+        silence(true);
+        needsSchedule = true;
+      }
+    }
+    function ensureContext() {
+      if (context) return context.state !== 'closed';
+      if (!AC || destroyed || configurationError) return false;
+      try {
+        context = new AC();
+        master = context.createGain();
+        duck = context.createGain();
+        master.gain.value = 1;
+        duck.gain.value = 1;
+        duck.connect(master);
+        master.connect(context.destination);
+        context.addEventListener('statechange', stateChanged);
+        // Decode while suspended. No source is created before explicit enable/start.
+        if (context.state === 'running') {
+          initialSuspendPending = true;
+          void context.suspend().catch(() => {}).finally(() => { initialSuspendPending = false; });
+        }
+        return true;
+      } catch (_) {
+        runtimeError = 'Recorded sound effects are unavailable in this browser.';
+        if (context) void context.close().catch(() => {});
+        context = null; master = null; duck = null;
+        return false;
+      }
+    }
+
+    function loadClip(record) {
+      const ticket = ++record.ticket;
+      const decodingContext = context;
+      const abort = new AbortController();
+      record.attempts++;
+      record.failed = false;
+      let timer, rejectCancelled;
+      const cancelled = new Promise((_, reject) => { rejectCancelled = reject; });
+      record.cancel = () => {
+        abort.abort();
+        rejectCancelled(new Error('Effects preparation cancelled.'));
+      };
+      timer = setTimeout(() => {
+        abort.abort();
+        rejectCancelled(new Error('Effects preparation timed out.'));
+      }, 15000);
+      const task = (async () => {
+        const response = await fetch(record.src, {
+          signal: abort.signal,
+          cache: record.attempts > 1 ? 'reload' : 'force-cache',
+          credentials: 'same-origin'
+        });
+        if (!response.ok) throw new Error('Effect download failed.');
+        const bytes = await response.arrayBuffer();
+        if (!bytes.byteLength) throw new Error('Empty effect recording.');
+        if (destroyed || ticket !== record.ticket) throw new Error('Effects preparation cancelled.');
+        const buffer = await decodingContext.decodeAudioData(bytes);
+        if (!buffer || !finite(buffer.duration) || buffer.duration <= 0) {
+          throw new Error('Invalid effect recording.');
+        }
+        return buffer;
+      })();
+      record.promise = Promise.race([task, cancelled]).then(buffer => {
+        if (destroyed || ticket !== record.ticket) return false;
+        record.buffer = buffer;
+        record.failed = false;
+        return true;
+      }).catch(() => {
+        if (!destroyed && ticket === record.ticket) record.failed = true;
+        return false;
+      }).finally(() => {
+        clearTimeout(timer);
+        if (ticket === record.ticket) {
+          record.promise = null;
+          record.cancel = null;
+        }
+      });
+      return record.promise;
+    }
+
+    async function prepare({retry = false} = {}) {
+      try {
+        if (destroyed || configurationError || !ensureContext()) return false;
+        const results = await Promise.all([...records.values()].map(record => {
+          if (record.buffer) return true;
+          if (record.promise) return record.promise;
+          if (record.attempts && !retry) return false;
+          return loadClip(record);
+        }));
+        const complete = !destroyed && results.every(Boolean) && ready();
+        if (complete) runtimeError = '';
+        return complete;
+      } catch (_) {
+        if (!destroyed) runtimeError = 'Recorded sound effects could not be prepared.';
+        return false;
+      }
+    }
+
+    async function wake() {
+      if (!context || destroyed || context.state === 'closed') return false;
+      if (context.state === 'running' && !initialSuspendPending) return true;
+      let timer;
+      try {
+        // resume() is invoked before awaiting, retaining the explicit user gesture.
+        const waking = context.resume();
+        return await Promise.race([
+          waking.then(() => context?.state === 'running'),
+          new Promise(resolve => { timer = setTimeout(() => resolve(false), 2500); })
+        ]);
+      } catch (_) { return false; }
+      finally { clearTimeout(timer); }
+    }
+    async function enable() {
+      if (destroyed || !ensureContext()) return false;
+      const ticket = ++settingTicket;
+      enabled = true;
+      const awake = await wake();
+      if (destroyed || ticket !== settingTicket || !enabled) return false;
+      if (!awake) {
+        enabled = false;
+        runtimeError = 'Sound effects could not start. Try Effects on again.';
+      }
+      return awake;
+    }
+
+    function duckLevel(at) {
+      if (!narratorOn) return 1;
+      for (const window of speech) {
+        if (at < window.from - .18) break;
+        if (at < window.from) return 1 - .72 * (at - (window.from - .18)) / .18;
+        if (at <= window.to) return .28;
+        if (at < window.to + .28) return .28 + .72 * (at - window.to) / .28;
+      }
+      return 1;
+    }
+    function scheduleDucking(at, now, smooth = false) {
+      const gain = duck.gain;
+      const begin = smooth ? at + .025 : at;
+      gain.cancelScheduledValues(now);
+      gain.setValueAtTime(smooth ? gain.value : duckLevel(at), now);
+      if (smooth) gain.linearRampToValueAtTime(duckLevel(begin), now + .025);
+      if (!narratorOn) return;
+      for (const window of speech) {
+        for (const [time, value, ramp] of [
+          [window.from - .18, 1, false],
+          [window.from, .28, true],
+          [window.to, .28, false],
+          [window.to + .28, 1, true]
+        ]) {
+          if (time <= begin) continue;
+          const when = now + time - at;
+          if (ramp) gain.linearRampToValueAtTime(value, when);
+          else gain.setValueAtTime(value, when);
+        }
+      }
+    }
+
+    function scheduleEvent(event, at, now) {
+      const buffer = records.get(event.clip).buffer;
+      let duration = event.duration;
+      if (duration === null) {
+        duration = event.bed ? event.sceneEnd - event.from : buffer.duration / event.rate;
+      }
+      if (!event.bed) duration = Math.min(duration, buffer.duration / event.rate);
+      duration = Math.min(duration, length - event.from);
+      const end = event.from + duration;
+      if (duration <= 0 || end <= at + .001 || event.gain === 0) return;
+      const elapsed = Math.max(0, at - event.from);
+      const remaining = duration - elapsed;
+      const when = now + Math.max(0, event.from - at);
+      const fadeIn = Math.min(event.fadeIn, duration / 2);
+      const fadeOut = Math.min(event.fadeOut, duration - fadeIn);
+      const level = event.gain * Math.min(
+        1,
+        fadeIn ? elapsed / fadeIn : 1,
+        fadeOut ? (duration - elapsed) / fadeOut : 1
+      );
+      const source = context.createBufferSource();
+      const envelope = context.createGain();
+      const gate = context.createGain();
+      const voice = {source, envelope, gate, when};
+      voices.add(voice);
+      source.onended = () => clean(voice);
+      try {
+        source.buffer = buffer;
+        source.loop = event.bed;
+        source.playbackRate.setValueAtTime(event.rate, when);
+        gate.gain.value = 1;
+        if (elapsed > .001) {
+          gate.gain.setValueAtTime(0, when);
+          gate.gain.linearRampToValueAtTime(1, when + Math.min(.008, remaining / 2));
+        }
+        envelope.gain.setValueAtTime(Math.max(0, level), when);
+        if (elapsed < fadeIn) {
+          envelope.gain.linearRampToValueAtTime(event.gain, when + fadeIn - elapsed);
+        }
+        if (elapsed < duration - fadeOut) {
+          envelope.gain.setValueAtTime(event.gain, when + duration - fadeOut - elapsed);
+        }
+        if (fadeOut) envelope.gain.linearRampToValueAtTime(0, when + remaining);
+        source.connect(envelope);
+        envelope.connect(gate);
+        gate.connect(duck);
+        const offset = event.bed
+          ? (elapsed * event.rate) % buffer.duration
+          : elapsed * event.rate;
+        // duration is buffer time; stop is the independent timeline-time boundary.
+        source.start(when, offset, remaining * event.rate);
+        source.stop(when + remaining);
+      } catch (error) {
+        try { source.stop(); } catch (_) {}
+        clean(voice);
+        throw error;
+      }
+    }
+    function schedule(at) {
+      if (!active || !enabled || destroyed || context?.state !== 'running') return false;
+      silence();
+      const now = context.currentTime;
+      try {
+        scheduleDucking(at, now);
+        for (const event of timeline) scheduleEvent(event, at, now);
+        anchorPosition = at;
+        anchorTime = now;
+        needsSchedule = false;
+        return true;
+      } catch (_) {
+        runtimeError = 'Recorded sound effects could not play.';
+        stop();
+        return false;
+      }
+    }
+
+    async function start(_sceneIndex, latestPosition) {
+      stop();
+      if (finite(latestPosition)) position = clamp(latestPosition, 0, length);
+      if (destroyed || !enabled || !context) return false;
+      const ticket = ++runTicket;
+      const awake = await wake();
+      if (destroyed || ticket !== runTicket || !enabled) return false;
+      const prepared = awake && await prepare();
+      if (destroyed || ticket !== runTicket || !enabled || !prepared) return false;
+      active = true;
+      return schedule(position);
+    }
+    function update(value, _sceneIndex, _cue, _sceneTime, voiceOn = true) {
+      if (destroyed || !finite(value)) return;
+      position = clamp(value, 0, length);
+      const changedVoice = narratorOn !== Boolean(voiceOn);
+      narratorOn = Boolean(voiceOn);
+      if (!active || !enabled || context?.state !== 'running') return;
+      const now = context.currentTime;
+      // One stage timeline: crossing a scene boundary never repeats an event.
+      const expected = anchorPosition + now - anchorTime;
+      if (needsSchedule || Math.abs(position - expected) > .24) {
+        schedule(position);
+      } else if (changedVoice) {
+        scheduleDucking(position, now, true);
+      }
+    }
+    function mute() {
+      enabled = false;
+      ++settingTicket;
+      stop();
+    }
+    function destroy() {
+      if (destroyed) return;
+      destroyed = true;
+      mute();
+      silence(true);
+      for (const record of records.values()) {
+        ++record.ticket;
+        record.cancel?.();
+        record.cancel = null;
+        record.buffer = null;
+      }
+      const closing = context;
+      if (closing) {
+        closing.removeEventListener('statechange', stateChanged);
+        void closing.close().catch(() => {});
+      }
+      context = null; master = null; duck = null;
+    }
+
+    const api = {
+      supported: Boolean(AC),
+      get enabled() { return enabled; },
+      get active() { return active; },
+      get ready() { return ready(); },
+      get error() {
+        if (!AC) return 'Recorded sound effects are unavailable in this browser.';
+        if (configurationError) return configurationError;
+        if ([...records.values()].some(record => record.failed)) {
+          return 'Some sound effects could not load. Retry, or turn Effects off to continue.';
+        }
+        return runtimeError;
+      },
+      get failedClips() {
+        return [...records].filter(([, record]) => record.failed).map(([id]) => id);
+      },
+      prepare, enable, start, update, stop, mute, destroy
+    };
+    if (AC && !configurationError) void prepare();
+    return api;
   }
-  window.CrisisSound={create};
+  window.CrisisSound = {create};
 })();
