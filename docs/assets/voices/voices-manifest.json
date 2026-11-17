@@ -1,0 +1,195 @@
+{
+  "u1-priya": {
+    "speaker": "Priya Natarajan, Channel 7 News",
+    "source": "reporter-email-0752",
+    "voice": "af_heart",
+    "speed": 1.0,
+    "text": "Can you confirm what caused the evacuation, whether anyone was hurt, when residents will be allowed back in, and what the company is doing for the students who are outside right now? We would like a statement by 9:00 a.m. and would welcome someone on camera at 11:00.",
+    "seconds": 15.68,
+    "speech_rms_dbfs": -18.1,
+    "peak_dbfs": -2.4,
+    "pauses": [
+      [
+        2.45,
+        0.34
+      ],
+      [
+        4.0,
+        0.39
+      ],
+      [
+        6.19,
+        0.45
+      ],
+      [
+        10.06,
+        0.5
+      ],
+      [
+        12.76,
+        0.3
+      ]
+    ],
+    "sha256": "d08fd8b4fae42a6ee3357135d1e8c6ad31059d6fe08ddde9aabcdf6486f0c63e"
+  },
+  "u2-post": {
+    "speaker": "Circulating social post",
+    "source": "social-post-0841",
+    "voice": "am_puck",
+    "speed": 1.05,
+    "text": "The Halden on campus has been CONDEMNED and is collapsing. Two students hospitalized. Tallgrass Student Living knew. Share this.",
+    "seconds": 7.16,
+    "speech_rms_dbfs": -18.0,
+    "peak_dbfs": -2.5,
+    "pauses": [],
+    "sha256": "d29daff76e0df96e68536ab9245fc003a254dcdf87677c3975306604d50cd16e"
+  },
+  "u2-request-4471": {
+    "speaker": "Resident, Unit 312",
+    "source": "request-4471",
+    "voice": "af_kore",
+    "speed": 1.0,
+    "text": "Cracks in the hallway wall on 3 by the east stairs, new since last week.",
+    "seconds": 4.26,
+    "speech_rms_dbfs": -18.0,
+    "peak_dbfs": -4.6,
+    "pauses": [],
+    "sha256": "44e7e69a014e267d840eb31b7b82df43db2fad966d48609b883055ecf36ff6de"
+  },
+  "u2-request-4502": {
+    "speaker": "Resident, Unit 318",
+    "source": "request-4502",
+    "voice": "af_aoede",
+    "speed": 1.0,
+    "text": "The crack is longer now and my door won't close unless I slam it.",
+    "seconds": 3.53,
+    "speech_rms_dbfs": -18.0,
+    "peak_dbfs": -2.6,
+    "pauses": [],
+    "sha256": "88f592e83b2f8714d9bbbdf930020be2bf9e66bf5f34ac1367ba0b00221a40ef"
+  },
+  "u2-request-4539": {
+    "speaker": "Resident, Unit 312",
+    "source": "request-4539",
+    "voice": "af_kore",
+    "speed": 1.0,
+    "text": "Third time. The crack goes into the ceiling now. Can someone please look at it.",
+    "seconds": 4.29,
+    "speech_rms_dbfs": -18.0,
+    "peak_dbfs": -3.8,
+    "pauses": [],
+    "sha256": "c883df99658c20a74b9a398f1e0b239c9019d6c0ec7dab083cdae66ed15586e5"
+  },
+  "u2-closed": {
+    "speaker": "Closing note, M. Reyes",
+    "source": "request-4471, request-4502, request-4539",
+    "voice": "am_fenrir",
+    "speed": 0.96,
+    "text": "Cosmetic. No action required.",
+    "seconds": 1.82,
+    "speech_rms_dbfs": -18.0,
+    "peak_dbfs": -2.5,
+    "pauses": [],
+    "sha256": "91a77c964abcab7c95fad6d181572165bb55a80cbe37edabd5d44bac1ea55dca"
+  },
+  "u2-mother": {
+    "speaker": "A mother in Dayton, on Facebook",
+    "source": "parent-calls",
+    "voice": "af_alloy",
+    "speed": 0.96,
+    "text": "nobody from the company will answer.",
+    "seconds": 2.26,
+    "speech_rms_dbfs": -18.1,
+    "peak_dbfs": -2.9,
+    "pauses": [],
+    "sha256": "4280b0b49681e857a88209923f67a1277025f321d74fd7ff0228f92cb97f2726"
+  },
+  "u2-priya": {
+    "speaker": "Priya Natarajan, Channel 7 News",
+    "source": "reporter-followup",
+    "voice": "af_heart",
+    "speed": 1.0,
+    "text": "We have the maintenance ticket screenshots. Did Tallgrass Student Living ignore warnings about this wall for three weeks? Will someone go on camera at 11:00?",
+    "seconds": 9.17,
+    "speech_rms_dbfs": -18.1,
+    "peak_dbfs": -2.2,
+    "pauses": [
+      [
+        2.16,
+        0.48
+      ],
+      [
+        6.56,
+        0.5
+      ]
+    ],
+    "sha256": "4cebbc906b0f353f4c76f03d385b469d26fe1a4f3f4987836d6a2c3b2d559c7f"
+  },
+  "u3-contractor": {
+    "speaker": "Kessler-Brandt Construction",
+    "source": "contractor-statement",
+    "voice": "am_michael",
+    "speed": 1.0,
+    "text": "Kessler-Brandt Construction built The Halden to the engineer's drawings and passed every city inspection. We are confident in our work.",
+    "seconds": 8.24,
+    "speech_rms_dbfs": -18.2,
+    "peak_dbfs": -2.1,
+    "pauses": [
+      [
+        3.78,
+        0.34
+      ],
+      [
+        6.06,
+        0.5
+      ]
+    ],
+    "sha256": "819594bd0272693b7be522fe8da1cd50cedf517d2cad6b1f35ac9ad34dcdddf4"
+  },
+  "u3-engineer": {
+    "speaker": "Larkin & Pell Structural Engineers",
+    "source": "engineer-statement",
+    "voice": "af_sarah",
+    "speed": 1.0,
+    "text": "Our design was sound. We are reviewing whether construction matched the design.",
+    "seconds": 4.26,
+    "speech_rms_dbfs": -18.0,
+    "peak_dbfs": -2.2,
+    "pauses": [
+      [
+        1.18,
+        0.5
+      ]
+    ],
+    "sha256": "a19b7114444a7ccb8705c737f70d29ebeed95af336b10730fd236e984050331c"
+  },
+  "u3-university": {
+    "speaker": "University of Cincinnati (statement within the fictional scenario)",
+    "source": "university-statement",
+    "voice": "af_nova",
+    "speed": 1.0,
+    "text": "The Halden is a privately owned and operated property and is not affiliated with the University. Student Affairs is assisting affected students with information about temporary housing.",
+    "seconds": 10.19,
+    "speech_rms_dbfs": -18.5,
+    "peak_dbfs": -2.1,
+    "pauses": [
+      [
+        4.98,
+        0.5
+      ]
+    ],
+    "sha256": "e4457b9e293c7f2e75f6033325406c7f24d014835fcf9b2809b1258ca99be2dc"
+  },
+  "u3-dana": {
+    "speaker": "Dana Whitlock, chief executive (proposed wording, not issued)",
+    "source": "ceo-request",
+    "voice": "af_bella",
+    "speed": 0.98,
+    "text": "we were as surprised as anyone.",
+    "seconds": 1.6,
+    "speech_rms_dbfs": -18.0,
+    "peak_dbfs": -5.2,
+    "pauses": [],
+    "sha256": "bce767f8afe2c33d2f372db999f7bd6cfd3f4344268ec365ae69ca34e3027584"
+  }
+}

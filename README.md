@@ -13,11 +13,11 @@ Each team chooses one person to open the website's updates and complete its chec
 5. Team briefings: finish the paper memo and give a two-minute briefing.
 6. Debrief: discuss the decisions, hand in the paper memo, and prepare for the individual evaluation.
 
-Each of the three updates includes an eight-scene illustrated overview with a recorded stock male narrator, scene sound effects, play, pause, replay, scene selection, a transcript, and an expanded view for projection. Nothing plays until the user presses Play. Narration and effects start enabled and can be turned off separately. There is no music. The first update includes a dry crack, a brief evacuation alarm and footsteps, rain, and communication cues. Later updates use calls, messages, paper, and pen sounds. These are dramatized effects, not recordings of an actual incident.
+Each of the three updates opens with a short overview of about a minute (1:03, 1:18 and 1:20). The overview shows the street outside The Halden, the team's phone, and the documents themselves. AI voices read only the words that a document quotes, each source in its own voice, and there is no narrator. Play, pause, a scrub bar, separate switches for voices and sound, full screen, and a text version are provided. Nothing plays until the user presses Play.
 
-Narration uses static MP3 files hosted with the website, so every device receives the same voice without a speech API or subscription. Scene timing allows the narration to finish, and the animation follows the recording's playback position. Pausing, seeking, opening the evidence, changing stages, or leaving the page stops both audio and motion. Each animation uses only information available in its round; all written evidence remains available below it. Watching does not mark documents as read or complete a checkpoint.
+Voices and effects are static MP3 files hosted with the website, so every device hears the same thing without a speech service or subscription. The picture follows the playback clock, so pausing or scrubbing always lands on the same frame. Opening a document, changing stages, or leaving the page stops sound and motion. Each overview uses only information available in its round; all written evidence remains available below it. Watching does not mark documents as read or complete a checkpoint.
 
-Each update includes individual document cards and a full reading view. Students mark the reading complete, confirm the required work on their memo handout, and complete the checkpoint to unlock the next stage. Search includes only evidence from the current and earlier updates. The countdown has start, pause, reset, and add-minute controls.
+Each update includes individual document cards and a full reading view. A document that has been marked as read folds into a compact green row, so the ones still to read stand out; it still opens when clicked. Students mark the reading complete, confirm the required work on their memo handout, and complete the checkpoint to unlock the next stage. Search includes only evidence from the current and earlier updates. The countdown has start, pause, reset, and add-minute controls.
 
 ## Paper and submissions
 
@@ -45,41 +45,38 @@ These are completion checks reported by students, not automated grading or verif
 - `docs/content.js`: scenario facts, source artifacts, tasks, roles, and assessment instructions.
 - `docs/app.js`: navigation, reading controls, completion checkpoints, search, and timers.
 - `docs/progress.js`: shared prerequisite and progress-restoration rules.
-- `docs/animation-scenes.js`: Scene text, visual facts, and timing, drawn from the case documents.
-- `docs/animation.js` and `docs/animation.css`: Captions, playback controls, audio lifecycle, chapter navigation and expanded viewing.
-- `docs/animation-art.js`: Layered SVG illustrations with scene-specific compositions and independently movable objects.
-- `docs/animation-story.js`: Three or four visual beats per scene, with persistent source and uncertainty labels.
-- `docs/animation-motion.js` and `docs/animation-cinema.css`: Deterministic visual choreography and the responsive illustration/evidence layout. Every pose follows the player position and respects reduced-motion preferences.
-- `docs/animation-sound.js`: Recorded scene effects scheduled with Web Audio against the narration clock, including transitions across scene cuts and automatic volume reduction under speech.
-- `docs/effects-tracks.js` and `docs/assets/effects/`: Twelve edited CC0 clips, all 57 scene cues, source credits, hashes and measured levels. `docs/audio-credits.html` provides credits and individual sound previews.
-- `scripts/sound-effects.json`, `scripts/build-sound-effects.py` and `.github/workflows/build-sound-effects.yml`: Reproducible effect processing and cue validation; the build checks that the approved narration is unchanged.
-- `docs/narration-tracks.js` and `docs/assets/audio/`: Recorded narration, complete spoken transcripts, scene durations, and generation details.
-- `scripts/narration.json` and `scripts/build-narration.py`: Narration scripts and reproducible audio generation with the stock Kokoro `am_michael` voice.
-- `.github/workflows/generate-narration.yml`: Generates and commits the recordings when their scripts change, using a standard public-repository runner. The generation does not use a paid speech API. Publish the generated files through the normal Pages workflow after generation completes.
+- `docs/films.js`: What each overview shows and says, with timings. Every statement comes from that update's documents in `content.js`.
+- `docs/film.js` and `docs/film.css`: The player. It paints the street on a canvas, times the captions, notifications and documents, and schedules sound with Web Audio.
+- `docs/voice-tracks.js` and `docs/assets/voices/`: Twelve voice clips with their lengths and a manifest of voices, levels and hashes.
+- `scripts/voices.json` and `scripts/build-voices.py`: The quoted lines, the stock Kokoro voice chosen for each, and the script that generates and levels the clips. To change a voice, edit its `voice` value and run the script.
+- `docs/assets/effects/`: The CC0 sound effects. `docs/audio-credits.html` lists credits and lets you preview every voice and effect.
+- `docs/assets/fonts/`: Archivo, the one typeface the site uses, hosted with the site (SIL Open Font License).
 - `scripts/test-progress.cjs`: focused checks for sequential access, partial completion, refresh, and invalid saved state.
 - `docs/styles.css`: desktop, phone, and print layouts.
 - `docs/downloads/`: printable reference and original assignment templates.
 - `scripts/build-quick-reference.py`: regenerates the reference PDF from the scenario data.
 
-### Animation direction
+### How the overviews are made
 
-All three narrated overviews use a consistent illustrated documentary style. Full-contrast artwork and concise evidence occupy separate areas; the complete scene caption, spoken transcript and written case remain available. Each of the 24 scenes has three or four visual beats, rather than displaying every foreground fact at once.
+The street, the rain, the people and the light are drawn in code on a canvas. Captions, notifications, maintenance requests and statements are ordinary page text laid over it, so they stay sharp on a projector. There are no video files.
 
-The visual director samples the existing narration clock. It owns no audio, timers or animation loop. Walking, crack reveal, document handling, phone gestures, rain and memo writing therefore freeze when playback pauses and return to the matching pose after a seek. Natural scene changes use a short artwork-only crossfade; source labels always belong to the current scene. Chapter selection displays that chapter directly.
+People appear only as silhouettes. The time of day follows the case: dark at 6:40 a.m., grey daylight from 8:05. The story keeps unofficial reports, unverified posts, preliminary findings, attributed accounts, offers and proposed statements visibly qualified. It never shows a collapse, a hotel booking, a published statement from the chief executive, or a protest already taking place. Counts appear as complete case values.
 
-The story keeps unofficial reports, unverified posts, preliminary findings, attributed accounts, offers and proposed actions visibly qualified. It never depicts an actual collapse, hotel booking, published CEO statement or protest already taking place. Counts appear as complete case values, not animated intermediate figures.
+Reduced-motion mode holds the rain, the walking, the camera move and the flashing light still, and keeps every caption and document readable.
 
-The responsive layout stacks the illustration above the evidence on smaller screens. Reduced-motion mode removes camera movement, walking, rain travel and drawn reveals, while keeping the full composition and the current evidence readable. Motion is an optional aid; the written evidence and paper memo determine the classroom workflow.
+### Voices and sound
 
-### Scene sound design
+Twelve clips read words quoted in the documents: the reporter's two emails, the circulating post, the three maintenance requests and their closing note, a parent's post, the contractor's, engineer's and university's statements, and the chief executive's proposed line. The voices are stock voices from the open Kokoro model. None is a recording or clone of a real person. Each clip is levelled to the same loudness, and the rain drops under a voice while it reads.
 
-The three overviews use recorded Foley and ambience: a dry crack, a brief building alarm, walking footsteps, rain, desk-phone ringing, vibration, keyboard/mouse clicks, paper, pen and receiver handling. Short device tones identify outgoing calls and messages. There is no music.
+The voices were checked by transcribing each clip with a speech-recognition model and comparing it with its script, and each film's mix was rendered offline to confirm that nothing clips. Those are technical checks. They do not replace listening once on the classroom speakers.
 
-A few sounds begin just before the next scene, so rain introduces the shelter, a ring leads into incoming calls, and paper leads into the memo. All scenes retain their original narration and duration. Effects reduce to 28% around speech and recover afterward; disabling Narration restores the intended effect level. Pause, buffering, reading, seeking and changing stages stop sound immediately. Resuming uses the matching clip offset and never replays a completed cue.
+### Colour and type
 
-The player preloads only the clips needed by the current update. Play briefly reads “Loading effects…” until they are ready; turning Effects off allows narration or visuals to play without waiting. Failed effect loading leaves narration available and provides an explicit retry through the Effects button.
+Colour means one of three things: a status (green for done or confirmed, amber for waiting or not known, red for a deadline), Tallgrass's own material (forest green and lime), or the press (blue). Everything else is neutral. Reading pages are light, and the film and the header of each update are dark. The tokens are at the top of `docs/styles.css`.
 
-Source files were verified as CC0 and are served from this repository. The build records source and output SHA-256 hashes, exact excerpt ranges, encoded peaks and an estimated combined mix peak. The approval of the existing narration is preserved by before/after hash checks. Those measurements verify technical bounds, not an audible review on classroom speakers.
+### Retired files
+
+The earlier narrated overviews are no longer loaded. Their build inputs are still in the repository because two GitHub workflows depend on them: `scripts/narration.json`, `scripts/build-narration.py`, `scripts/sound-effects.json`, `scripts/build-sound-effects.py`, `docs/narration-tracks.js`, `docs/effects-tracks.js`, `docs/assets/audio/` and the three `*-preview` images in `docs/assets/`. They can be deleted together with `.github/workflows/generate-narration.yml` and `.github/workflows/build-sound-effects.yml`.
 
 The site has no external runtime dependencies, tracking, or application database.
 
@@ -87,7 +84,7 @@ The site has no external runtime dependencies, tracking, or application database
 
 Publish the `main` branch's `/docs` directory in the repository's Pages settings. Keep all asset links relative so the site works at its full project URL. No custom domain or CNAME is needed.
 
-For a local check, serve `docs/` through an HTTP server. `npm run check` checks JavaScript syntax and the progression tests. `npm run build` copies the same website into `dist/` for a separate preview host; `docs/` remains the source.
+For a local check, serve `docs/` through an HTTP server. `npm run check` checks JavaScript syntax and the progression tests. The overviews fetch their audio, so they need the HTTP server and will not play from a file opened directly. `npm run build` copies the same website into `dist/` for a separate preview host; `docs/` remains the source.
 
 ## Course sources
 

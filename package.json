@@ -5,6 +5,6 @@
   "description": "A classroom crisis communication simulation for COMM 5009.",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "node --check docs/app.js && node --check docs/content.js && node --check docs/progress.js && node --check docs/animation.js && node --check docs/animation-art.js && node --check docs/animation-story.js && node --check docs/animation-motion.js && node --check docs/animation-sound.js && node --test scripts/test-progress.cjs"
+    "check": "node --check docs/app.js && node --check docs/content.js && node --check docs/progress.js && node --check docs/films.js && node --check docs/film.js && node --check docs/voice-tracks.js && node --test scripts/test-progress.cjs"
   }
 }
